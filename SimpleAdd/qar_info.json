@@ -1,0 +1,7 @@
+{
+	"common_dir" : "/media/psf/Home/Documents/ResearchProject/PRiME_OpenCL-kapow_fpga16/jjd_showcase/",
+	"acds_version" : "Version 20.1.1",
+	"platform" : "linux",
+	"os" : "Ubuntu 18.04.5",
+	"qpf" : "soc_system.qpf"
+}
