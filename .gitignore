@@ -45,6 +45,7 @@ timing
 *.tcl
 *.txt # Explicitly add any text files used
 *~
+
 *example*
 *sopc_*
 # ignore Quartus II generated folders
@@ -62,3 +63,9 @@ Reports/
 Papers/
 PRiME_OpenCL-kapow_fpga16/
 FPGAFiles/
+
+# Word temporary
+~$*.docx*
+
+# Word Auto Backup File
+Backup of *.docx*
