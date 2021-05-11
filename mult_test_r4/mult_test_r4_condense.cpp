@@ -4,9 +4,9 @@
 
 using namespace std;
 
-#define TESTS 168
-#define N 8
-#define M 5
+#define TESTS 100
+#define N 4
+#define M 6
 #define D (M-3)
 
 #define PRINT
@@ -45,13 +45,13 @@ int main(){
 		x_gold = 0;
 		y_gold = 0;
 		for(int k = 0; k<N; k++){
-			x[k] = rand()/((RAND_MAX + 1u)/3) - 1;
+			x[k] = rand()/((RAND_MAX + 1u)/7) - 3;
 			//x[k] = rand()/((RAND_MAX + 1u)/2);
-			x_gold += ((long)x[k])<<k;
+			x_gold += ((long)x[k])<<(k<<1);
 
-			y[k] = rand()/((RAND_MAX + 1u)/3) -1;
+			y[k] = rand()/((RAND_MAX + 1u)/7) - 3;
 			//y[k] = rand()/((RAND_MAX + 1u)/2);
-			y_gold += ((long)y[k])<<k;
+			y_gold += ((long)y[k])<<(k<<1);
 		}
 		p_gold = x_gold*y_gold;
 
@@ -77,8 +77,9 @@ int main(){
 		for(int i = 0; i<2*N; i++){
 			p[i]=0;
 			p_frac[i]=0;
+			p_full[i]=0;
 		}
-		
+		p_full[2*N]=0;
 
 		//initialize
 		for(int j = -3; j<N; j++){
@@ -87,9 +88,9 @@ int main(){
 				partial_product(x_j[j+3],x,y[N-j-4],j);
 				partial_product(y_j[(j+1)+3],y,x[N-j-4],j+1);
 			}
-			online_add(x_j[j+3],y_j[(j+1)+3],x_add_y, N+M+1, false);
+			online_add(x_j[j+3],y_j[(j+1)+3],x_add_y, N+M+1, true);
 			shift_up2(w, N+M);
-			online_add(w, x_add_y, v, N+M, false);
+			online_add(w, x_add_y, v, N+M, true);
 
 			for(int k = 0; k<M-1; k++){
 				v_est[k]=v[(N+1)+k];
@@ -100,7 +101,7 @@ int main(){
 				p[2*N-1-j]= sel;
 				p_j[N+3]=-1*sel;
 			}
-			online_add(v, p_j, w, N+M, false);
+			online_add(v, p_j, w, N+M, true);
 
 			#ifdef PRINT
 			myfile<<"	j="<<j<<"\n";
@@ -138,9 +139,10 @@ int main(){
 
 		long p_out = 0;
 		for(int i = 0; i<2*N+1; i++){
-			p_out += ((long)p_full[i])<<i;
+			p_out += ((long)p_full[i])<<(i<<1);
 			//myfile<<"		p_out:"<<p_out<<"\n";
 		}
+
 
 		#ifdef PRINT
 		myfile<<"X="<<x_gold<<" Y="<<y_gold<<"\n";
@@ -172,7 +174,23 @@ int main(){
 void partial_product(int a[],int b[], int c, int j){
 	//myfile<<"		c:"<<c<<"\n";
 	for(int i = N-1; i>=N-(j+3); i--){
-		a[i]=b[i]*c;
+		a[i]+=b[i]*c;
+		if(a[i]<=-8){
+			a[i]+=8;
+			a[i+1]-=2;
+		}
+		else if(a[i]<=-4){
+			a[i]+=4;
+			a[i+1]-=1;
+		}
+		else if(a[i]>=8){
+			a[i]-=8;
+			a[i+1]+=2;
+		}
+		else if(a[i]>=4){
+			a[i]-=4;
+			a[i+1]+=1;
+		}
 	}
 }
 
@@ -188,7 +206,7 @@ void print_vec(int a[], int size, int point){
 	for(int i = size-1; i>=0; i--){
 		if(i==point-1)myfile<<".";
 		myfile<<a[i]<<" ";
-		val+=((long)a[i])<<i;
+		val+=((long)a[i])<<(i<<1);
 	}
 	myfile<<"  "<<val;
 	myfile<<"\n";
@@ -197,46 +215,55 @@ void print_vec(int a[], int size, int point){
 int sel_vec(int a[]){
 	int val = 0;
 	for(int i=0; i<M-1; i++){
-		val += a[i]<<i;
+		val += a[i]<<(i<<1);
 	}
+	val+=8;
 	//myfile<<"		val:"<<val<<"\n";
-	if(val>=2) return 1;
-	else if (val<-2) return -1;
-	else return 0;
+	if(val>=0) return val/16;
+	else return val/16-1;
 }
 
 void online_add(int a[], int b[], int c[], int size, bool carry){
-	int w_j1, w_j2, h_j2, z_j2, z_j3, t_j1, s_j1;
+	int w_j1, w_j2, t_j1, s_j1, ab, condense;
 	w_j2 = 0;
-	z_j3 = 0;
 	s_j1 = 0;
-	for(int i = size+2; i>=0; i--){
+	for(int i = size+1; i>=0; i--){
 		w_j1 = w_j2;
-		z_j2 = z_j3;
-		//myfile<<"		s_j1:"<<s_j1<<"\n";
-		if(carry && i==size) c[i] = s_j1;
+		
+		if(carry && i==size) condense = s_j1;
 		if(i<(size)){
-			c[i] = s_j1;
+			if(condense!=0) myfile<<"CONDENSING!\n";
+			if(s_j1==0) c[i] = condense*3;
+			else if (condense==0) c[i] = s_j1;
+			else c[i] = s_j1+condense*4;
+
+			condense = (s_j1!=0)? 0 : condense;
 		}
-		if(i>=3){
-			h_j2 = ((a[i-3]+b[i-3])>0)? 1 : 0;
-			//myfile<<"		h_j2:"<<h_j2<<"\n";
-			z_j3 = ((a[i-3]+b[i-3])>0)? (a[i-3]+b[i-3]-2) : (a[i-3] + b[i-3]);
+		if(i>=2){
+			ab = a[i-2]+b[i-2];
+			if(ab >= 3){
+				t_j1 = 1;
+				w_j2 = ab -4;
+			}
+			else if (ab <= -3){
+				t_j1 = -1;
+				w_j2 = ab + 4;
+			}
+			else {
+				t_j1 = 0;
+				w_j2 = ab;
+			}
 		}
 		else{
-			h_j2 = 0;
-			z_j3 = 0;
+			t_j1 = 0;
+			w_j2 = 0;
 		}
-
-		t_j1 = ((z_j2+h_j2)<0)? -1: 0;
-		w_j2 = ((z_j2+h_j2)<0)? (z_j2+h_j2+2): (z_j2+h_j2);
-
 		s_j1 = t_j1 +w_j1;
 	}
 }
 
 void copy_and_shift_downN(int a[], int b[]){
-	for(int i = 0; i<N+2; i++){
+	for(int i = 0; i<N+D; i++){
 		a[i]=b[i+3];
 	}
 }
