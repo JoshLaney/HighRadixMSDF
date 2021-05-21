@@ -26,13 +26,13 @@ int main(){
 	
 	myfile.open("output.txt");
 	for(int test = 1; test<=TESTS; test++){
-		int x[N] = {-1, 2, 2, 3};
-		int y[N] = {-3, -2, -3, -3};
+		int x[N] = {-3, 2, 0, 3};
+		int y[N] = {-1, 0, -3, 3};
 		//int x[N];
 		//int y[N];
 		int p[2*N];
 		int p_frac[2*N];
-		int p_full[2*N+1];
+		int p_full[2*N];
 
 		int x_j[N+4][N+M+1];
 		int y_j[N+4][N+M+1];
@@ -91,7 +91,7 @@ int main(){
 				partial_product(x_j[j+3],x,y[N-j-4],j);
 				partial_product(y_j[(j+1)+3],y,x[N-j-4],j+1);
 			}
-			online_add(x_j[j+3],y_j[(j+1)+3],x_add_y, N+M+1, false);
+			online_add(x_j[j+3],y_j[(j+1)+3],x_add_y, N+M+1, true);
 			shift_up2(w, N+M);
 			
 			// myfile<<"	w      :";
@@ -100,7 +100,7 @@ int main(){
 			// myfile<<"	x+y    :";
 			// print_vec(x_add_y, N+M,N+M-D);
 			
-			online_add(w, x_add_y, v, N+M, false);
+			online_add(w, x_add_y, v, N+M, true);
 			
 			// myfile<<"	v      :";
 			// print_vec(v, N+M, N+M-D);
@@ -114,7 +114,7 @@ int main(){
 				p[2*N-1-j]= sel;
 				p_j[N+3]=-1*sel;
 			}
-			online_add(v, p_j, w, N+M, false);
+			online_add(v, p_j, w, N+M, true);
 
 			#ifdef PRINT
 			myfile<<"	j="<<j<<"\n";
@@ -147,11 +147,11 @@ int main(){
 
 		#ifdef PRINT
 		myfile<<"	p      :";
-		print_vec(p_full, 2*N+1, 2*N);
+		print_vec(p_full, 2*N, 2*N);
 		#endif
 
 		long p_out = 0;
-		for(int i = 0; i<2*N+1; i++){
+		for(int i = 0; i<2*N; i++){
 			p_out += ((long)p_full[i])*pow(R,i);
 			//myfile<<"		p_out:"<<p_out<<"\n";
 		}
@@ -243,6 +243,26 @@ void partial_product(int a[],int b[], int c, int j){
 }
 
 void shift_up2(int a[], int size){
+	if(a[size-1] != 0){
+		if(a[size-1]>1||a[size-1]<-1) cout<<"shift overflow\n";
+		int condense = a[size-1];
+		a[size-1]=0;
+		for(int i = size-2; i>=1; i--){
+			if(a[i]==0){
+				if(condense>0) a[i] = R-condense;
+				else if(condense<0) a[i] = -1*R+condense;
+				else a[i] = 0;
+			}
+			else{
+				if(condense==0) a[i]=a[i];
+				else{
+					if(condense>0) a[i]=a[i]+R;
+					else a[i]=a[i]-R;
+					condense=0;
+				}
+			}
+		}
+	}
 	for(int i = size-1; i>=1; i--){
 		a[i]=a[i-1];
 	}
@@ -267,8 +287,8 @@ int sel_vec(int a[]){
 	}
 	val+=(R*R)/2;
 	//myfile<<"		val:"<<val<<"\n";
-	if(val>=R*R*R) return R-1;
-	else if (val<=-1*R*R*(R-1)) return -1*R+1;
+	if(val>=R*R) return R-1;
+	else if (val<=-1*R*R) return -1*R+1;
 	else if(val>=0) return val/(R*R);
 	else return val/(R*R)-1;
 }
@@ -279,17 +299,37 @@ void online_add(int a[], int b[], int c[], int size, bool carry){
 	// myfile<<"		b    :";
 	// print_vec(b, N+M, N+M-D);
 	if(R>2){
-		int w_j1, w_j2, t_j1, s_j1, ab;
+		int w_j1, w_j2, t_j1, s_j1, ab, condense;
 		w_j2 = 0;
 		s_j1 = 0;
+		condense=0;
 		for(int i = size+1; i>=0; i--){
 			//myfile<<"		s_j1:"<<s_j1<<"\n";
 			//myfile<<"		w_j2:"<<w_j2<<"\n";
 			w_j1 = w_j2;
 			
-			if(carry && i==size) c[i] = s_j1;
+			//if(carry && i==size) c[i] = s_j1;
+			// if(i<(size)){
+			// 	c[i] = s_j1;
+			// }
+			if(carry && i==size) condense = s_j1;
+			if(condense>1 || condense<-1) cout<<"CONDENSE LARGER THAN EXPTECTED\n";
+			if(condense!=0) cout<<"condesning\n";
 			if(i<(size)){
-				c[i] = s_j1;
+				if(s_j1==0){
+					if(condense>0) c[i] = R-condense;
+					else if(condense<0) c[i] = -1*R+condense;
+					else c[i] = 0;
+				}
+				else{
+					if(condense==0) c[i]=s_j1;
+					else{
+						if(condense>0) c[i]=s_j1+R;
+						else c[i]=s_j1-R;
+						condense=0;
+					}
+				}
+				//c[i] = s_j1;
 			}
 			if(i>=2){
 				ab = a[i-2]+b[i-2];
@@ -314,7 +354,7 @@ void online_add(int a[], int b[], int c[], int size, bool carry){
 		}
 	}
 	else{
-		int w_j1, w_j2, h_j2, z_j2, z_j3, t_j1, s_j1;
+		int w_j1, w_j2, h_j2, z_j2, z_j3, t_j1, s_j1, condense;
 		w_j2 = 0;
 		z_j3 = 0;
 		s_j1 = 0;
@@ -322,9 +362,26 @@ void online_add(int a[], int b[], int c[], int size, bool carry){
 			w_j1 = w_j2;
 			z_j2 = z_j3;
 			//myfile<<"		s_j1:"<<s_j1<<"\n";
-			if(carry && i==size) c[i] = s_j1;
+			//if(carry && i==size) c[i] = s_j1;
+			// if(i<(size)){
+			// 	c[i] = s_j1;
+			// }
+			if(carry && i==size) condense = s_j1;
+			if(condense>1 || condense<-1) cout<<"CONDENSE LARGER THAN EXPTECTED\n";
 			if(i<(size)){
-				c[i] = s_j1;
+				if(s_j1==0){
+					if(condense>0) c[i] = R-condense;
+					else if(condense<0) c[i] = -1*R+condense;
+					else c[i] = 0;
+				}
+				else{
+					if(condense==0) c[i]=s_j1;
+					else{
+						if(condense>0) c[i]=s_j1+R;
+						else c[i]=s_j1-R;
+					}
+				}
+				//c[i] = s_j1;
 			}
 			if(i>=3){
 				h_j2 = ((a[i-3]+b[i-3])>0)? 1 : 0;
