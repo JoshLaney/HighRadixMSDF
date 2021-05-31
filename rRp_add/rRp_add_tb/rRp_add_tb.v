@@ -2,7 +2,7 @@
 
 module rRp_add_tb;
 
-parameter RADIX = 2;
+parameter RADIX = 4;
 parameter WIDTH = 6; //number of digits 
 parameter TESTS = 100;
 
@@ -21,9 +21,10 @@ integer x_num;
 integer y_num;
 integer s_num;
 integer s_expected;
+integer s_expected_old;
 integer tests;
 
-rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH)) addr(.x(x), .y(y), .s(s));
+rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH)) addr(.x_in(x), .y_in(y), .s_out(s), .clock(clk));
 
 always begin
 	clk = 1; #5; clk=0; #5;
@@ -38,9 +39,9 @@ initial begin
 	tests = TESTS -1;
 end
 
-always @(posedge clk)
+always @(negedge clk)
 	begin
-		#1;
+		#3;
 		x_num = 0;
 		y_num = 0;
 		s_expected = 0;
@@ -56,15 +57,16 @@ always @(posedge clk)
 		s_expected = x_num + y_num;
 	end
 
-always @(negedge clk)
+always @(posedge clk)
 	begin
+		#1
 		s_num = 0;
 		for(i = 0; i<WIDTH+1; i= i +1) begin
 			s_i = s[i*D +: D];
 			s_num = s_num + s_i*RADIX**i;
 		end
-
-		if(s_num != s_expected)
+		#1
+		if(s_num != s_expected_old)
 		begin
 			$display("Error at test %d", TESTS-tests);
 			errors = errors + 1;
@@ -76,6 +78,8 @@ always @(negedge clk)
 			$display("%d tests completed with %d errors", TESTS, errors);
 			$finish;
 		end
+		#1
+		s_expected_old = s_expected;
 	end
 
 endmodule

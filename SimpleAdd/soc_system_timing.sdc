@@ -3,6 +3,12 @@ create_clock -period 20 [get_ports fpga_clk_50]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_tx_clock_connection_clk]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_rx_clock_connection_clk]
 derive_pll_clocks
+
+
+#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[0]}]
+#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[1]}]
+#create_generated_clock -name PLL_C2 -multiply_by 2 -source [soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}][get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[2]}]
+
 derive_clock_uncertainty
 
 set_false_path -from [get_clocks {fpga_clk_50}] -to [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}]

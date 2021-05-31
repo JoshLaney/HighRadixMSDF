@@ -1,6 +1,6 @@
 module dpRam 
 (
-input clock, resetn, read, write, we_arith,
+input avalon_clock, ram_clock, resetn, read, write, we_arith,
 input [2:0] address,
 input [10:0] addr_arith,
 input [31:0] writedata, data_arith,
@@ -8,12 +8,15 @@ output [31:0] q_arith,
 output reg [31:0] readdata
 );
 
+parameter NEG_EDGE = 0;
+parameter ID = 1;
+
 reg [10:0] addr_hps;
 reg [31:0] data_hps;
 wire [31:0] q_hps;
 reg we_hps, w_inc, r_inc_inhibit;
 
-always@(posedge clock) begin
+always@(posedge avalon_clock) begin
 	w_inc <= 1'b0;
 	r_inc_inhibit <= 1'b0;
 	if(write) begin
@@ -37,26 +40,43 @@ always@(posedge clock) begin
 			end
 			3'b001: readdata <= addr_hps;
 			3'b010: readdata <= we_hps;
-			3'b011: readdata <= 32'h87654321;
+			3'b011: readdata <= ID;
 			default: ;
 		endcase
 	end
 	if(w_inc) addr_hps <= addr_hps + 11'b1;
 end
 
-true_dual_port_ram_single_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
+generate
+if(NEG_EDGE == 0) begin
+	true_dual_port_ram_single_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
 	.data_a(data_hps),
 	.data_b(data_arith),
 	.addr_a(addr_hps),
 	.addr_b(addr_arith),
 	.we_a(we_hps),
 	.we_b(we_arith),
-	.clk(clock),
+	.clk(ram_clock),
 	.q_a(q_hps),
 	.q_b(q_arith)
 	);
+end else begin
+	true_dual_port_ram_single_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
+	.data_a(data_hps),
+	.data_b(data_arith),
+	.addr_a(addr_hps),
+	.addr_b(addr_arith),
+	.we_a(we_hps),
+	.we_b(we_arith),
+	.clk(~ram_clock),
+	.q_a(q_hps),
+	.q_b(q_arith)
+	);
+end
+endgenerate
 
-	endmodule
+
+endmodule
 
 // Quartus Prime Verilog Template
 // True Dual Port RAM with single clock
