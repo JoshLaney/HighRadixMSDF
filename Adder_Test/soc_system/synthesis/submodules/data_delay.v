@@ -6,7 +6,7 @@ input pll_clock;
 input [WIDTH-1:0] data_in;
 output [WIDTH-1:0] data_out;
 
-(* preserve="true" *) reg [WIDTH-1:0] data_out;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [WIDTH-1:0] data_out;
 
 always@(posedge pll_clock) begin
 	data_out <= data_in;

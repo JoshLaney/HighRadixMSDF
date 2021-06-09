@@ -88,44 +88,64 @@ module soc_system (
 		input  wire        reset_reset_n                          //           reset.reset_n
 	);
 
-	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [addr_delay_pos:pll_clock, addr_delay_pos_0:pll_clock, data_delay_pos:pll_clock, mux_a:pll_clock, mux_b:pll_clock, ram_a_pos:ram_clock, ram_b_pos:ram_clock, ram_c_pos:ram_clock, test_control_unit_0:pll_clock_pos]
-	wire         pll_0_outclk1_clk;                                              // pll_0:outclk_1 -> [addr_delay_neg:pll_clock, addr_delay_neg_0:pll_clock, data_delay_neg:pll_clock, ram_a_neg:ram_clock, ram_b_neg:ram_clock, ram_c_neg:ram_clock, test_control_unit_0:pll_clock_neg]
-	wire         pll_0_outclk2_clk;                                              // pll_0:outclk_2 -> [data_delay_neg_0:pll_clock, data_delay_pos_0:pll_clock, online_adder_0:clock]
+	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [addr_delay_pos:pll_clock, addr_delay_pos_0:pll_clock, addr_delay_pos_1:pll_clock, addr_delay_pos_2:pll_clock, data_delay_c_pos_1:pll_clock, ram_a_pos:ram_clock, ram_b_pos:ram_clock, ram_c_pos:ram_clock, test_control_unit_0:pll_clock_pos]
+	wire         pll_0_outclk1_clk;                                              // pll_0:outclk_1 -> [addr_delay_neg:pll_clock, addr_delay_neg_0:pll_clock, addr_delay_neg_1:pll_clock, addr_delay_neg_2:pll_clock, data_delay_c_neg_1:pll_clock, ram_a_neg:ram_clock, ram_b_neg:ram_clock, ram_c_neg:ram_clock, test_control_unit_0:pll_clock_neg]
+	wire         pll_0_outclk2_clk;                                              // pll_0:outclk_2 -> [clock_div_0:clock, data_delay_a:pll_clock, data_delay_a_0:pll_clock, data_delay_a_1:pll_clock, data_delay_b:pll_clock, data_delay_b_0:pll_clock, data_delay_b_1:pll_clock, data_delay_c_neg:pll_clock, data_delay_c_neg_0:pll_clock, data_delay_c_neg_2:pll_clock, data_delay_c_pos:pll_clock, data_delay_c_pos_0:pll_clock, data_delay_c_pos_2:pll_clock, online_adder_0:clock, rst_controller:clk]
 	wire  [10:0] test_control_unit_0_read_a_pos_addr;                            // test_control_unit_0:r_addr_a_pos -> ram_a_pos:addr_arith
 	wire         test_control_unit_0_read_a_pos_we;                              // test_control_unit_0:we_read_a_pos -> ram_a_pos:we_arith
 	wire  [10:0] test_control_unit_0_read_b_neg_addr;                            // test_control_unit_0:r_addr_b_neg -> ram_b_neg:addr_arith
 	wire         test_control_unit_0_read_b_neg_we;                              // test_control_unit_0:we_read_b_neg -> ram_b_neg:we_arith
-	wire  [10:0] addr_delay_neg_0_addr_out_addr;                                 // addr_delay_neg_0:addr_out -> ram_c_neg:addr_arith
-	wire         addr_delay_neg_0_addr_out_we;                                   // addr_delay_neg_0:e_out -> ram_c_neg:we_arith
-	wire  [10:0] addr_delay_pos_0_addr_out_addr;                                 // addr_delay_pos_0:addr_out -> ram_c_pos:addr_arith
-	wire         addr_delay_pos_0_addr_out_we;                                   // addr_delay_pos_0:e_out -> ram_c_pos:we_arith
+	wire  [10:0] test_control_unit_0_write_neg_addr;                             // test_control_unit_0:w_addr_neg -> addr_delay_neg:addr_in
+	wire         test_control_unit_0_write_neg_we;                               // test_control_unit_0:we_neg -> addr_delay_neg:e_in
+	wire  [10:0] test_control_unit_0_write_pos_addr;                             // test_control_unit_0:w_addr_pos -> addr_delay_pos:addr_in
+	wire         test_control_unit_0_write_pos_we;                               // test_control_unit_0:we_pos -> addr_delay_pos:e_in
+	wire  [10:0] addr_delay_neg_2_addr_out_addr;                                 // addr_delay_neg_2:addr_out -> ram_c_neg:addr_arith
+	wire         addr_delay_neg_2_addr_out_we;                                   // addr_delay_neg_2:e_out -> ram_c_neg:we_arith
+	wire  [10:0] addr_delay_pos_2_addr_out_addr;                                 // addr_delay_pos_2:addr_out -> ram_c_pos:addr_arith
+	wire         addr_delay_pos_2_addr_out_we;                                   // addr_delay_pos_2:e_out -> ram_c_pos:we_arith
 	wire  [10:0] addr_delay_neg_addr_out_addr;                                   // addr_delay_neg:addr_out -> addr_delay_neg_0:addr_in
 	wire         addr_delay_neg_addr_out_we;                                     // addr_delay_neg:e_out -> addr_delay_neg_0:e_in
 	wire  [10:0] addr_delay_pos_addr_out_addr;                                   // addr_delay_pos:addr_out -> addr_delay_pos_0:addr_in
 	wire         addr_delay_pos_addr_out_we;                                     // addr_delay_pos:e_out -> addr_delay_pos_0:e_in
-	wire  [29:0] mux_b_q_out_q;                                                  // mux_b:q_out -> online_adder_0:y_in
+	wire  [10:0] addr_delay_neg_0_addr_out_addr;                                 // addr_delay_neg_0:addr_out -> addr_delay_neg_1:addr_in
+	wire         addr_delay_neg_0_addr_out_we;                                   // addr_delay_neg_0:e_out -> addr_delay_neg_1:e_in
+	wire  [10:0] addr_delay_pos_0_addr_out_addr;                                 // addr_delay_pos_0:addr_out -> addr_delay_pos_1:addr_in
+	wire         addr_delay_pos_0_addr_out_we;                                   // addr_delay_pos_0:e_out -> addr_delay_pos_1:e_in
+	wire  [10:0] addr_delay_neg_1_addr_out_addr;                                 // addr_delay_neg_1:addr_out -> addr_delay_neg_2:addr_in
+	wire         addr_delay_neg_1_addr_out_we;                                   // addr_delay_neg_1:e_out -> addr_delay_neg_2:e_in
+	wire  [10:0] addr_delay_pos_1_addr_out_addr;                                 // addr_delay_pos_1:addr_out -> addr_delay_pos_2:addr_in
+	wire         addr_delay_pos_1_addr_out_we;                                   // addr_delay_pos_1:e_out -> addr_delay_pos_2:e_in
+	wire         clock_div_0_ctrl_a_ctrl;                                        // clock_div_0:ctrl_a -> mux_a:mux_ctrl
+	wire         clock_div_0_ctrl_b_ctrl;                                        // clock_div_0:ctrl_b -> mux_b:mux_ctrl
 	wire  [31:0] online_adder_0_c_out_data;                                      // online_adder_0:s_out -> arith_out_duplicate_0:data_in
-	wire  [31:0] data_delay_pos_0_data_out_data;                                 // data_delay_pos_0:data_out -> data_delay_pos:data_in
-	wire  [31:0] data_delay_neg_0_data_out_data;                                 // data_delay_neg_0:data_out -> data_delay_neg:data_in
-	wire  [31:0] arith_out_duplicate_0_neg_out_data;                             // arith_out_duplicate_0:neg_out -> data_delay_neg_0:data_in
-	wire  [31:0] arith_out_duplicate_0_pos_out_data;                             // arith_out_duplicate_0:pos_out -> data_delay_pos_0:data_in
-	wire  [31:0] data_delay_pos_data_out_data;                                   // data_delay_pos:data_out -> ram_c_pos:data_arith
-	wire  [31:0] data_delay_neg_data_out_data;                                   // data_delay_neg:data_out -> ram_c_neg:data_arith
+	wire  [31:0] data_delay_c_neg_2_data_out_data;                               // data_delay_c_neg_2:data_out -> data_delay_c_neg_1:data_in
+	wire  [29:0] data_delay_a_1_data_out_data;                                   // data_delay_a_1:data_out -> online_adder_0:x_in
+	wire  [29:0] data_delay_b_1_data_out_data;                                   // data_delay_b_1:data_out -> online_adder_0:y_in
+	wire  [31:0] data_delay_c_neg_1_data_out_data;                               // data_delay_c_neg_1:data_out -> ram_c_neg:data_arith
+	wire  [31:0] data_delay_c_pos_1_data_out_data;                               // data_delay_c_pos_1:data_out -> ram_c_pos:data_arith
+	wire  [29:0] mux_b_data_out_data;                                            // mux_b:q_out -> data_delay_b:data_in
+	wire  [29:0] mux_a_data_out_data;                                            // mux_a:q_out -> data_delay_a:data_in
+	wire  [29:0] data_delay_a_data_out_data;                                     // data_delay_a:data_out -> data_delay_a_0:data_in
+	wire  [29:0] data_delay_b_data_out_data;                                     // data_delay_b:data_out -> data_delay_b_0:data_in
+	wire  [31:0] data_delay_c_pos_data_out_data;                                 // data_delay_c_pos:data_out -> data_delay_c_pos_0:data_in
+	wire  [31:0] data_delay_c_neg_data_out_data;                                 // data_delay_c_neg:data_out -> data_delay_c_neg_0:data_in
+	wire  [31:0] data_delay_c_neg_0_data_out_data;                               // data_delay_c_neg_0:data_out -> data_delay_c_neg_2:data_in
+	wire  [31:0] data_delay_c_pos_0_data_out_data;                               // data_delay_c_pos_0:data_out -> data_delay_c_pos_2:data_in
+	wire  [31:0] data_delay_c_pos_2_data_out_data;                               // data_delay_c_pos_2:data_out -> data_delay_c_pos_1:data_in
+	wire  [29:0] data_delay_a_0_data_out_data;                                   // data_delay_a_0:data_out -> data_delay_a_1:data_in
+	wire  [29:0] data_delay_b_0_data_out_data;                                   // data_delay_b_0:data_out -> data_delay_b_1:data_in
 	wire  [31:0] ram_a_neg_q_arth_q;                                             // ram_a_neg:q_arith -> mux_a:neg_in
 	wire  [31:0] ram_b_neg_q_arth_q;                                             // ram_b_neg:q_arith -> mux_b:neg_in
+	wire  [31:0] arith_out_duplicate_0_neg_out_data;                             // arith_out_duplicate_0:neg_out -> data_delay_c_neg:data_in
 	wire  [31:0] ram_b_pos_q_arth_q;                                             // ram_b_pos:q_arith -> mux_b:pos_in
+	wire  [31:0] arith_out_duplicate_0_pos_out_data;                             // arith_out_duplicate_0:pos_out -> data_delay_c_pos:data_in
 	wire  [31:0] ram_a_pos_q_arth_q;                                             // ram_a_pos:q_arith -> mux_a:pos_in
-	wire  [29:0] mux_a_q_out_q;                                                  // mux_a:q_out -> online_adder_0:x_in
 	wire  [10:0] test_control_unit_0_read_a_neg_addr;                            // test_control_unit_0:r_addr_a_neg -> ram_a_neg:addr_arith
 	wire         test_control_unit_0_read_a_neg_we;                              // test_control_unit_0:we_read_a_neg -> ram_a_neg:we_arith
 	wire  [10:0] test_control_unit_0_read_b_pos_addr;                            // test_control_unit_0:r_addr_b_pos -> ram_b_pos:addr_arith
 	wire         test_control_unit_0_read_b_pos_we;                              // test_control_unit_0:we_read_b_pos -> ram_b_pos:we_arith
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
 	wire  [63:0] pll_reconfig_0_reconfig_to_pll_reconfig_to_pll;                 // pll_reconfig_0:reconfig_to_pll -> pll_0:reconfig_to_pll
-	wire  [10:0] test_control_unit_0_write_neg_addr;                             // test_control_unit_0:w_addr_neg -> addr_delay_neg:addr_in
-	wire         test_control_unit_0_write_neg_we;                               // test_control_unit_0:we_neg -> addr_delay_neg:e_in
-	wire  [10:0] test_control_unit_0_write_pos_addr;                             // test_control_unit_0:w_addr_pos -> addr_delay_pos:addr_in
-	wire         test_control_unit_0_write_pos_we;                               // test_control_unit_0:we_pos -> addr_delay_pos:e_in
 	wire   [1:0] hps_0_h2f_lw_axi_master_awburst;                                // hps_0:h2f_lw_AWBURST -> mm_interconnect_0:hps_0_h2f_lw_axi_master_awburst
 	wire   [3:0] hps_0_h2f_lw_axi_master_arlen;                                  // hps_0:h2f_lw_ARLEN -> mm_interconnect_0:hps_0_h2f_lw_axi_master_arlen
 	wire   [3:0] hps_0_h2f_lw_axi_master_wstrb;                                  // hps_0:h2f_lw_WSTRB -> mm_interconnect_0:hps_0_h2f_lw_axi_master_wstrb
@@ -223,8 +243,9 @@ module soc_system (
 	wire         mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_read;        // mm_interconnect_1:pll_reconfig_0_mgmt_avalon_slave_read -> pll_reconfig_0:mgmt_read
 	wire         mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_write;       // mm_interconnect_1:pll_reconfig_0_mgmt_avalon_slave_write -> pll_reconfig_0:mgmt_write
 	wire  [31:0] mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_writedata;   // mm_interconnect_1:pll_reconfig_0_mgmt_avalon_slave_writedata -> pll_reconfig_0:mgmt_writedata
-	wire         rst_controller_reset_out_reset;                                 // rst_controller:reset_out -> [mm_bridge_0:reset, mm_interconnect_0:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_1:mm_bridge_0_reset_reset_bridge_in_reset_reset, pll_reconfig_0:mgmt_reset, ram_a_neg:resetn, ram_a_pos:resetn, ram_b_neg:resetn, ram_b_pos:resetn, ram_c_neg:resetn, ram_c_pos:resetn, test_control_unit_0:resetn]
-	wire         rst_controller_001_reset_out_reset;                             // rst_controller_001:reset_out -> mm_interconnect_0:hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset
+	wire         rst_controller_reset_out_reset;                                 // rst_controller:reset_out -> clock_div_0:resetn
+	wire         rst_controller_001_reset_out_reset;                             // rst_controller_001:reset_out -> [mm_bridge_0:reset, mm_interconnect_0:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_1:mm_bridge_0_reset_reset_bridge_in_reset_reset, pll_reconfig_0:mgmt_reset, ram_a_neg:resetn, ram_a_pos:resetn, ram_b_neg:resetn, ram_b_pos:resetn, ram_c_neg:resetn, ram_c_pos:resetn, test_control_unit_0:resetn]
+	wire         rst_controller_002_reset_out_reset;                             // rst_controller_002:reset_out -> mm_interconnect_0:hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset
 
 	addr_delay #(
 		.ADDR_WIDTH (11)
@@ -248,6 +269,26 @@ module soc_system (
 
 	addr_delay #(
 		.ADDR_WIDTH (11)
+	) addr_delay_neg_1 (
+		.pll_clock (pll_0_outclk1_clk),              //    clock.clk
+		.addr_in   (addr_delay_neg_0_addr_out_addr), //  addr_in.addr
+		.e_in      (addr_delay_neg_0_addr_out_we),   //         .we
+		.addr_out  (addr_delay_neg_1_addr_out_addr), // addr_out.addr
+		.e_out     (addr_delay_neg_1_addr_out_we)    //         .we
+	);
+
+	addr_delay #(
+		.ADDR_WIDTH (11)
+	) addr_delay_neg_2 (
+		.pll_clock (pll_0_outclk1_clk),              //    clock.clk
+		.addr_in   (addr_delay_neg_1_addr_out_addr), //  addr_in.addr
+		.e_in      (addr_delay_neg_1_addr_out_we),   //         .we
+		.addr_out  (addr_delay_neg_2_addr_out_addr), // addr_out.addr
+		.e_out     (addr_delay_neg_2_addr_out_we)    //         .we
+	);
+
+	addr_delay #(
+		.ADDR_WIDTH (11)
 	) addr_delay_pos (
 		.pll_clock (pll_0_outclk0_clk),                  //    clock.clk
 		.addr_in   (test_control_unit_0_write_pos_addr), //  addr_in.addr
@@ -266,6 +307,26 @@ module soc_system (
 		.e_out     (addr_delay_pos_0_addr_out_we)    //         .we
 	);
 
+	addr_delay #(
+		.ADDR_WIDTH (11)
+	) addr_delay_pos_1 (
+		.pll_clock (pll_0_outclk0_clk),              //    clock.clk
+		.addr_in   (addr_delay_pos_0_addr_out_addr), //  addr_in.addr
+		.e_in      (addr_delay_pos_0_addr_out_we),   //         .we
+		.addr_out  (addr_delay_pos_1_addr_out_addr), // addr_out.addr
+		.e_out     (addr_delay_pos_1_addr_out_we)    //         .we
+	);
+
+	addr_delay #(
+		.ADDR_WIDTH (11)
+	) addr_delay_pos_2 (
+		.pll_clock (pll_0_outclk0_clk),              //    clock.clk
+		.addr_in   (addr_delay_pos_1_addr_out_addr), //  addr_in.addr
+		.e_in      (addr_delay_pos_1_addr_out_we),   //         .we
+		.addr_out  (addr_delay_pos_2_addr_out_addr), // addr_out.addr
+		.e_out     (addr_delay_pos_2_addr_out_we)    //         .we
+	);
+
 	arith_out_duplicate #(
 		.WIDTH (32)
 	) arith_out_duplicate_0 (
@@ -274,36 +335,123 @@ module soc_system (
 		.data_in (online_adder_0_c_out_data)           // data_in.data
 	);
 
+	clock_div clock_div_0 (
+		.resetn (~rst_controller_reset_out_reset), // clock_reset.reset_n
+		.clock  (pll_0_outclk2_clk),               //  clock_sink.clk
+		.ctrl_a (clock_div_0_ctrl_a_ctrl),         //      ctrl_a.ctrl
+		.ctrl_b (clock_div_0_ctrl_b_ctrl)          //      ctrl_b.ctrl
+	);
+
 	data_delay #(
-		.WIDTH (32)
-	) data_delay_neg (
-		.pll_clock (pll_0_outclk1_clk),              //    clock.clk
-		.data_in   (data_delay_neg_0_data_out_data), //  data_in.data
-		.data_out  (data_delay_neg_data_out_data)    // data_out.data
+		.WIDTH (30)
+	) data_delay_a (
+		.pll_clock (pll_0_outclk2_clk),          //    clock.clk
+		.data_in   (mux_a_data_out_data),        //  data_in.data
+		.data_out  (data_delay_a_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (30)
+	) data_delay_a_0 (
+		.pll_clock (pll_0_outclk2_clk),            //    clock.clk
+		.data_in   (data_delay_a_data_out_data),   //  data_in.data
+		.data_out  (data_delay_a_0_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (30)
+	) data_delay_a_1 (
+		.pll_clock (pll_0_outclk2_clk),            //    clock.clk
+		.data_in   (data_delay_a_0_data_out_data), //  data_in.data
+		.data_out  (data_delay_a_1_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (30)
+	) data_delay_b (
+		.pll_clock (pll_0_outclk2_clk),          //    clock.clk
+		.data_in   (mux_b_data_out_data),        //  data_in.data
+		.data_out  (data_delay_b_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (30)
+	) data_delay_b_0 (
+		.pll_clock (pll_0_outclk2_clk),            //    clock.clk
+		.data_in   (data_delay_b_data_out_data),   //  data_in.data
+		.data_out  (data_delay_b_0_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (30)
+	) data_delay_b_1 (
+		.pll_clock (pll_0_outclk2_clk),            //    clock.clk
+		.data_in   (data_delay_b_0_data_out_data), //  data_in.data
+		.data_out  (data_delay_b_1_data_out_data)  // data_out.data
 	);
 
 	data_delay #(
 		.WIDTH (32)
-	) data_delay_neg_0 (
+	) data_delay_c_neg (
 		.pll_clock (pll_0_outclk2_clk),                  //    clock.clk
 		.data_in   (arith_out_duplicate_0_neg_out_data), //  data_in.data
-		.data_out  (data_delay_neg_0_data_out_data)      // data_out.data
+		.data_out  (data_delay_c_neg_data_out_data)      // data_out.data
 	);
 
 	data_delay #(
 		.WIDTH (32)
-	) data_delay_pos (
-		.pll_clock (pll_0_outclk0_clk),              //    clock.clk
-		.data_in   (data_delay_pos_0_data_out_data), //  data_in.data
-		.data_out  (data_delay_pos_data_out_data)    // data_out.data
+	) data_delay_c_neg_0 (
+		.pll_clock (pll_0_outclk2_clk),                //    clock.clk
+		.data_in   (data_delay_c_neg_data_out_data),   //  data_in.data
+		.data_out  (data_delay_c_neg_0_data_out_data)  // data_out.data
 	);
 
 	data_delay #(
 		.WIDTH (32)
-	) data_delay_pos_0 (
+	) data_delay_c_neg_1 (
+		.pll_clock (pll_0_outclk1_clk),                //    clock.clk
+		.data_in   (data_delay_c_neg_2_data_out_data), //  data_in.data
+		.data_out  (data_delay_c_neg_1_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (32)
+	) data_delay_c_neg_2 (
+		.pll_clock (pll_0_outclk2_clk),                //    clock.clk
+		.data_in   (data_delay_c_neg_0_data_out_data), //  data_in.data
+		.data_out  (data_delay_c_neg_2_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (32)
+	) data_delay_c_pos (
 		.pll_clock (pll_0_outclk2_clk),                  //    clock.clk
 		.data_in   (arith_out_duplicate_0_pos_out_data), //  data_in.data
-		.data_out  (data_delay_pos_0_data_out_data)      // data_out.data
+		.data_out  (data_delay_c_pos_data_out_data)      // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (32)
+	) data_delay_c_pos_0 (
+		.pll_clock (pll_0_outclk2_clk),                //    clock.clk
+		.data_in   (data_delay_c_pos_data_out_data),   //  data_in.data
+		.data_out  (data_delay_c_pos_0_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (32)
+	) data_delay_c_pos_1 (
+		.pll_clock (pll_0_outclk0_clk),                //    clock.clk
+		.data_in   (data_delay_c_pos_2_data_out_data), //  data_in.data
+		.data_out  (data_delay_c_pos_1_data_out_data)  // data_out.data
+	);
+
+	data_delay #(
+		.WIDTH (32)
+	) data_delay_c_pos_2 (
+		.pll_clock (pll_0_outclk2_clk),                //    clock.clk
+		.data_in   (data_delay_c_pos_0_data_out_data), //  data_in.data
+		.data_out  (data_delay_c_pos_2_data_out_data)  // data_out.data
 	);
 
 	soc_system_hps_0 #(
@@ -438,7 +586,7 @@ module soc_system (
 		.PIPELINE_RESPONSE (1)
 	) mm_bridge_0 (
 		.clk              (clk_clk),                                        //   clk.clk
-		.reset            (rst_controller_reset_out_reset),                 // reset.reset
+		.reset            (rst_controller_001_reset_out_reset),             // reset.reset
 		.s0_waitrequest   (mm_interconnect_0_mm_bridge_0_s0_waitrequest),   //    s0.waitrequest
 		.s0_readdata      (mm_interconnect_0_mm_bridge_0_s0_readdata),      //      .readdata
 		.s0_readdatavalid (mm_interconnect_0_mm_bridge_0_s0_readdatavalid), //      .readdatavalid
@@ -466,29 +614,29 @@ module soc_system (
 	arith_in_mux #(
 		.WIDTH (30)
 	) mux_a (
-		.pos_in    (ram_a_pos_q_arth_q), //       pos.q
-		.neg_in    (ram_a_neg_q_arth_q), //       neg.q
-		.pll_clock (pll_0_outclk0_clk),  // pll_clock.clk
-		.q_out     (mux_a_q_out_q)       //     q_out.q
+		.pos_in   (ram_a_pos_q_arth_q),      //      pos.q
+		.neg_in   (ram_a_neg_q_arth_q),      //      neg.q
+		.q_out    (mux_a_data_out_data),     // data_out.data
+		.mux_ctrl (clock_div_0_ctrl_a_ctrl)  // mux_ctrl.ctrl
 	);
 
 	arith_in_mux #(
 		.WIDTH (30)
 	) mux_b (
-		.pos_in    (ram_b_pos_q_arth_q), //       pos.q
-		.neg_in    (ram_b_neg_q_arth_q), //       neg.q
-		.pll_clock (pll_0_outclk0_clk),  // pll_clock.clk
-		.q_out     (mux_b_q_out_q)       //     q_out.q
+		.pos_in   (ram_b_pos_q_arth_q),      //      pos.q
+		.neg_in   (ram_b_neg_q_arth_q),      //      neg.q
+		.q_out    (mux_b_data_out_data),     // data_out.data
+		.mux_ctrl (clock_div_0_ctrl_b_ctrl)  // mux_ctrl.ctrl
 	);
 
 	rRp_add #(
 		.RADIX (2),
 		.WIDTH (15)
 	) online_adder_0 (
-		.x_in  (mux_a_q_out_q),             //  a_in.q
-		.y_in  (mux_b_q_out_q),             //  b_in.q
-		.s_out (online_adder_0_c_out_data), // c_out.data
-		.clock (pll_0_outclk2_clk)          // clock.clk
+		.x_in  (data_delay_a_1_data_out_data), //  a_in.data
+		.y_in  (data_delay_b_1_data_out_data), //  b_in.data
+		.s_out (online_adder_0_c_out_data),    // c_out.data
+		.clock (pll_0_outclk2_clk)             // clock.clk
 	);
 
 	soc_system_pll_0 pll_0 (
@@ -514,7 +662,7 @@ module soc_system (
 		.WAIT_FOR_LOCK       (1)
 	) pll_reconfig_0 (
 		.mgmt_clk          (clk_clk),                                                        //          mgmt_clk.clk
-		.mgmt_reset        (rst_controller_reset_out_reset),                                 //        mgmt_reset.reset
+		.mgmt_reset        (rst_controller_001_reset_out_reset),                             //        mgmt_reset.reset
 		.mgmt_waitrequest  (mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_waitrequest), // mgmt_avalon_slave.waitrequest
 		.mgmt_read         (mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_read),        //                  .read
 		.mgmt_write        (mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_write),       //                  .write
@@ -530,7 +678,7 @@ module soc_system (
 		.NEG_EDGE (0),
 		.ID       (3)
 	) ram_a_neg (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_a_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_a_neg_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_a_neg_avalon_slave_0_write),     //               .write
@@ -548,7 +696,7 @@ module soc_system (
 		.NEG_EDGE (0),
 		.ID       (2)
 	) ram_a_pos (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_a_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_a_pos_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_a_pos_avalon_slave_0_write),     //               .write
@@ -566,7 +714,7 @@ module soc_system (
 		.NEG_EDGE (0),
 		.ID       (5)
 	) ram_b_neg (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_b_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_b_neg_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_b_neg_avalon_slave_0_write),     //               .write
@@ -584,7 +732,7 @@ module soc_system (
 		.NEG_EDGE (0),
 		.ID       (4)
 	) ram_b_pos (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_b_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_b_pos_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_b_pos_avalon_slave_0_write),     //               .write
@@ -602,7 +750,7 @@ module soc_system (
 		.NEG_EDGE (0),
 		.ID       (7)
 	) ram_c_neg (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_c_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_c_neg_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_c_neg_avalon_slave_0_write),     //               .write
@@ -611,16 +759,16 @@ module soc_system (
 		.avalon_clock (clk_clk),                                              //     clock_sink.clk
 		.ram_clock    (pll_0_outclk1_clk),                                    //        pll_clk.clk
 		.q_arith      (),                                                     //         q_arth.q
-		.data_arith   (data_delay_neg_data_out_data),                         //      data_arth.data
-		.addr_arith   (addr_delay_neg_0_addr_out_addr),                       //      addr_arth.addr
-		.we_arith     (addr_delay_neg_0_addr_out_we)                          //               .we
+		.data_arith   (data_delay_c_neg_1_data_out_data),                     //      data_arth.data
+		.addr_arith   (addr_delay_neg_2_addr_out_addr),                       //      addr_arth.addr
+		.we_arith     (addr_delay_neg_2_addr_out_we)                          //               .we
 	);
 
 	dpRam #(
 		.NEG_EDGE (0),
 		.ID       (6)
 	) ram_c_pos (
-		.resetn       (~rst_controller_reset_out_reset),                      //    clock_reset.reset_n
+		.resetn       (~rst_controller_001_reset_out_reset),                  //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_ram_c_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata     (mm_interconnect_1_ram_c_pos_avalon_slave_0_readdata),  //               .readdata
 		.write        (mm_interconnect_1_ram_c_pos_avalon_slave_0_write),     //               .write
@@ -629,9 +777,9 @@ module soc_system (
 		.avalon_clock (clk_clk),                                              //     clock_sink.clk
 		.ram_clock    (pll_0_outclk0_clk),                                    //        pll_clk.clk
 		.q_arith      (),                                                     //         q_arth.q
-		.data_arith   (data_delay_pos_data_out_data),                         //      data_arth.data
-		.addr_arith   (addr_delay_pos_0_addr_out_addr),                       //      addr_arth.addr
-		.we_arith     (addr_delay_pos_0_addr_out_we)                          //               .we
+		.data_arith   (data_delay_c_pos_1_data_out_data),                     //      data_arth.data
+		.addr_arith   (addr_delay_pos_2_addr_out_addr),                       //      addr_arth.addr
+		.we_arith     (addr_delay_pos_2_addr_out_we)                          //               .we
 	);
 
 	testControlUnit #(
@@ -643,7 +791,7 @@ module soc_system (
 		.read          (mm_interconnect_1_test_control_unit_0_avalon_slave_0_read),      //               .read
 		.address       (mm_interconnect_1_test_control_unit_0_avalon_slave_0_address),   //               .address
 		.avalon_clock  (clk_clk),                                                        //     clock_sink.clk
-		.resetn        (~rst_controller_reset_out_reset),                                //     reset_sink.reset_n
+		.resetn        (~rst_controller_001_reset_out_reset),                            //     reset_sink.reset_n
 		.w_addr_pos    (test_control_unit_0_write_pos_addr),                             //      write_pos.addr
 		.we_pos        (test_control_unit_0_write_pos_we),                               //               .we
 		.w_addr_neg    (test_control_unit_0_write_neg_addr),                             //      write_neg.addr
@@ -698,8 +846,8 @@ module soc_system (
 		.hps_0_h2f_lw_axi_master_rvalid                                      (hps_0_h2f_lw_axi_master_rvalid),                 //                                                              .rvalid
 		.hps_0_h2f_lw_axi_master_rready                                      (hps_0_h2f_lw_axi_master_rready),                 //                                                              .rready
 		.clk_0_clk_clk                                                       (clk_clk),                                        //                                                     clk_0_clk.clk
-		.hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset (rst_controller_001_reset_out_reset),             // hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset.reset
-		.mm_bridge_0_reset_reset_bridge_in_reset_reset                       (rst_controller_reset_out_reset),                 //                       mm_bridge_0_reset_reset_bridge_in_reset.reset
+		.hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset (rst_controller_002_reset_out_reset),             // hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset.reset
+		.mm_bridge_0_reset_reset_bridge_in_reset_reset                       (rst_controller_001_reset_out_reset),             //                       mm_bridge_0_reset_reset_bridge_in_reset.reset
 		.mm_bridge_0_s0_address                                              (mm_interconnect_0_mm_bridge_0_s0_address),       //                                                mm_bridge_0_s0.address
 		.mm_bridge_0_s0_write                                                (mm_interconnect_0_mm_bridge_0_s0_write),         //                                                              .write
 		.mm_bridge_0_s0_read                                                 (mm_interconnect_0_mm_bridge_0_s0_read),          //                                                              .read
@@ -714,7 +862,7 @@ module soc_system (
 
 	soc_system_mm_interconnect_1 mm_interconnect_1 (
 		.clk_0_clk_clk                                 (clk_clk),                                                        //                               clk_0_clk.clk
-		.mm_bridge_0_reset_reset_bridge_in_reset_reset (rst_controller_reset_out_reset),                                 // mm_bridge_0_reset_reset_bridge_in_reset.reset
+		.mm_bridge_0_reset_reset_bridge_in_reset_reset (rst_controller_001_reset_out_reset),                             // mm_bridge_0_reset_reset_bridge_in_reset.reset
 		.mm_bridge_0_m0_address                        (mm_bridge_0_m0_address),                                         //                          mm_bridge_0_m0.address
 		.mm_bridge_0_m0_waitrequest                    (mm_bridge_0_m0_waitrequest),                                     //                                        .waitrequest
 		.mm_bridge_0_m0_burstcount                     (mm_bridge_0_m0_burstcount),                                      //                                        .burstcount
@@ -795,7 +943,7 @@ module soc_system (
 		.ADAPT_RESET_REQUEST       (0)
 	) rst_controller (
 		.reset_in0      (~reset_reset_n),                 // reset_in0.reset
-		.clk            (clk_clk),                        //       clk.clk
+		.clk            (pll_0_outclk2_clk),              //       clk.clk
 		.reset_out      (rst_controller_reset_out_reset), // reset_out.reset
 		.reset_req      (),                               // (terminated)
 		.reset_req_in0  (1'b0),                           // (terminated)
@@ -857,9 +1005,72 @@ module soc_system (
 		.USE_RESET_REQUEST_IN15    (0),
 		.ADAPT_RESET_REQUEST       (0)
 	) rst_controller_001 (
-		.reset_in0      (~hps_0_h2f_reset_reset_n),           // reset_in0.reset
+		.reset_in0      (~reset_reset_n),                     // reset_in0.reset
 		.clk            (clk_clk),                            //       clk.clk
 		.reset_out      (rst_controller_001_reset_out_reset), // reset_out.reset
+		.reset_req      (),                                   // (terminated)
+		.reset_req_in0  (1'b0),                               // (terminated)
+		.reset_in1      (1'b0),                               // (terminated)
+		.reset_req_in1  (1'b0),                               // (terminated)
+		.reset_in2      (1'b0),                               // (terminated)
+		.reset_req_in2  (1'b0),                               // (terminated)
+		.reset_in3      (1'b0),                               // (terminated)
+		.reset_req_in3  (1'b0),                               // (terminated)
+		.reset_in4      (1'b0),                               // (terminated)
+		.reset_req_in4  (1'b0),                               // (terminated)
+		.reset_in5      (1'b0),                               // (terminated)
+		.reset_req_in5  (1'b0),                               // (terminated)
+		.reset_in6      (1'b0),                               // (terminated)
+		.reset_req_in6  (1'b0),                               // (terminated)
+		.reset_in7      (1'b0),                               // (terminated)
+		.reset_req_in7  (1'b0),                               // (terminated)
+		.reset_in8      (1'b0),                               // (terminated)
+		.reset_req_in8  (1'b0),                               // (terminated)
+		.reset_in9      (1'b0),                               // (terminated)
+		.reset_req_in9  (1'b0),                               // (terminated)
+		.reset_in10     (1'b0),                               // (terminated)
+		.reset_req_in10 (1'b0),                               // (terminated)
+		.reset_in11     (1'b0),                               // (terminated)
+		.reset_req_in11 (1'b0),                               // (terminated)
+		.reset_in12     (1'b0),                               // (terminated)
+		.reset_req_in12 (1'b0),                               // (terminated)
+		.reset_in13     (1'b0),                               // (terminated)
+		.reset_req_in13 (1'b0),                               // (terminated)
+		.reset_in14     (1'b0),                               // (terminated)
+		.reset_req_in14 (1'b0),                               // (terminated)
+		.reset_in15     (1'b0),                               // (terminated)
+		.reset_req_in15 (1'b0)                                // (terminated)
+	);
+
+	altera_reset_controller #(
+		.NUM_RESET_INPUTS          (1),
+		.OUTPUT_RESET_SYNC_EDGES   ("deassert"),
+		.SYNC_DEPTH                (2),
+		.RESET_REQUEST_PRESENT     (0),
+		.RESET_REQ_WAIT_TIME       (1),
+		.MIN_RST_ASSERTION_TIME    (3),
+		.RESET_REQ_EARLY_DSRT_TIME (1),
+		.USE_RESET_REQUEST_IN0     (0),
+		.USE_RESET_REQUEST_IN1     (0),
+		.USE_RESET_REQUEST_IN2     (0),
+		.USE_RESET_REQUEST_IN3     (0),
+		.USE_RESET_REQUEST_IN4     (0),
+		.USE_RESET_REQUEST_IN5     (0),
+		.USE_RESET_REQUEST_IN6     (0),
+		.USE_RESET_REQUEST_IN7     (0),
+		.USE_RESET_REQUEST_IN8     (0),
+		.USE_RESET_REQUEST_IN9     (0),
+		.USE_RESET_REQUEST_IN10    (0),
+		.USE_RESET_REQUEST_IN11    (0),
+		.USE_RESET_REQUEST_IN12    (0),
+		.USE_RESET_REQUEST_IN13    (0),
+		.USE_RESET_REQUEST_IN14    (0),
+		.USE_RESET_REQUEST_IN15    (0),
+		.ADAPT_RESET_REQUEST       (0)
+	) rst_controller_002 (
+		.reset_in0      (~hps_0_h2f_reset_reset_n),           // reset_in0.reset
+		.clk            (clk_clk),                            //       clk.clk
+		.reset_out      (rst_controller_002_reset_out_reset), // reset_out.reset
 		.reset_req      (),                                   // (terminated)
 		.reset_req_in0  (1'b0),                               // (terminated)
 		.reset_in1      (1'b0),                               // (terminated)

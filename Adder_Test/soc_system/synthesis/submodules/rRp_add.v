@@ -8,7 +8,7 @@ module rRp_add(
 );
 
 parameter RADIX = 2;
-parameter WIDTH = 16; //number of digits
+parameter WIDTH = 15; //number of digits
 localparam A = RADIX - 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 localparam N = D*WIDTH; //bitwidth of each input
@@ -19,8 +19,8 @@ integer i;
 input [(N-1):0] x_in, y_in;
 output [((N-1)+D):0] s_out;
 input clock;
-(* preserve="true" *) reg [(N-1):0] x, y;
-(* preserve="true" *) reg [((N-1)+D):0] s_out, s;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [(N-1):0] x, y;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [((N-1)+D):0] s_out, s;
 
 reg [(tN-1):0] t;
 

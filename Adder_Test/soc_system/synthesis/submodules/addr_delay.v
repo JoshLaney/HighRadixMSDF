@@ -7,8 +7,8 @@ input [ADDR_WIDTH-1:0] addr_in;
 output e_out;
 output [ADDR_WIDTH-1:0] addr_out;
 
-(* preserve="true" *) reg [ADDR_WIDTH-1:0] addr_out;
-(* preserve="true" *) reg e_out;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [ADDR_WIDTH-1:0] addr_out;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg e_out;
 
 always@(posedge pll_clock) begin
 	addr_out <= addr_in;
