@@ -1,11 +1,11 @@
 module testControlUnit (avalon_clock, pll_clock_pos, pll_clock_neg, resetn, writedata, readdata, write, read, address,
 	r_addr_a_pos, r_addr_a_neg, r_addr_b_pos, r_addr_b_neg, w_addr_pos, w_addr_neg, we_pos, we_neg, we_read_a_pos, we_read_a_neg,
-	we_read_b_pos, we_read_b_neg
+	we_read_b_pos, we_read_b_neg, pll_lock
 	);
 
 parameter ID = 1;
 // signals for connecting to the Avalon fabric 
-input avalon_clock, pll_clock_pos, pll_clock_neg, resetn, read, write;
+input avalon_clock, pll_clock_pos, pll_clock_neg, resetn, read, write, pll_lock;
 input [2:0] address;
 input [31:0] writedata;
 output we_pos, we_neg, we_read_a_pos, we_read_a_neg, we_read_b_pos, we_read_b_neg;
@@ -61,7 +61,8 @@ always@(posedge avalon_clock) begin
 			case(address)
 				3'b000: readdata <= (go_pos & go_neg);
 				3'b010: readdata <= num;
-				3'b011: readdata <= ID;
+				3'b011: readdata <= pll_lock;
+				3'b100: readdata <= ID;
 				default: ;
 			endcase
 		end

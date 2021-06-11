@@ -690,7 +690,8 @@ module soc_system (
 		.we_read_b_neg (test_control_unit_0_read_b_neg_we),                              //     read_b_neg.we
 		.r_addr_b_neg  (test_control_unit_0_read_b_neg_addr),                            //               .addr
 		.pll_clock_pos (clock_div_0_clk_pos_clk),                                        //  pll_clock_pos.clk
-		.pll_clock_neg (clock_div_0_clk_neg_clk)                                         //  pll_clock_neg.clk
+		.pll_clock_neg (clock_div_0_clk_neg_clk),                                        //  pll_clock_neg.clk
+		.pll_lock      ()                                                                //       pll_lock.export
 	);
 
 	soc_system_mm_interconnect_0 mm_interconnect_0 (

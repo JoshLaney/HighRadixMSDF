@@ -1958,7 +1958,7 @@
   <parameter name="gui_reference_clock_frequency" value="50.0" />
   <parameter name="gui_switchover_delay" value="0" />
   <parameter name="gui_switchover_mode">Automatic Switchover</parameter>
-  <parameter name="gui_use_locked" value="true" />
+  <parameter name="gui_use_locked" value="false" />
  </module>
  <module
    name="pll_reconfig_0"
@@ -2426,17 +2426,6 @@
    version="20.1"
    start="mux_b.data_out"
    end="data_delay_b_0.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="pll_0.locked"
-   end="test_control_unit_0.pll_lock">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />

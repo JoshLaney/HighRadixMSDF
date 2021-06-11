@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="soc_system" kind="soc_system" version="1.0" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.06.07.03:49:59 -->
+ <!-- 2021.06.11.03:48:11 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1623062506</value>
+  <value>1623407921</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -75980,7 +75980,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_pll_mode">
    <type>java.lang.String</type>
-   <value>Integer-N PLL</value>
+   <value>Fractional-N PLL</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -75988,7 +75988,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="fractional_vco_multiplier">
    <type>boolean</type>
-   <value>false</value>
+   <value>true</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -76015,7 +76015,7 @@ the requested settings for a module instance. -->
    <value>0.0</value>
    <derived>false</derived>
    <enabled>true</enabled>
-   <visible>false</visible>
+   <visible>true</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="gui_operation_mode">
@@ -76039,7 +76039,7 @@ the requested settings for a module instance. -->
    <value>32</value>
    <derived>false</derived>
    <enabled>true</enabled>
-   <visible>false</visible>
+   <visible>true</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="pll_fractional_cout">
@@ -76055,7 +76055,7 @@ the requested settings for a module instance. -->
    <value>1st_order</value>
    <derived>false</derived>
    <enabled>true</enabled>
-   <visible>false</visible>
+   <visible>true</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="pll_dsm_out_sel">
@@ -76116,7 +76116,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_multiply_factor">
    <type>int</type>
-   <value>32</value>
+   <value>240</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -76127,12 +76127,12 @@ the requested settings for a module instance. -->
    <value>214748365</value>
    <derived>false</derived>
    <enabled>true</enabled>
-   <visible>false</visible>
+   <visible>true</visible>
    <valid>true</valid>
   </parameter>
   <parameter name="gui_divide_factor_n">
    <type>int</type>
-   <value>1</value>
+   <value>10</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -76156,7 +76156,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_divide_factor_c0">
    <type>int</type>
-   <value>16</value>
+   <value>12</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -76164,7 +76164,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_actual_multiply_factor0">
    <type>int</type>
-   <value>32</value>
+   <value>240</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -76180,7 +76180,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_actual_divide_factor0">
    <type>int</type>
-   <value>16</value>
+   <value>120</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78372,7 +78372,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="m_cnt_hi_div">
    <type>int</type>
-   <value>16</value>
+   <value>120</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78380,7 +78380,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="m_cnt_lo_div">
    <type>int</type>
-   <value>16</value>
+   <value>120</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78388,7 +78388,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="n_cnt_hi_div">
    <type>int</type>
-   <value>256</value>
+   <value>5</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78396,7 +78396,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="n_cnt_lo_div">
    <type>int</type>
-   <value>256</value>
+   <value>5</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78412,7 +78412,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="n_cnt_bypass_en">
    <type>java.lang.String</type>
-   <value>true</value>
+   <value>false</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78436,7 +78436,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="c_cnt_hi_div0">
    <type>int</type>
-   <value>8</value>
+   <value>6</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -78444,7 +78444,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="c_cnt_lo_div0">
    <type>int</type>
-   <value>8</value>
+   <value>6</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -79460,7 +79460,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="pll_bwctrl">
    <type>int</type>
-   <value>4000</value>
+   <value>14000</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -79468,7 +79468,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="pll_output_clk_frequency">
    <type>java.lang.String</type>
-   <value>1600.0 MHz</value>
+   <value>1200.0 MHz</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -79532,7 +79532,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_parameter_values">
    <type>[Ljava.lang.String;</type>
-   <value>16,16,256,256,false,true,false,false,8,8,1,0,ph_mux_clk,false,false,1,20,4000,1600.0 MHz,214748365,gclk,glb,fb_1,ph_mux_clk,false</value>
+   <value>120,120,5,5,false,false,false,false,6,6,1,0,ph_mux_clk,false,false,1,20,14000,1200.0 MHz,214748365,gclk,glb,fb_1,ph_mux_clk,false</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -85620,6 +85620,51 @@ parameters are a RESULT of the module parameters. -->
     <direction>Input</direction>
     <width>1</width>
     <role>clk</role>
+   </port>
+  </interface>
+  <interface name="pll_lock" kind="conduit_end" version="20.1">
+   <!-- The connection points exposed by a module instance for the
+particular module parameters. Connection points and their
+parameters are a RESULT of the module parameters. -->
+   <parameter name="associatedClock">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="associatedReset">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="deviceFamily">
+    <type>java.lang.String</type>
+    <value>UNKNOWN</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="generateLegacySim">
+    <type>boolean</type>
+    <value>false</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <type>conduit</type>
+   <isStart>false</isStart>
+   <port>
+    <name>pll_lock</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>export</role>
    </port>
   </interface>
  </module>
@@ -97214,7 +97259,7 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <plugin>
-  <instanceCount>68</instanceCount>
+  <instanceCount>69</instanceCount>
   <name>conduit_end</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
