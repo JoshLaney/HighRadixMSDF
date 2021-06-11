@@ -10,11 +10,14 @@ module  soc_system_pll_0(
 	// interface 'outclk0'
 	output wire outclk_0,
 
+	// interface 'outclk1'
+	output wire outclk_1,
+
+	// interface 'outclk2'
+	output wire outclk_2,
+
 	// interface 'locked'
 	output wire locked,
-
-	// interface 'cascade_out'
-	output wire cascade_out,
 
 	// interface 'reconfig_to_pll'
 	input wire [63:0] reconfig_to_pll,
@@ -24,19 +27,19 @@ module  soc_system_pll_0(
 );
 
 	altera_pll #(
-		.fractional_vco_multiplier("false"),
+		.fractional_vco_multiplier("true"),
 		.reference_clock_frequency("50.0 MHz"),
 		.pll_fractional_cout(32),
 		.pll_dsm_out_sel("1st_order"),
 		.operation_mode("normal"),
-		.number_of_clocks(1),
-		.output_clock_frequency0("114.285714 MHz"),
+		.number_of_clocks(3),
+		.output_clock_frequency0("50.000000 MHz"),
 		.phase_shift0("0 ps"),
 		.duty_cycle0(50),
-		.output_clock_frequency1("0 MHz"),
-		.phase_shift1("0 ps"),
+		.output_clock_frequency1("100.000000 MHz"),
+		.phase_shift1("4997 ps"),
 		.duty_cycle1(50),
-		.output_clock_frequency2("0 MHz"),
+		.output_clock_frequency2("100.000000 MHz"),
 		.phase_shift2("0 ps"),
 		.duty_cycle2(50),
 		.output_clock_frequency3("0 MHz"),
@@ -86,34 +89,34 @@ module  soc_system_pll_0(
 		.duty_cycle17(50),
 		.pll_type("Cyclone V"),
 		.pll_subtype("Reconfigurable"),
-		.m_cnt_hi_div(16),
-		.m_cnt_lo_div(16),
-		.n_cnt_hi_div(256),
-		.n_cnt_lo_div(256),
+		.m_cnt_hi_div(120),
+		.m_cnt_lo_div(120),
+		.n_cnt_hi_div(5),
+		.n_cnt_lo_div(5),
 		.m_cnt_bypass_en("false"),
-		.n_cnt_bypass_en("true"),
+		.n_cnt_bypass_en("false"),
 		.m_cnt_odd_div_duty_en("false"),
 		.n_cnt_odd_div_duty_en("false"),
-		.c_cnt_hi_div0(7),
-		.c_cnt_lo_div0(7),
+		.c_cnt_hi_div0(12),
+		.c_cnt_lo_div0(12),
 		.c_cnt_prst0(1),
 		.c_cnt_ph_mux_prst0(0),
 		.c_cnt_in_src0("ph_mux_clk"),
 		.c_cnt_bypass_en0("false"),
 		.c_cnt_odd_div_duty_en0("false"),
-		.c_cnt_hi_div1(1),
-		.c_cnt_lo_div1(1),
-		.c_cnt_prst1(1),
+		.c_cnt_hi_div1(6),
+		.c_cnt_lo_div1(6),
+		.c_cnt_prst1(7),
 		.c_cnt_ph_mux_prst1(0),
 		.c_cnt_in_src1("ph_mux_clk"),
-		.c_cnt_bypass_en1("true"),
+		.c_cnt_bypass_en1("false"),
 		.c_cnt_odd_div_duty_en1("false"),
-		.c_cnt_hi_div2(1),
-		.c_cnt_lo_div2(1),
+		.c_cnt_hi_div2(6),
+		.c_cnt_lo_div2(6),
 		.c_cnt_prst2(1),
 		.c_cnt_ph_mux_prst2(0),
 		.c_cnt_in_src2("ph_mux_clk"),
-		.c_cnt_bypass_en2("true"),
+		.c_cnt_bypass_en2("false"),
 		.c_cnt_odd_div_duty_en2("false"),
 		.c_cnt_hi_div3(1),
 		.c_cnt_lo_div3(1),
@@ -221,9 +224,9 @@ module  soc_system_pll_0(
 		.c_cnt_bypass_en17("true"),
 		.c_cnt_odd_div_duty_en17("false"),
 		.pll_vco_div(1),
-		.pll_cp_current(20),
-		.pll_bwctrl(4000),
-		.pll_output_clk_frequency("1600.0 MHz"),
+		.pll_cp_current(10),
+		.pll_bwctrl(14000),
+		.pll_output_clk_frequency("1200.0 MHz"),
 		.pll_fractional_division("214748365"),
 		.mimic_fbclk_type("gclk"),
 		.pll_fbclk_mux_1("glb"),
@@ -232,13 +235,12 @@ module  soc_system_pll_0(
 		.pll_slf_rst("false")
 	) altera_pll_i (
 		.rst	(rst),
-		.outclk	({outclk_0}),
+		.outclk	({outclk_2, outclk_1, outclk_0}),
 		.locked	(locked),
 		.reconfig_to_pll	(reconfig_to_pll),
 		.fboutclk	( ),
 		.fbclk	(1'b0),
 		.refclk	(refclk),
-		.cascade_out	(cascade_out),
 		.reconfig_from_pll	(reconfig_from_pll)
 	);
 endmodule

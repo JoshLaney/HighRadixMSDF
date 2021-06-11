@@ -88,14 +88,13 @@ module soc_system (
 		input  wire        reset_reset_n                          //           reset.reset_n
 	);
 
-	wire         pll_1_outclk0_clk;                                              // pll_1:outclk_0 -> pllTest_0:pll_clock_0
-	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [pllTest_0:pll_clock_2, pll_1:refclk]
-	wire         pll_1_outclk1_clk;                                              // pll_1:outclk_1 -> pllTest_0:pll_clock_1
-	wire         pll_0_cascade_out_export;                                       // pll_0:cascade_out -> pll_1:adjpllin
+	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> pllTest_0:pll_clock_0
+	wire         pll_0_outclk1_clk;                                              // pll_0:outclk_1 -> pllTest_0:pll_clock_1
+	wire         pll_0_outclk2_clk;                                              // pll_0:outclk_2 -> pllTest_0:pll_clock_2
 	wire         pll_0_locked_export;                                            // pll_0:locked -> pllTest_0:locked
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
 	wire  [63:0] pll_reconfig_0_reconfig_to_pll_reconfig_to_pll;                 // pll_reconfig_0:reconfig_to_pll -> pll_0:reconfig_to_pll
-	wire         plltest_0_pll_reset_reset;                                      // pllTest_0:pll_reset -> [pll_0:rst, pll_1:rst]
+	wire         plltest_0_pll_reset_reset;                                      // pllTest_0:pll_reset -> pll_0:rst
 	wire   [1:0] hps_0_h2f_lw_axi_master_awburst;                                // hps_0:h2f_lw_AWBURST -> mm_interconnect_0:hps_0_h2f_lw_axi_master_awburst
 	wire   [3:0] hps_0_h2f_lw_axi_master_arlen;                                  // hps_0:h2f_lw_ARLEN -> mm_interconnect_0:hps_0_h2f_lw_axi_master_arlen
 	wire   [3:0] hps_0_h2f_lw_axi_master_wstrb;                                  // hps_0:h2f_lw_WSTRB -> mm_interconnect_0:hps_0_h2f_lw_axi_master_wstrb
@@ -332,10 +331,10 @@ module soc_system (
 		.read         (mm_interconnect_1_plltest_0_avalon_slave_0_read),      //               .read
 		.address      (mm_interconnect_1_plltest_0_avalon_slave_0_address),   //               .address
 		.avalon_clock (clk_clk),                                              //     clock_sink.clk
-		.pll_clock_0  (pll_1_outclk0_clk),                                    //          pll_0.clk
-		.pll_clock_1  (pll_1_outclk1_clk),                                    //          pll_1.clk
+		.pll_clock_0  (pll_0_outclk0_clk),                                    //          pll_0.clk
+		.pll_clock_1  (pll_0_outclk1_clk),                                    //          pll_1.clk
 		.resetn       (~rst_controller_reset_out_reset),                      //     reset_sink.reset_n
-		.pll_clock_2  (pll_0_outclk0_clk),                                    //          pll_2.clk
+		.pll_clock_2  (pll_0_outclk2_clk),                                    //          pll_2.clk
 		.locked       (pll_0_locked_export),                                  //       pll_lock.export
 		.pll_reset    (plltest_0_pll_reset_reset)                             //      PLL_reset.reset
 	);
@@ -344,19 +343,11 @@ module soc_system (
 		.refclk            (clk_clk),                                        //            refclk.clk
 		.rst               (plltest_0_pll_reset_reset),                      //             reset.reset
 		.outclk_0          (pll_0_outclk0_clk),                              //           outclk0.clk
+		.outclk_1          (pll_0_outclk1_clk),                              //           outclk1.clk
+		.outclk_2          (pll_0_outclk2_clk),                              //           outclk2.clk
 		.locked            (pll_0_locked_export),                            //            locked.export
-		.cascade_out       (pll_0_cascade_out_export),                       //       cascade_out.export
 		.reconfig_to_pll   (pll_reconfig_0_reconfig_to_pll_reconfig_to_pll), //   reconfig_to_pll.reconfig_to_pll
 		.reconfig_from_pll (pll_0_reconfig_from_pll_reconfig_from_pll)       // reconfig_from_pll.reconfig_from_pll
-	);
-
-	soc_system_pll_1 pll_1 (
-		.refclk   (pll_0_outclk0_clk),         //   refclk.clk
-		.rst      (plltest_0_pll_reset_reset), //    reset.reset
-		.outclk_0 (pll_1_outclk0_clk),         //  outclk0.clk
-		.outclk_1 (pll_1_outclk1_clk),         //  outclk1.clk
-		.adjpllin (pll_0_cascade_out_export),  // adjpllin.export
-		.locked   ()                           // (terminated)
 	);
 
 	altera_pll_reconfig_top #(
