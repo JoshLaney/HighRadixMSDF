@@ -1839,7 +1839,7 @@
   <parameter name="gui_divide_factor_c7" value="1" />
   <parameter name="gui_divide_factor_c8" value="1" />
   <parameter name="gui_divide_factor_c9" value="1" />
-  <parameter name="gui_divide_factor_n" value="10" />
+  <parameter name="gui_divide_factor_n" value="1" />
   <parameter name="gui_dps_cntr" value="C0" />
   <parameter name="gui_dps_dir" value="Positive" />
   <parameter name="gui_dps_num" value="1" />
@@ -1873,7 +1873,7 @@
   <parameter name="gui_frac_multiply_factor" value="214748365" />
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
-  <parameter name="gui_multiply_factor" value="240" />
+  <parameter name="gui_multiply_factor" value="24" />
   <parameter name="gui_number_of_clocks" value="1" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />
@@ -1934,7 +1934,7 @@
   <parameter name="gui_pll_auto_reset" value="Off" />
   <parameter name="gui_pll_bandwidth_preset" value="Auto" />
   <parameter name="gui_pll_cascading_mode">Create an adjpllin signal to connect with an upstream PLL</parameter>
-  <parameter name="gui_pll_mode" value="Fractional-N PLL" />
+  <parameter name="gui_pll_mode" value="Integer-N PLL" />
   <parameter name="gui_ps_units0" value="ps" />
   <parameter name="gui_ps_units1" value="degrees" />
   <parameter name="gui_ps_units10" value="ps" />
@@ -1958,7 +1958,7 @@
   <parameter name="gui_reference_clock_frequency" value="50.0" />
   <parameter name="gui_switchover_delay" value="0" />
   <parameter name="gui_switchover_mode">Automatic Switchover</parameter>
-  <parameter name="gui_use_locked" value="false" />
+  <parameter name="gui_use_locked" value="true" />
  </module>
  <module
    name="pll_reconfig_0"
@@ -2426,6 +2426,17 @@
    version="20.1"
    start="mux_b.data_out"
    end="data_delay_b_0.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="pll_0.locked"
+   end="test_control_unit_0.pll_lock">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />

@@ -26,7 +26,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "6";
          type = "int";
       }
    }
@@ -47,7 +47,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "4";
          type = "int";
       }
       datum sopceditor_expanded
@@ -68,7 +68,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "5";
          type = "int";
       }
    }
@@ -93,6 +93,14 @@
       datum baseAddress
       {
          value = "256";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
          type = "String";
       }
    }
@@ -1617,7 +1625,7 @@
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
   <parameter name="gui_divide_factor_c0" value="12" />
-  <parameter name="gui_divide_factor_c1" value="12" />
+  <parameter name="gui_divide_factor_c1" value="24" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />
   <parameter name="gui_divide_factor_c12" value="1" />
@@ -1708,7 +1716,7 @@
   <parameter name="gui_phase_shift8" value="0" />
   <parameter name="gui_phase_shift9" value="0" />
   <parameter name="gui_phase_shift_deg0" value="0.0" />
-  <parameter name="gui_phase_shift_deg1" value="180.0" />
+  <parameter name="gui_phase_shift_deg1" value="0.0" />
   <parameter name="gui_phase_shift_deg10" value="0.0" />
   <parameter name="gui_phase_shift_deg11" value="0.0" />
   <parameter name="gui_phase_shift_deg12" value="0.0" />
@@ -1865,11 +1873,6 @@
  <connection
    kind="reset"
    version="20.1"
-   start="pllTest_0.PLL_reset"
-   end="pll_0.reset" />
- <connection
-   kind="reset"
-   version="20.1"
    start="clk_0.clk_reset"
    end="pll_reconfig_0.mgmt_reset" />
  <connection
@@ -1877,11 +1880,17 @@
    version="20.1"
    start="clk_0.clk_reset"
    end="mm_bridge_0.reset" />
+ <connection kind="reset" version="20.1" start="clk_0.clk_reset" end="pll_0.reset" />
  <connection
    kind="reset"
    version="20.1"
    start="clk_0.clk_reset"
    end="pllTest_0.reset_sink" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="clock_div_0.reset_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />

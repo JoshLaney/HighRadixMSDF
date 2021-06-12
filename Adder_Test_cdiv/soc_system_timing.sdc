@@ -13,8 +13,8 @@ create_generated_clock -divide_by 2 -source {soc_inst|pll_0|altera_pll_i|cyclone
 create_generated_clock -divide_by 2 -source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -name clk_pos [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
 derive_clock_uncertainty
 
-set_false_path -from {fpga_clk_50} -to {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk clk_pos clk_neg}
-set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk  clk_pos clk_neg} -to {fpga_clk_50}
+#set_false_path -from {fpga_clk_50} -to {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk clk_pos clk_neg}
+#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk  clk_pos clk_neg} -to {fpga_clk_50}
 #set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}
 #set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
 #set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}

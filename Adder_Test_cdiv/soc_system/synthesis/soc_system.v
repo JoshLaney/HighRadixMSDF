@@ -116,6 +116,7 @@ module soc_system (
 	wire  [31:0] data_delay_c_pos_0_data_out_data;                               // data_delay_c_pos_0:data_out -> data_delay_c_pos_1:data_in
 	wire  [29:0] mux_a_data_out_data;                                            // mux_a:q_out -> data_delay_a_0:data_in
 	wire  [29:0] mux_b_data_out_data;                                            // mux_b:q_out -> data_delay_b_0:data_in
+	wire         pll_0_locked_export;                                            // pll_0:locked -> test_control_unit_0:pll_lock
 	wire  [31:0] ram_a_neg_q_arth_q;                                             // ram_a_neg:q_arith -> mux_a:neg_in
 	wire  [31:0] ram_b_neg_q_arth_q;                                             // ram_b_neg:q_arith -> mux_b:neg_in
 	wire  [31:0] arith_out_duplicate_0_neg_out_data;                             // arith_out_duplicate_0:neg_out -> data_delay_c_neg_0:data_in
@@ -530,9 +531,9 @@ module soc_system (
 		.refclk            (clk_clk),                                        //            refclk.clk
 		.rst               (~reset_reset_n),                                 //             reset.reset
 		.outclk_0          (pll_0_outclk0_clk),                              //           outclk0.clk
+		.locked            (pll_0_locked_export),                            //            locked.export
 		.reconfig_to_pll   (pll_reconfig_0_reconfig_to_pll_reconfig_to_pll), //   reconfig_to_pll.reconfig_to_pll
-		.reconfig_from_pll (pll_0_reconfig_from_pll_reconfig_from_pll),      // reconfig_from_pll.reconfig_from_pll
-		.locked            ()                                                //       (terminated)
+		.reconfig_from_pll (pll_0_reconfig_from_pll_reconfig_from_pll)       // reconfig_from_pll.reconfig_from_pll
 	);
 
 	altera_pll_reconfig_top #(
@@ -691,7 +692,7 @@ module soc_system (
 		.r_addr_b_neg  (test_control_unit_0_read_b_neg_addr),                            //               .addr
 		.pll_clock_pos (clock_div_0_clk_pos_clk),                                        //  pll_clock_pos.clk
 		.pll_clock_neg (clock_div_0_clk_neg_clk),                                        //  pll_clock_neg.clk
-		.pll_lock      ()                                                                //       pll_lock.export
+		.pll_lock      (pll_0_locked_export)                                             //       pll_lock.export
 	);
 
 	soc_system_mm_interconnect_0 mm_interconnect_0 (

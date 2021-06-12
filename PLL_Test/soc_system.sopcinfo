@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="soc_system" kind="soc_system" version="1.0" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.06.12.04:40:04 -->
+ <!-- 2021.06.12.13:49:09 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1623497509</value>
+  <value>1623530454</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -636,6 +636,51 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>pll_1</slaveName>
     <name>pllTest_0.pll_1</name>
    </clockDomainMember>
+  </interface>
+  <interface name="reset_sink" kind="reset_sink" version="20.1">
+   <!-- The connection points exposed by a module instance for the
+particular module parameters. Connection points and their
+parameters are a RESULT of the module parameters. -->
+   <parameter name="associatedClock">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="synchronousEdges">
+    <type>com.altera.sopcmodel.reset.Reset$Edges</type>
+    <value>NONE</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="deviceFamily">
+    <type>java.lang.String</type>
+    <value>UNKNOWN</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="generateLegacySim">
+    <type>boolean</type>
+    <value>false</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <type>reset</type>
+   <isStart>false</isStart>
+   <port>
+    <name>resetn</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>reset_n</role>
+   </port>
   </interface>
  </module>
  <module name="hps_0" kind="altera_hps" version="20.1" path="hps_0">
@@ -73862,7 +73907,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_divide_factor_c1">
    <type>int</type>
-   <value>12</value>
+   <value>24</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -73918,7 +73963,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_phase_shift_deg1">
    <type>double</type>
-   <value>180.0</value>
+   <value>0.0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -86889,33 +86934,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>reconfig_to_pll</endConnectionPoint>
  </connection>
  <connection
-   name="pllTest_0.PLL_reset/pll_0.reset"
-   kind="reset"
-   version="20.1"
-   start="pllTest_0.PLL_reset"
-   end="pll_0.reset">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>pllTest_0</startModule>
-  <startConnectionPoint>PLL_reset</startConnectionPoint>
-  <endModule>pll_0</endModule>
-  <endConnectionPoint>reset</endConnectionPoint>
- </connection>
- <connection
    name="clk_0.clk_reset/pll_reconfig_0.mgmt_reset"
    kind="reset"
    version="20.1"
@@ -86970,6 +86988,33 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>reset</endConnectionPoint>
  </connection>
  <connection
+   name="clk_0.clk_reset/pll_0.reset"
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="pll_0.reset">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
+  <endModule>pll_0</endModule>
+  <endConnectionPoint>reset</endConnectionPoint>
+ </connection>
+ <connection
    name="clk_0.clk_reset/pllTest_0.reset_sink"
    kind="reset"
    version="20.1"
@@ -86994,6 +87039,33 @@ parameters are a RESULT of the module parameters. -->
   <startModule>clk_0</startModule>
   <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>pllTest_0</endModule>
+  <endConnectionPoint>reset_sink</endConnectionPoint>
+ </connection>
+ <connection
+   name="clk_0.clk_reset/clock_div_0.reset_sink"
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="clock_div_0.reset_sink">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
+  <endModule>clock_div_0</endModule>
   <endConnectionPoint>reset_sink</endConnectionPoint>
  </connection>
  <plugin>
@@ -87058,6 +87130,14 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Clock Output</displayName>
+  <version>20.1</version>
+ </plugin>
+ <plugin>
+  <instanceCount>47</instanceCount>
+  <name>reset_sink</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Reset Input</displayName>
   <version>20.1</version>
  </plugin>
  <plugin>
@@ -87130,14 +87210,6 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>AXI Slave</displayName>
-  <version>20.1</version>
- </plugin>
- <plugin>
-  <instanceCount>46</instanceCount>
-  <name>reset_sink</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Reset Input</displayName>
   <version>20.1</version>
  </plugin>
  <plugin>
@@ -87429,7 +87501,7 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <plugin>
-  <instanceCount>46</instanceCount>
+  <instanceCount>47</instanceCount>
   <name>reset</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>

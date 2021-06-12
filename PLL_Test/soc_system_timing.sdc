@@ -5,13 +5,17 @@ create_clock -period 40 [get_ports eth_tse_0_pcs_mac_rx_clock_connection_clk]
 
 derive_pll_clocks
 
-create_generated_clock -divide_by 2 \
+create_generated_clock \
+-divide_by 2 \
 -source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
--name clk_neg [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
+-name clk_pos \
+[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
 
-create_generated_clock -divide_by 2 \
--source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg] \
--name clk_pos [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
+create_generated_clock \
+-source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos] \
+-invert \
+-name clk_neg \
+[get_nets *clock_div_0_clock_neg_clk]
 
 #set_false_path -from [get_clocks {fpga_clk_50}] -to [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}]
 #set_false_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_clocks {fpga_clk_50}]

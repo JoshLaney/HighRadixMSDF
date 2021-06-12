@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="soc_system" kind="system" version="20.1" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.06.12.04:48:42 -->
+ <!-- 2021.06.12.12:37:41 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1623497509</value>
+  <value>1623525653</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -712,6 +712,51 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>pll_1</slaveName>
     <name>pllTest_0.pll_1</name>
    </clockDomainMember>
+  </interface>
+  <interface name="reset_sink" kind="reset_sink" version="20.1">
+   <!-- The connection points exposed by a module instance for the
+particular module parameters. Connection points and their
+parameters are a RESULT of the module parameters. -->
+   <parameter name="associatedClock">
+    <type>java.lang.String</type>
+    <value></value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="synchronousEdges">
+    <type>com.altera.sopcmodel.reset.Reset$Edges</type>
+    <value>NONE</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="deviceFamily">
+    <type>java.lang.String</type>
+    <value>UNKNOWN</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="generateLegacySim">
+    <type>boolean</type>
+    <value>false</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <type>reset</type>
+   <isStart>false</isStart>
+   <port>
+    <name>resetn</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>reset_n</role>
+   </port>
   </interface>
  </module>
  <module name="hps_0" kind="altera_hps" version="20.1" path="hps_0">
@@ -42749,7 +42794,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_divide_factor_c1">
    <type>int</type>
-   <value>12</value>
+   <value>24</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -42805,7 +42850,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="gui_phase_shift_deg1">
    <type>double</type>
-   <value>180.0</value>
+   <value>0.0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -50482,10 +50527,10 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>reconfig_to_pll</endConnectionPoint>
  </connection>
  <connection
-   name="pllTest_0.PLL_reset/pll_0.reset"
+   name="clk_0.clk_reset/pll_0.reset"
    kind="reset"
    version="20.1"
-   start="pllTest_0.PLL_reset"
+   start="clk_0.clk_reset"
    end="pll_0.reset">
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
@@ -50503,10 +50548,37 @@ parameters are a RESULT of the module parameters. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <startModule>pllTest_0</startModule>
-  <startConnectionPoint>PLL_reset</startConnectionPoint>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
   <endModule>pll_0</endModule>
   <endConnectionPoint>reset</endConnectionPoint>
+ </connection>
+ <connection
+   name="clk_0.clk_reset/clock_div_0.reset_sink"
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="clock_div_0.reset_sink">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>clk_0</startModule>
+  <startConnectionPoint>clk_reset</startConnectionPoint>
+  <endModule>clock_div_0</endModule>
+  <endConnectionPoint>reset_sink</endConnectionPoint>
  </connection>
  <connection
    name="hps_0_fpga_interfaces.h2f_lw_axi_master/mm_interconnect_0.hps_0_h2f_lw_axi_master"
@@ -51152,6 +51224,14 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <plugin>
+  <instanceCount>10</instanceCount>
+  <name>reset_sink</name>
+  <type>com.altera.entityinterfaces.IElementClass</type>
+  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
+  <displayName>Reset Input</displayName>
+  <version>20.1</version>
+ </plugin>
+ <plugin>
   <instanceCount>1</instanceCount>
   <name>altera_hps</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
@@ -51205,14 +51285,6 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IModule</subtype>
   <displayName>Avalon-MM Pipeline Bridge</displayName>
-  <version>20.1</version>
- </plugin>
- <plugin>
-  <instanceCount>9</instanceCount>
-  <name>reset_sink</name>
-  <type>com.altera.entityinterfaces.IElementClass</type>
-  <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
-  <displayName>Reset Input</displayName>
   <version>20.1</version>
  </plugin>
  <plugin>
@@ -51296,7 +51368,7 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <plugin>
-  <instanceCount>1</instanceCount>
+  <instanceCount>2</instanceCount>
   <name>reset</name>
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IConnection</subtype>
@@ -51328,5 +51400,5 @@ parameters are a RESULT of the module parameters. -->
   <version>20.1</version>
  </plugin>
  <reportVersion>20.1 720</reportVersion>
- <uniqueIdentifier>001C4293B1670000017A000D3195</uniqueIdentifier>
+ <uniqueIdentifier>001C4293B1670000017A01BA9864</uniqueIdentifier>
 </EnsembleReport>

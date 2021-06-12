@@ -1,14 +1,15 @@
-module clock_div (clock, clk_pos, clk_neg);
+module clock_div (clock, clk_pos, clk_neg, resetn);
 
-input clock;
+input clock, resetn;
 output clk_pos, clk_neg;
 
 (* preserve="true" *) reg clk_pos;
-(* preserve="true" *) reg clk_neg;
+(* preserve="true" *) wire clk_neg;
 
+assign clk_neg = ~clk_pos;
 always@(posedge clock)begin
-	clk_pos<=clk_neg;
-	clk_neg<=~clk_neg;
+	if(!resetn) clk_pos <= 1'b0;
+	else clk_pos<=~clk_pos;
 end
 
 endmodule

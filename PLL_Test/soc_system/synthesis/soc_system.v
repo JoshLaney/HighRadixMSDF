@@ -94,7 +94,6 @@ module soc_system (
 	wire         pll_0_locked_export;                                            // pll_0:locked -> pllTest_0:locked
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
 	wire  [63:0] pll_reconfig_0_reconfig_to_pll_reconfig_to_pll;                 // pll_reconfig_0:reconfig_to_pll -> pll_0:reconfig_to_pll
-	wire         plltest_0_pll_reset_reset;                                      // pllTest_0:pll_reset -> pll_0:rst
 	wire   [1:0] hps_0_h2f_lw_axi_master_awburst;                                // hps_0:h2f_lw_AWBURST -> mm_interconnect_0:hps_0_h2f_lw_axi_master_awburst
 	wire   [3:0] hps_0_h2f_lw_axi_master_arlen;                                  // hps_0:h2f_lw_ARLEN -> mm_interconnect_0:hps_0_h2f_lw_axi_master_arlen
 	wire   [3:0] hps_0_h2f_lw_axi_master_wstrb;                                  // hps_0:h2f_lw_WSTRB -> mm_interconnect_0:hps_0_h2f_lw_axi_master_wstrb
@@ -168,7 +167,8 @@ module soc_system (
 	clock_div clock_div_0 (
 		.clock   (pll_0_outclk0_clk),         // clock_sink.clk
 		.clk_pos (clock_div_0_clock_pos_clk), //  clock_pos.clk
-		.clk_neg (clock_div_0_clock_neg_clk)  //  clock_neg.clk
+		.clk_neg (clock_div_0_clock_neg_clk), //  clock_neg.clk
+		.resetn  (reset_reset_n)              // reset_sink.reset_n
 	);
 
 	soc_system_hps_0 #(
@@ -342,12 +342,12 @@ module soc_system (
 		.resetn       (~rst_controller_reset_out_reset),                      //     reset_sink.reset_n
 		.pll_clock_2  (pll_0_outclk0_clk),                                    //          pll_2.clk
 		.locked       (pll_0_locked_export),                                  //       pll_lock.export
-		.pll_reset    (plltest_0_pll_reset_reset)                             //      PLL_reset.reset
+		.pll_reset    ()                                                      //      PLL_reset.reset
 	);
 
 	soc_system_pll_0 pll_0 (
 		.refclk            (clk_clk),                                        //            refclk.clk
-		.rst               (plltest_0_pll_reset_reset),                      //             reset.reset
+		.rst               (~reset_reset_n),                                 //             reset.reset
 		.outclk_0          (pll_0_outclk0_clk),                              //           outclk0.clk
 		.locked            (pll_0_locked_export),                            //            locked.export
 		.reconfig_to_pll   (pll_reconfig_0_reconfig_to_pll_reconfig_to_pll), //   reconfig_to_pll.reconfig_to_pll
