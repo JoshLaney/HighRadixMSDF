@@ -1,15 +1,14 @@
-module clock_div (clock, ctrl_a, ctrl_b, resetn);
+module clock_div (clock, clk_pos, clk_neg);
 
-input clock, resetn;
-output ctrl_a, ctrl_b;
+input clock;
+output clk_pos, clk_neg;
 
-reg ctrl_a;
-wire ctrl_b;
+(* preserve="true" *) reg clk_pos;
+(* preserve="true" *) reg clk_neg;
 
-assign ctrl_b = ~ctrl_a;
 always@(posedge clock)begin
-	if(!resetn) ctrl_a<=1'b1;
-	ctrl_a<=~ctrl_a;
+	clk_pos<=clk_neg;
+	clk_neg<=~clk_neg;
 end
 
 endmodule

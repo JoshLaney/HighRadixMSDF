@@ -22,6 +22,14 @@
          type = "boolean";
       }
    }
+   element clock_div_0
+   {
+      datum _sortIndex
+      {
+         value = "4";
+         type = "int";
+      }
+   }
    element hps_0
    {
       datum _sortIndex
@@ -39,7 +47,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "5";
          type = "int";
       }
       datum sopceditor_expanded
@@ -60,7 +68,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "6";
          type = "int";
       }
    }
@@ -992,6 +1000,7 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
+ <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -1607,7 +1616,7 @@
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
-  <parameter name="gui_divide_factor_c0" value="24" />
+  <parameter name="gui_divide_factor_c0" value="12" />
   <parameter name="gui_divide_factor_c1" value="12" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />
@@ -1625,7 +1634,7 @@
   <parameter name="gui_divide_factor_c7" value="1" />
   <parameter name="gui_divide_factor_c8" value="1" />
   <parameter name="gui_divide_factor_c9" value="1" />
-  <parameter name="gui_divide_factor_n" value="10" />
+  <parameter name="gui_divide_factor_n" value="1" />
   <parameter name="gui_dps_cntr" value="C0" />
   <parameter name="gui_dps_dir" value="Positive" />
   <parameter name="gui_dps_num" value="1" />
@@ -1659,8 +1668,8 @@
   <parameter name="gui_frac_multiply_factor" value="214748365" />
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
-  <parameter name="gui_multiply_factor" value="240" />
-  <parameter name="gui_number_of_clocks" value="3" />
+  <parameter name="gui_multiply_factor" value="24" />
+  <parameter name="gui_number_of_clocks" value="1" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />
   <parameter name="gui_output_clock_frequency1" value="100.0" />
@@ -1720,7 +1729,7 @@
   <parameter name="gui_pll_auto_reset" value="Off" />
   <parameter name="gui_pll_bandwidth_preset" value="Low" />
   <parameter name="gui_pll_cascading_mode">Create an adjpllin signal to connect with an upstream PLL</parameter>
-  <parameter name="gui_pll_mode" value="Fractional-N PLL" />
+  <parameter name="gui_pll_mode" value="Integer-N PLL" />
   <parameter name="gui_ps_units0" value="ps" />
   <parameter name="gui_ps_units1" value="degrees" />
   <parameter name="gui_ps_units10" value="ps" />
@@ -1803,17 +1812,22 @@
  <connection
    kind="clock"
    version="20.1"
-   start="pll_0.outclk0"
-   end="pllTest_0.pll_0" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk1"
+   start="clock_div_0.clock_neg"
    end="pllTest_0.pll_1" />
  <connection
    kind="clock"
    version="20.1"
-   start="pll_0.outclk2"
+   start="clock_div_0.clock_pos"
+   end="pllTest_0.pll_0" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
+   end="clock_div_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
    end="pllTest_0.pll_2" />
  <connection
    kind="conduit"

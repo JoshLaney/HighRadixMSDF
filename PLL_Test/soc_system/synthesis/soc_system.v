@@ -88,9 +88,9 @@ module soc_system (
 		input  wire        reset_reset_n                          //           reset.reset_n
 	);
 
-	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> pllTest_0:pll_clock_0
-	wire         pll_0_outclk1_clk;                                              // pll_0:outclk_1 -> pllTest_0:pll_clock_1
-	wire         pll_0_outclk2_clk;                                              // pll_0:outclk_2 -> pllTest_0:pll_clock_2
+	wire         clock_div_0_clock_neg_clk;                                      // clock_div_0:clk_neg -> pllTest_0:pll_clock_1
+	wire         clock_div_0_clock_pos_clk;                                      // clock_div_0:clk_pos -> pllTest_0:pll_clock_0
+	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [clock_div_0:clock, pllTest_0:pll_clock_2]
 	wire         pll_0_locked_export;                                            // pll_0:locked -> pllTest_0:locked
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
 	wire  [63:0] pll_reconfig_0_reconfig_to_pll_reconfig_to_pll;                 // pll_reconfig_0:reconfig_to_pll -> pll_0:reconfig_to_pll
@@ -164,6 +164,12 @@ module soc_system (
 	wire  [31:0] mm_interconnect_1_pll_reconfig_0_mgmt_avalon_slave_writedata;   // mm_interconnect_1:pll_reconfig_0_mgmt_avalon_slave_writedata -> pll_reconfig_0:mgmt_writedata
 	wire         rst_controller_reset_out_reset;                                 // rst_controller:reset_out -> [mm_bridge_0:reset, mm_interconnect_0:mm_bridge_0_reset_reset_bridge_in_reset_reset, mm_interconnect_1:mm_bridge_0_reset_reset_bridge_in_reset_reset, pllTest_0:resetn, pll_reconfig_0:mgmt_reset]
 	wire         rst_controller_001_reset_out_reset;                             // rst_controller_001:reset_out -> mm_interconnect_0:hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset
+
+	clock_div clock_div_0 (
+		.clock   (pll_0_outclk0_clk),         // clock_sink.clk
+		.clk_pos (clock_div_0_clock_pos_clk), //  clock_pos.clk
+		.clk_neg (clock_div_0_clock_neg_clk)  //  clock_neg.clk
+	);
 
 	soc_system_hps_0 #(
 		.F2S_Width (0),
@@ -331,10 +337,10 @@ module soc_system (
 		.read         (mm_interconnect_1_plltest_0_avalon_slave_0_read),      //               .read
 		.address      (mm_interconnect_1_plltest_0_avalon_slave_0_address),   //               .address
 		.avalon_clock (clk_clk),                                              //     clock_sink.clk
-		.pll_clock_0  (pll_0_outclk0_clk),                                    //          pll_0.clk
-		.pll_clock_1  (pll_0_outclk1_clk),                                    //          pll_1.clk
+		.pll_clock_0  (clock_div_0_clock_pos_clk),                            //          pll_0.clk
+		.pll_clock_1  (clock_div_0_clock_neg_clk),                            //          pll_1.clk
 		.resetn       (~rst_controller_reset_out_reset),                      //     reset_sink.reset_n
-		.pll_clock_2  (pll_0_outclk2_clk),                                    //          pll_2.clk
+		.pll_clock_2  (pll_0_outclk0_clk),                                    //          pll_2.clk
 		.locked       (pll_0_locked_export),                                  //       pll_lock.export
 		.pll_reset    (plltest_0_pll_reset_reset)                             //      PLL_reset.reset
 	);
@@ -343,8 +349,6 @@ module soc_system (
 		.refclk            (clk_clk),                                        //            refclk.clk
 		.rst               (plltest_0_pll_reset_reset),                      //             reset.reset
 		.outclk_0          (pll_0_outclk0_clk),                              //           outclk0.clk
-		.outclk_1          (pll_0_outclk1_clk),                              //           outclk1.clk
-		.outclk_2          (pll_0_outclk2_clk),                              //           outclk2.clk
 		.locked            (pll_0_locked_export),                            //            locked.export
 		.reconfig_to_pll   (pll_reconfig_0_reconfig_to_pll_reconfig_to_pll), //   reconfig_to_pll.reconfig_to_pll
 		.reconfig_from_pll (pll_0_reconfig_from_pll_reconfig_from_pll)       // reconfig_from_pll.reconfig_from_pll

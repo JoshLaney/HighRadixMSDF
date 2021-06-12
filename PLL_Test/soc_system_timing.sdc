@@ -2,30 +2,22 @@
 create_clock -period 20 [get_ports fpga_clk_50]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_tx_clock_connection_clk]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_rx_clock_connection_clk]
+
 derive_pll_clocks
 
+create_generated_clock -divide_by 2 \
+-source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
+-name clk_neg [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
 
-#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[0]}]
-#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[1]}]
-#create_generated_clock -name PLL_C2 -multiply_by 2 -source [soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}][get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[2]}]
+create_generated_clock -divide_by 2 \
+-source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg] \
+-name clk_pos [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
+
+#set_false_path -from [get_clocks {fpga_clk_50}] -to [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}]
+#set_false_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_clocks {fpga_clk_50}]
 
 derive_clock_uncertainty
 
-set_false_path -from [get_clocks {fpga_clk_50}] -to [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}]
-set_false_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_clocks {fpga_clk_50}]
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
-#set_false_path -from [get_keepers *ram_a*portb_we*] -to [get_keepers *ram_a*]
-#set_false_path -from [get_keepers *ram_b*portb_we*] -to [get_keepers *ram_b*]
-set_false_path -from [get_keepers {*ram_b*portb_we_reg}] -to [get_keepers {*data_delay_b*|data_out*}]
-set_false_path -from [get_keepers {*ram_a*portb_we_reg}] -to [get_keepers {*data_delay_a*|data_out*}]
-
-#set_max_delay -from [get_registers {soc_system:soc_inst|data_delay:data_delay_c_pos_*|data_out[*]}] -to [get_registers *] 3.5
-#set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2
-#set_max_delay -from [get_keepers *\|gen*] -to * 2
-#set_max_delay -from [get_keepers *|fclk_data_in*] -to * 2
 
 # for enhancing USB BlasterII to be reliable, 25MHz
 create_clock -name {altera_reserved_tck} -period 40 {altera_reserved_tck}
