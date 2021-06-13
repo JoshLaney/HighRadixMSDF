@@ -4,7 +4,7 @@ input clock, resetn;
 output clk_pos, clk_neg;
 
 (* preserve="true" *) reg clk_pos;
-(* preserve="true" *) wire clk_neg;
+(* keep="true" *) wire clk_neg;
 
 assign clk_neg = ~clk_pos;
 always@(posedge clock)begin

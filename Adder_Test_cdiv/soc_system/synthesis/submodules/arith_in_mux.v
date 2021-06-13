@@ -7,6 +7,6 @@ input [31:0] pos_in, neg_in;
 output [WIDTH-1:0] q_out;
 
 
-assign q_out = ~mux_ctrl ? neg_in[WIDTH-1:0] : pos_in[WIDTH-1:0];
+assign q_out = mux_ctrl ? neg_in[WIDTH-1:0] : pos_in[WIDTH-1:0];
 
 endmodule

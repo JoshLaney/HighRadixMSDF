@@ -13,7 +13,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "15";
          type = "int";
       }
    }
@@ -21,7 +21,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "16";
          type = "int";
       }
    }
@@ -29,7 +29,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "12";
          type = "int";
       }
    }
@@ -37,7 +37,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "13";
          type = "int";
       }
    }
@@ -116,6 +116,94 @@
       {
          value = "22";
          type = "int";
+      }
+   }
+   element dp_ram_a_neg
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
+   element dp_ram_a_pos
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+   }
+   element dp_ram_a_pos.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "32";
+         type = "String";
+      }
+   }
+   element dp_ram_b_neg
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
+   element dp_ram_b_neg.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "String";
+      }
+   }
+   element dp_ram_b_pos
+   {
+      datum _sortIndex
+      {
+         value = "9";
+         type = "int";
+      }
+   }
+   element dp_ram_b_pos.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "96";
+         type = "String";
+      }
+   }
+   element dp_ram_c_neg
+   {
+      datum _sortIndex
+      {
+         value = "14";
+         type = "int";
+      }
+   }
+   element dp_ram_c_neg.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "128";
+         type = "String";
+      }
+   }
+   element dp_ram_c_pos
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element dp_ram_c_pos.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "160";
+         type = "String";
       }
    }
    element hps_0
@@ -208,52 +296,76 @@
          type = "String";
       }
    }
-   element ram_a_neg
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "8";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
       }
    }
-   element ram_a_pos
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "7";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
       }
    }
-   element ram_b_neg
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "10";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
       }
    }
-   element ram_b_pos
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "9";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
       }
    }
-   element ram_c_neg
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "16";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
       }
    }
-   element ram_c_pos
+   element soc_system
    {
-      datum _sortIndex
+      datum _originalDeviceFamily
       {
-         value = "13";
-         type = "int";
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
       }
    }
    element soc_system
@@ -1198,6 +1310,30 @@
  <module name="data_delay_c_pos_1" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="32" />
  </module>
+ <module name="dp_ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="3" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
+ <module name="dp_ram_a_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="2" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
+ <module name="dp_ram_b_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="5" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
+ <module name="dp_ram_b_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="4" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
+ <module name="dp_ram_c_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="7" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
+ <module name="dp_ram_c_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ID" value="6" />
+  <parameter name="NEG_EDGE" value="0" />
+ </module>
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -1970,30 +2106,6 @@
   <parameter name="MIF_FILE_NAME" value="" />
   <parameter name="device_family" value="Cyclone V" />
  </module>
- <module name="ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="3" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
- <module name="ram_a_pos" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="2" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
- <module name="ram_b_neg" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="5" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
- <module name="ram_b_pos" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="4" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
- <module name="ram_c_neg" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="7" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
- <module name="ram_c_pos" kind="dp_ram" version="1.0" enabled="1">
-  <parameter name="ID" value="6" />
-  <parameter name="NEG_EDGE" value="0" />
- </module>
  <module
    name="test_control_unit_0"
    kind="test_control_unit"
@@ -2023,43 +2135,7 @@
    kind="avalon"
    version="20.1"
    start="mm_bridge_0.m0"
-   end="ram_a_pos.avalon_slave_0">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0020" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="20.1"
-   start="mm_bridge_0.m0"
-   end="ram_a_neg.avalon_slave_0">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="20.1"
-   start="mm_bridge_0.m0"
-   end="ram_b_pos.avalon_slave_0">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0060" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="20.1"
-   start="mm_bridge_0.m0"
-   end="ram_b_neg.avalon_slave_0">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0040" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="20.1"
-   start="mm_bridge_0.m0"
-   end="ram_c_neg.avalon_slave_0">
+   end="dp_ram_c_neg.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0080" />
   <parameter name="defaultConnection" value="false" />
@@ -2068,9 +2144,45 @@
    kind="avalon"
    version="20.1"
    start="mm_bridge_0.m0"
-   end="ram_c_pos.avalon_slave_0">
+   end="dp_ram_c_pos.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00a0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="mm_bridge_0.m0"
+   end="dp_ram_b_neg.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0040" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="mm_bridge_0.m0"
+   end="dp_ram_b_pos.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0060" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="mm_bridge_0.m0"
+   end="dp_ram_a_neg.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="20.1"
+   start="mm_bridge_0.m0"
+   end="dp_ram_a_pos.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0020" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2092,32 +2204,32 @@
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_b_neg.clock_sink" />
+   end="dp_ram_a_pos.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_b_pos.clock_sink" />
+   end="dp_ram_a_neg.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_a_neg.clock_sink" />
+   end="dp_ram_b_neg.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_a_pos.clock_sink" />
+   end="dp_ram_b_pos.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_c_neg.clock_sink" />
+   end="dp_ram_c_pos.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
    start="clk_0.clk"
-   end="ram_c_pos.clock_sink" />
+   end="dp_ram_c_neg.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
@@ -2148,17 +2260,17 @@
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_neg"
-   end="ram_a_neg.pll_clk" />
+   end="dp_ram_c_neg.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_neg"
-   end="ram_b_neg.pll_clk" />
+   end="dp_ram_b_neg.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_neg"
-   end="ram_c_neg.pll_clk" />
+   end="dp_ram_a_neg.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
@@ -2183,17 +2295,17 @@
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_pos"
-   end="ram_a_pos.pll_clk" />
+   end="dp_ram_c_pos.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_pos"
-   end="ram_b_pos.pll_clk" />
+   end="dp_ram_b_pos.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_pos"
-   end="ram_c_pos.pll_clk" />
+   end="dp_ram_a_pos.pll_clk" />
  <connection
    kind="clock"
    version="20.1"
@@ -2237,7 +2349,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="ram_c_neg.addr_arth"
+   start="dp_ram_c_neg.addr_arth"
    end="addr_delay_c_neg_1.addr_out">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2248,7 +2360,29 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="ram_a_pos.addr_arth"
+   start="dp_ram_c_pos.addr_arth"
+   end="addr_delay_c_pos_1.addr_out">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="dp_ram_a_neg.addr_arth"
+   end="test_control_unit_0.read_a_neg">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="dp_ram_a_pos.addr_arth"
    end="test_control_unit_0.read_a_pos">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2259,7 +2393,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="ram_b_neg.addr_arth"
+   start="dp_ram_b_neg.addr_arth"
    end="test_control_unit_0.read_b_neg">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2303,17 +2437,6 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="addr_delay_c_pos_1.addr_out"
-   end="ram_c_pos.addr_arth">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="mux_ctrl_0.ctrl_a"
    end="mux_a.mux_ctrl">
   <parameter name="endPort" value="" />
@@ -2336,8 +2459,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="ram_c_neg.data_arth"
-   end="data_delay_c_neg_1.data_out">
+   start="dp_ram_c_pos.data_arth"
+   end="data_delay_c_pos_1.data_out">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2380,8 +2503,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_pos_1.data_out"
-   end="ram_c_pos.data_arth">
+   start="data_delay_c_neg_1.data_out"
+   end="dp_ram_c_neg.data_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2446,41 +2569,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="mux_a.neg"
-   end="ram_a_neg.q_arth">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mux_b.neg"
-   end="ram_b_neg.q_arth">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="arith_out_duplicate_0.neg_out"
    end="data_delay_c_neg_0.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mux_b.pos"
-   end="ram_b_pos.q_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2501,7 +2591,40 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="ram_a_pos.q_arth"
+   start="dp_ram_b_neg.q_arth"
+   end="mux_b.neg">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="dp_ram_a_neg.q_arth"
+   end="mux_a.neg">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="dp_ram_b_pos.q_arth"
+   end="mux_b.pos">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="dp_ram_a_pos.q_arth"
    end="mux_a.pos">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2512,19 +2635,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="test_control_unit_0.read_a_neg"
-   end="ram_a_neg.addr_arth">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="test_control_unit_0.read_b_pos"
-   end="ram_b_pos.addr_arth">
+   end="dp_ram_b_pos.addr_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2568,42 +2680,42 @@
    kind="reset"
    version="20.1"
    start="clk_0.clk_reset"
-   end="ram_a_pos.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="ram_a_neg.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="ram_b_pos.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="ram_b_neg.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="ram_c_neg.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="ram_c_pos.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
    end="mux_ctrl_0.clock_reset" />
  <connection
    kind="reset"
    version="20.1"
    start="clk_0.clk_reset"
    end="clock_div_0.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_c_neg.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_c_pos.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_b_neg.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_b_pos.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_a_neg.clock_reset" />
+ <connection
+   kind="reset"
+   version="20.1"
+   start="clk_0.clk_reset"
+   end="dp_ram_a_pos.clock_reset" />
  <connection
    kind="reset"
    version="20.1"

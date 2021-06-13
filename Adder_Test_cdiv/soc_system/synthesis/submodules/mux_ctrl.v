@@ -8,8 +8,8 @@ wire ctrl_b;
 
 assign ctrl_b = ctrl_a;
 always@(posedge clock)begin
-	if(!resetn) ctrl_a<=1'b1;
-	ctrl_a<=~ctrl_a;
+	if(!resetn) ctrl_a<=1'b0;
+	else ctrl_a<=~ctrl_a;
 end
 
 endmodule
