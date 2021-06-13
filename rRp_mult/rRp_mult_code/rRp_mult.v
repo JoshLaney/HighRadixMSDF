@@ -1,22 +1,32 @@
 //generalized parallel online adder for radix > 2
 
 module rRp_mult(
-	x,
-	y,
-	p
+	x_in,
+	y_in,
+	p_out,
+	clock
 );
 
 parameter WIDTH = 4; //number of digits
 parameter RADIX = 2;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 
+input clock;
+input [D*WIDTH-1:0] x_in, y_in;
+output [D*(2*WIDTH+1)-1:0] p_out;
 
-input [D*WIDTH-1:0] x, y;
-output [D*(2*WIDTH+1)-1:0] p;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [D*WIDTH-1:0] x, y;
+(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [D*(2*WIDTH+1)-1:0] p_out, p;
 
 wire [D*(WIDTH+6)-1:0] w[0:WIDTH+2];
 wire [2*D*WIDTH-1: 0] p_frac;
 wire [2*D*WIDTH-1: 0] p_msds;
+
+always@(posedge clock) begin
+	x<=x_in;
+	y<=y_in;
+	p_out<=p;
+end
 
 genvar i;
 

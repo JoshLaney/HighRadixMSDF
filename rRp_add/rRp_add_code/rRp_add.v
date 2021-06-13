@@ -1,11 +1,10 @@
 //generalized parallel online adder for radix > 2
 
 module rRp_add(
-	x_in,
-	y_in,
-	s_out,
-	clock
-);
+	x,
+	y,
+	s
+	);
 
 parameter RADIX = 2;
 parameter WIDTH = 15; //number of digits
@@ -16,11 +15,10 @@ localparam tN = 2*WIDTH; //bitwidth of t
 
 integer i;
 
-input [(N-1):0] x_in, y_in;
-output [((N-1)+D):0] s_out;
-input clock;
-(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [(N-1):0] x, y;
-(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [((N-1)+D):0] s_out, s;
+input [(N-1):0] x, y;
+output [((N-1)+D):0] s;
+
+reg [((N-1)+D):0] s;
 
 reg [(tN-1):0] t;
 
@@ -28,11 +26,6 @@ reg [(tN-1):0] t;
 reg signed [(D-1):0] x_i, y_i;
 reg signed [1:0] t_im1;
 
-always@(posedge clock) begin
-	x<=x_in;
-	y<=y_in;
-	s_out<=s;
-end
 
 generate
 if (RADIX == 2) begin
