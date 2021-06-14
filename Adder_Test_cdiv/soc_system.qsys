@@ -1976,7 +1976,7 @@
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
   <parameter name="gui_divide_factor_c0" value="12" />
-  <parameter name="gui_divide_factor_c1" value="32" />
+  <parameter name="gui_divide_factor_c1" value="24" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />
   <parameter name="gui_divide_factor_c12" value="1" />
@@ -2028,7 +2028,7 @@
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
   <parameter name="gui_multiply_factor" value="24" />
-  <parameter name="gui_number_of_clocks" value="1" />
+  <parameter name="gui_number_of_clocks" value="2" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />
   <parameter name="gui_output_clock_frequency1" value="100.0" />
@@ -2067,7 +2067,7 @@
   <parameter name="gui_phase_shift8" value="0" />
   <parameter name="gui_phase_shift9" value="0" />
   <parameter name="gui_phase_shift_deg0" value="0.0" />
-  <parameter name="gui_phase_shift_deg1" value="180.0" />
+  <parameter name="gui_phase_shift_deg1" value="0.0" />
   <parameter name="gui_phase_shift_deg10" value="0.0" />
   <parameter name="gui_phase_shift_deg11" value="0.0" />
   <parameter name="gui_phase_shift_deg12" value="0.0" />
@@ -2212,42 +2212,6 @@
   <parameter name="baseAddress" value="0x0100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection kind="clock" version="20.1" start="clk_0.clk" end="mm_bridge_0.clk" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="test_control_unit_0.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_a_pos.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_a_neg.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_b_neg.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_b_pos.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_c_pos.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clk_0.clk"
-   end="dp_ram_c_neg.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
@@ -2364,6 +2328,46 @@
    version="20.1"
    start="pll_0.outclk0"
    end="clock_div_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="mm_bridge_0.clk" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="test_control_unit_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_a_pos.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_a_neg.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_b_pos.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_b_neg.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_c_pos.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk1"
+   end="dp_ram_c_neg.clock_sink" />
  <connection
    kind="conduit"
    version="20.1"

@@ -15,6 +15,7 @@ create_generated_clock \
 -name clk_pos \
 [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
 
+#neg clock follows pos clock, but it's reg is clocked by the pll output there it's source is the pll
 create_generated_clock \
 -divide_by 2 \
 -invert \

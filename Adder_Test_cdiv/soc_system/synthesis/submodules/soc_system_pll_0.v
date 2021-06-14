@@ -10,6 +10,9 @@ module  soc_system_pll_0(
 	// interface 'outclk0'
 	output wire outclk_0,
 
+	// interface 'outclk1'
+	output wire outclk_1,
+
 	// interface 'locked'
 	output wire locked,
 
@@ -26,11 +29,11 @@ module  soc_system_pll_0(
 		.pll_fractional_cout(32),
 		.pll_dsm_out_sel("1st_order"),
 		.operation_mode("normal"),
-		.number_of_clocks(1),
+		.number_of_clocks(2),
 		.output_clock_frequency0("100.000000 MHz"),
 		.phase_shift0("0 ps"),
 		.duty_cycle0(50),
-		.output_clock_frequency1("0 MHz"),
+		.output_clock_frequency1("50.000000 MHz"),
 		.phase_shift1("0 ps"),
 		.duty_cycle1(50),
 		.output_clock_frequency2("0 MHz"),
@@ -98,12 +101,12 @@ module  soc_system_pll_0(
 		.c_cnt_in_src0("ph_mux_clk"),
 		.c_cnt_bypass_en0("false"),
 		.c_cnt_odd_div_duty_en0("false"),
-		.c_cnt_hi_div1(1),
-		.c_cnt_lo_div1(1),
+		.c_cnt_hi_div1(12),
+		.c_cnt_lo_div1(12),
 		.c_cnt_prst1(1),
 		.c_cnt_ph_mux_prst1(0),
 		.c_cnt_in_src1("ph_mux_clk"),
-		.c_cnt_bypass_en1("true"),
+		.c_cnt_bypass_en1("false"),
 		.c_cnt_odd_div_duty_en1("false"),
 		.c_cnt_hi_div2(1),
 		.c_cnt_lo_div2(1),
@@ -229,7 +232,7 @@ module  soc_system_pll_0(
 		.pll_slf_rst("false")
 	) altera_pll_i (
 		.rst	(rst),
-		.outclk	({outclk_0}),
+		.outclk	({outclk_1, outclk_0}),
 		.locked	(locked),
 		.reconfig_to_pll	(reconfig_to_pll),
 		.fboutclk	( ),
