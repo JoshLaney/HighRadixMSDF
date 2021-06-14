@@ -17,6 +17,7 @@ reg [11:0] r_addr_pos_cnt, r_addr_neg_cnt, w_addr_pos_cnt, w_addr_neg_cnt, num, 
 (* preserve="true" *) reg [11:0] w_addr_pos_delay, w_addr_neg_delay;
 reg go_pos, go_neg, we_pos, we_neg, done_pos, done_neg;
 (* preserve="true" *) reg we_pos_delay, we_neg_delay, go_pos_1, go_pos_2, go_neg_1, go_neg_2;
+(* preserve="true" *) reg done_pos_1, done_pos_2, done_neg_1, done_neg_2;
  
 
 assign r_addr_a_pos = r_addr_pos_cnt[10:0];
@@ -66,8 +67,14 @@ always@(posedge avalon_clock) begin
 				default: ;
 			endcase
 		end
-		if(done_pos) go_pos <= 1'b0;
-		if(done_neg) go_neg <= 1'b0;
+		//prvent metastability
+		done_pos_1 <= done_pos;
+		done_pos_2 <= done_pos_1;
+		done_neg_1 <= done_neg;
+		done_neg_2 <= done_neg_1;
+
+		if(done_pos_2) go_pos <= 1'b0;
+		if(done_neg_2) go_neg <= 1'b0;
 	end
 end
 

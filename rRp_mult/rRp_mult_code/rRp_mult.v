@@ -7,7 +7,7 @@ module rRp_mult(
 	clock
 );
 
-parameter WIDTH = 4; //number of digits
+parameter WIDTH = 7; //number of digits
 parameter RADIX = 2;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 
@@ -15,16 +15,20 @@ input clock;
 input [D*WIDTH-1:0] x_in, y_in;
 output [D*(2*WIDTH+1)-1:0] p_out;
 
-(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [D*WIDTH-1:0] x, y;
-(* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *) (* preserve="true" *) reg [D*(2*WIDTH+1)-1:0] p_out, p;
+(* preserve *) reg [D*WIDTH-1:0] x_reg, y_reg;
+(* preserve *) reg [D*(2*WIDTH+1)-1:0] p_out;
 
+(* keep *) wire [D*WIDTH-1:0] x, y;
+wire [D*(2*WIDTH+1)-1:0] p;
 wire [D*(WIDTH+6)-1:0] w[0:WIDTH+2];
 wire [2*D*WIDTH-1: 0] p_frac;
 wire [2*D*WIDTH-1: 0] p_msds;
 
+assign x = x_reg;
+assign y = y_reg;
 always@(posedge clock) begin
-	x<=x_in;
-	y<=y_in;
+	x_reg<=x_in;
+	y_reg<=y_in;
 	p_out<=p;
 end
 

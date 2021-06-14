@@ -3,8 +3,8 @@
 module rRp_mult_tb;
 
 parameter RADIX = 2;
-parameter WIDTH = 8; //number of digits 
-parameter TESTS = 10000;
+parameter WIDTH = 7; //number of digits 
+parameter TESTS = 100;
 
 localparam A = RADIX - 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
@@ -21,9 +21,10 @@ integer x_num;
 integer y_num;
 integer p_num;
 integer p_expected;
+integer p_expected_old;
 integer tests;
 
-rRp_mult #(.WIDTH(WIDTH), .RADIX(RADIX)) mult(.x(x), .y(y), .p(p));
+rRp_mult #(.WIDTH(WIDTH), .RADIX(RADIX)) mult(.x_in(x), .y_in(y), .p_out(p), .clock(clk));
 
 always begin
 	clk = 1; #5; clk=0; #5;
@@ -38,9 +39,9 @@ initial begin
 	tests = TESTS -1;
 end
 
-always @(posedge clk)
+always @(negedge clk)
 	begin
-		#1;
+		#3;
 		x_num = 0;
 		y_num = 0;
 		p_expected = 0;
@@ -56,15 +57,16 @@ always @(posedge clk)
 		p_expected = x_num * y_num;
 	end
 
-always @(negedge clk)
+always @(posedge clk)
 	begin
+		#1
 		p_num = 0;
 		for(i = 0; i<2*WIDTH+1; i= i +1) begin
 			p_i = p[i*D +: D];
 			p_num = p_num + p_i*RADIX**i;
 		end
-
-		if(p_num != p_expected)
+		#1
+		if(p_num != p_expected_old)
 		begin
 			$display("Error at test %d", TESTS-tests);
 			errors = errors + 1;
@@ -76,6 +78,8 @@ always @(negedge clk)
 			$display("%d tests completed with %d errors", TESTS, errors);
 			$finish;
 		end
+		#1
+		p_expected_old = p_expected;
 	end
 
 endmodule

@@ -1248,6 +1248,14 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element test_control_unit_0
    {
       datum _sortIndex
@@ -1987,7 +1995,7 @@
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
-  <parameter name="gui_divide_factor_c0" value="12" />
+  <parameter name="gui_divide_factor_c0" value="96" />
   <parameter name="gui_divide_factor_c1" value="32" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />

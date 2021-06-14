@@ -1,0 +1,3 @@
+module DUTtester()
+   input clk,
+	

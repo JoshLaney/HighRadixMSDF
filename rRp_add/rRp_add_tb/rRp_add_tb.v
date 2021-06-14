@@ -24,7 +24,7 @@ integer s_expected;
 integer s_expected_old;
 integer tests;
 
-rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH)) addr(.x_in(x), .y_in(y), .s_out(s), .clock(clk));
+rRp_add_clocked #(.RADIX(RADIX), .WIDTH(WIDTH)) addr(.x_in(x), .y_in(y), .s_out(s), .clock(clk));
 
 always begin
 	clk = 1; #5; clk=0; #5;
