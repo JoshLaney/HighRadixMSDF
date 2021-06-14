@@ -2,7 +2,7 @@ set_global_assignment -entity "soc_system" -library "soc_system" -name IP_TOOL_N
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_TOOL_VERSION "20.1"
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "soc_system" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../soc_system.sopcinfo"]
-set_global_assignment -entity "soc_system" -library "soc_system" -name SLD_INFO "QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1623595809"
+set_global_assignment -entity "soc_system" -library "soc_system" -name SLD_INFO "QSYS_NAME soc_system HAS_SOPCINFO 1 GENERATION_ID 1623691390"
 set_global_assignment -library "soc_system" -name MISC_FILE [file join $::quartus(qip_path) "../soc_system.cmp"]
 set_global_assignment -library "soc_system" -name SLD_FILE [file join $::quartus(qip_path) "soc_system.regmap"]
 set_global_assignment -library "soc_system" -name MISC_FILE [file join $::quartus(qip_path) "soc_system_hps_0_hps.svd"]
@@ -17,7 +17,7 @@ set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPON
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTYyMzU5NTgwOQ==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTYyMzY5MTM5MA==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBW::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::NUNTWEZDNkQ2RjMxQzY=::QXV0byBERVZJQ0U="
 set_global_assignment -entity "soc_system" -library "soc_system" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::Nl9INg==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -1235,13 +1235,13 @@ set_global_assignment -entity "soc_system_pll_0" -library "soc_system" -name IP_
 set_global_assignment -entity "soc_system_pll_0" -library "soc_system" -name IP_COMPONENT_PARAMETER "Z3VpX3JlZmNsa19zd2l0Y2g=::ZmFsc2U=::Q3JlYXRlIGEgc2Vjb25kIGlucHV0IGNsayAncmVmY2xrMSc="
 set_global_assignment -entity "soc_system_pll_0" -library "soc_system" -name IP_COMPONENT_PARAMETER "Z3VpX2VuYWJsZV9jYXNjYWRlX291dA==::ZmFsc2U=::Q3JlYXRlIGEgJ2Nhc2NhZGVfb3V0JyBzaWduYWwgdG8gY29ubmVjdCB3aXRoIGEgZG93bnN0cmVhbSBQTEw="
 set_global_assignment -entity "soc_system_pll_0" -library "soc_system" -name IP_COMPONENT_PARAMETER "Z3VpX2VuYWJsZV9jYXNjYWRlX2lu::ZmFsc2U=::Q3JlYXRlIGFuIGFkanBsbGluIG9yIGNjbGsgc2lnbmFsIHRvIGNvbm5lY3Qgd2l0aCBhbiB1cHN0cmVhbSBQTEw="
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_NAME "clJwX2FkZA=="
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_DISPLAY_NAME "b25saW5lX2FkZGVy"
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_INTERNAL "Off"
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_PARAMETER "UkFESVg=::Mg==::UkFESVg="
-set_global_assignment -entity "rRp_add" -library "soc_system" -name IP_COMPONENT_PARAMETER "V0lEVEg=::MTU=::V0lEVEg="
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_NAME "clJwX2FkZF9jbG9ja2Vk"
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_DISPLAY_NAME "b25saW5lX2FkZGVy"
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_PARAMETER "UkFESVg=::Mg==::UkFESVg="
+set_global_assignment -entity "rRp_add_clocked" -library "soc_system" -name IP_COMPONENT_PARAMETER "V0lEVEg=::MTU=::V0lEVEg="
 set_global_assignment -entity "mux_ctrl" -library "soc_system" -name IP_COMPONENT_NAME "bXV4X2N0cmw="
 set_global_assignment -entity "mux_ctrl" -library "soc_system" -name IP_COMPONENT_DISPLAY_NAME "bXV4X2N0cmw="
 set_global_assignment -entity "mux_ctrl" -library "soc_system" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
@@ -7043,7 +7043,6 @@ set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_D
 set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
 set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_PARAMETER "TkVHX0VER0U=::MA==::TkVHX0VER0U="
 set_global_assignment -entity "dpRam" -library "soc_system" -name IP_COMPONENT_PARAMETER "SUQ=::Mw==::SUQ="
 set_global_assignment -entity "data_delay" -library "soc_system" -name IP_COMPONENT_NAME "ZGF0YV9kZWxheQ=="
 set_global_assignment -entity "data_delay" -library "soc_system" -name IP_COMPONENT_DISPLAY_NAME "ZGF0YV9kZWxheQ=="
@@ -7115,7 +7114,7 @@ set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::qua
 set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_std_synchronizer.v"]
 set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/soc_system_pll_0.v"]
 set_global_assignment -library "soc_system" -name QIP_FILE [file join $::quartus(qip_path) "submodules/soc_system_pll_0.qip"]
-set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/rRp_add.v"]
+set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/rRp_add_clocked.v"]
 set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/mux_ctrl.v"]
 set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/arith_in_mux.v"]
 set_global_assignment -library "soc_system" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_avalon_mm_bridge.v"]

@@ -15,6 +15,13 @@ create_generated_clock \
 -name clk_pos \
 [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
 
+create_generated_clock \
+-divide_by 2 \
+-invert \
+-source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
+-name clk_neg \
+[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
+
 #create_generated_clock \
 -source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos] \
 -invert \
