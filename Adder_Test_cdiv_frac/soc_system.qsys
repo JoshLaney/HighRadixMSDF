@@ -94,14 +94,6 @@
          type = "int";
       }
    }
-   element data_delay_c_neg_1
-   {
-      datum _sortIndex
-      {
-         value = "24";
-         type = "int";
-      }
-   }
    element data_delay_c_pos_0
    {
       datum _sortIndex
@@ -110,7 +102,15 @@
          type = "int";
       }
    }
-   element data_delay_c_pos_1
+   element div_data_delay_neg
+   {
+      datum _sortIndex
+      {
+         value = "24";
+         type = "int";
+      }
+   }
+   element div_data_delay_pos
    {
       datum _sortIndex
       {
@@ -1248,6 +1248,14 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element test_control_unit_0
    {
       datum _sortIndex
@@ -1325,13 +1333,23 @@
  <module name="data_delay_c_neg_0" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="32" />
  </module>
- <module name="data_delay_c_neg_1" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="32" />
- </module>
  <module name="data_delay_c_pos_0" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="32" />
  </module>
- <module name="data_delay_c_pos_1" kind="data_delay" version="1.0" enabled="1">
+ <module
+   name="div_data_delay_neg"
+   kind="div_data_delay"
+   version="1.0"
+   enabled="1">
+  <parameter name="NEG" value="1" />
+  <parameter name="WIDTH" value="32" />
+ </module>
+ <module
+   name="div_data_delay_pos"
+   kind="div_data_delay"
+   version="1.0"
+   enabled="1">
+  <parameter name="NEG" value="0" />
   <parameter name="WIDTH" value="32" />
  </module>
  <module name="dp_ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
@@ -2263,11 +2281,6 @@
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_neg"
-   end="data_delay_c_neg_1.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_neg"
    end="addr_delay_c_neg_0.clock" />
  <connection
    kind="clock"
@@ -2294,11 +2307,6 @@
    version="20.1"
    start="clock_div_0.clk_neg"
    end="test_control_unit_0.pll_clock_neg" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_pos"
-   end="data_delay_c_pos_1.clock" />
  <connection
    kind="clock"
    version="20.1"
@@ -2364,6 +2372,16 @@
    version="20.1"
    start="pll_0.outclk0"
    end="clock_div_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
+   end="div_data_delay_neg.pll_clock" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
+   end="div_data_delay_pos.pll_clock" />
  <connection
    kind="conduit"
    version="20.1"
@@ -2477,8 +2495,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="dp_ram_c_pos.data_arth"
-   end="data_delay_c_pos_1.data_out">
+   start="arith_out_duplicate_0.data_in"
+   end="online_adder_0.c_out">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2488,8 +2506,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="arith_out_duplicate_0.data_in"
-   end="online_adder_0.c_out">
+   start="div_data_delay_pos.data_in"
+   end="data_delay_c_pos_0.data_out">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2521,7 +2539,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_neg_1.data_out"
+   start="div_data_delay_neg.data_out"
    end="dp_ram_c_neg.data_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2532,19 +2550,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_neg_0.data_out"
-   end="data_delay_c_neg_1.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="data_delay_c_pos_0.data_out"
-   end="data_delay_c_pos_1.data_in">
+   start="div_data_delay_pos.data_out"
+   end="dp_ram_c_pos.data_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2567,6 +2574,17 @@
    version="20.1"
    start="mux_b.data_out"
    end="data_delay_b_0.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="data_delay_c_neg_0.data_out"
+   end="div_data_delay_neg.data_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />

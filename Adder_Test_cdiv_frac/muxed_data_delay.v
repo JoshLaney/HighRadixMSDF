@@ -1,4 +1,4 @@
-module data_delay (pll_clock, data_in, data_out);
+module muxed_data_delay (pll_clock, data_in, data_out);
 
 parameter WIDTH = 32;
 parameter NEG = 0;
