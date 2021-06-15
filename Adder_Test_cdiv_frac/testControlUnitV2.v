@@ -14,9 +14,12 @@ output [31:0] readdata;
 
 reg [31:0] readdata;
 reg [11:0] r_addr_pos_cnt, r_addr_neg_cnt, w_addr_pos_cnt, w_addr_neg_cnt, num, set_addr;
+(* preserve="true" *) reg [11:0] set_addr_pos_1, set_addr_pos_2, set_addr_neg_1, set_addr_neg_2;
+(* preserve="true" *) reg [11:0] num_pos_1, num_pos_2, num_neg_1, num_neg_2;
 (* preserve="true" *) reg [11:0] w_addr_pos_delay, w_addr_neg_delay;
 reg go_pos, go_neg, we_pos, we_neg, done_pos, done_neg;
 (* preserve="true" *) reg we_pos_delay, we_neg_delay, go_pos_1, go_pos_2, go_neg_1, go_neg_2;
+(* preserve="true" *) reg done_pos_1, done_pos_2, done_neg_1, done_neg_2;
  
 
 assign r_addr_a_pos = r_addr_pos_cnt[10:0];
@@ -66,16 +69,28 @@ always@(posedge avalon_clock) begin
 				default: ;
 			endcase
 		end
-		if(done_pos) go_pos <= 1'b0;
-		if(done_neg) go_neg <= 1'b0;
+		//prvent metastability
+		done_pos_1 <= done_pos;
+		done_pos_2 <= done_pos_1;
+		done_neg_1 <= done_neg;
+		done_neg_2 <= done_neg_1;
+
+		if(done_pos_2) go_pos <= 1'b0;
+		if(done_neg_2) go_neg <= 1'b0;
 	end
 end
 
 always@(posedge pll_clock_pos) begin
+	//prevent metastability
+	num_pos_1 <= num;
 	go_pos_1 <= go_pos;
-	go_pos_2 <= go_pos_1;  //prevent metastability
+	go_pos_2 <= go_pos_1;
+	num_pos_2 <= num_pos_1;
+	set_addr_pos_1 <= set_addr;
+	set_addr_pos_2 <= set_addr_pos_1;
+
 	if(go_pos_2 && !done_pos) begin
-		if(r_addr_pos_cnt<num) begin
+		if(r_addr_pos_cnt<num_pos_2) begin
 			we_pos_delay <= 1'b1;
 			we_pos <= we_pos_delay;
 
@@ -97,7 +112,7 @@ always@(posedge pll_clock_pos) begin
 		we_pos_delay <= 1'b0;
 		we_pos <= we_pos_delay;
 
-		r_addr_pos_cnt <= set_addr;
+		r_addr_pos_cnt <= set_addr_pos_1;
 		w_addr_pos_delay <= r_addr_pos_cnt;
 
 		w_addr_pos_cnt <= w_addr_pos_delay;
@@ -106,10 +121,16 @@ always@(posedge pll_clock_pos) begin
 end
 
 always@(posedge pll_clock_neg) begin
+	//prevent metastability
 	go_neg_1 <= go_neg;
-	go_neg_2 <= go_neg_1;  //prevent metastability
+	go_neg_2 <= go_neg_1;
+	num_neg_1 <= num;
+	num_neg_2 <= num_neg_1;
+	set_addr_neg_1 <= set_addr;
+	set_addr_neg_2 <= set_addr_neg_1;
+
 	if(go_neg_2 && !done_neg) begin
-		if(r_addr_neg_cnt<num) begin
+		if(r_addr_neg_cnt<num_neg_2) begin
 			we_neg_delay <= 1'b1;
 			we_neg <= we_neg_delay;
 
@@ -131,7 +152,7 @@ always@(posedge pll_clock_neg) begin
 		we_neg_delay <= 1'b0;
 		we_neg <= we_neg_delay;
 
-		r_addr_neg_cnt <= set_addr;
+		r_addr_neg_cnt <= set_addr_neg_2;
 		w_addr_neg_delay <= r_addr_neg_cnt;
 		w_addr_neg_cnt <= w_addr_neg_delay;
 

@@ -15,6 +15,14 @@ create_generated_clock \
 -name clk_pos \
 [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
 
+#neg clock follows pos clock, but it's reg is clocked by the pll output there it's source is the pll
+create_generated_clock \
+-divide_by 2 \
+-invert \
+-source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
+-name clk_neg \
+[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
+
 #create_generated_clock \
 -source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos] \
 -invert \
@@ -35,6 +43,11 @@ set_false_path -from [get_keepers {*ram_b*portb_we_reg}] -to [get_keepers {*data
 set_false_path -from [get_keepers {*ram_a*portb_we_reg}] -to [get_keepers {*data_delay_a*|data_out* *online_adder*}]
 #set_false_path -from [get_keepers {*ram_c*porta_we_reg}] -to [get_clocks {*clk_pos* *clk_neg*}]
 
+#Avalon-Tester cross domain paths
+set_false_path -from [get_registers {*test_control_unit_0|done_*}] -to [get_registers {*test_control_unit_0|done_*_1*}]
+set_false_path -from [get_registers {*test_control_unit_0|go_*}] -to [get_registers {*test_control_unit_0|go_*_1*}]
+set_false_path -from [get_registers {*test_control_unit_0|num[*]*}] -to [get_registers {*test_control_unit_0|num_*_1[*]}]
+set_false_path -from [get_registers {*test_control_unit_0|set_addr[*]*}] -to [get_registers {*test_control_unit_0|set_addr_*_1[*]}]
 #set_max_delay -from [get_registers {soc_system:soc_inst|data_delay:data_delay_c_pos_*|data_out[*]}] -to [get_registers *] 3.5
 #set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2
 #set_max_delay -from [get_keepers *\|gen*] -to * 2

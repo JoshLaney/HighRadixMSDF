@@ -1224,6 +1224,30 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element test_control_unit_0
    {
       datum _sortIndex
@@ -1312,27 +1336,21 @@
  </module>
  <module name="dp_ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="3" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="dp_ram_a_pos" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="2" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="dp_ram_b_neg" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="5" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="dp_ram_b_pos" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="4" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="dp_ram_c_neg" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="7" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="dp_ram_c_pos" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="6" />
-  <parameter name="NEG_EDGE" value="0" />
  </module>
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
@@ -2676,16 +2694,6 @@
   <parameter name="startPortLSB" value="0" />
   <parameter name="width" value="0" />
  </connection>
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="mux_ctrl_0.clock_reset" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="clock_div_0.clock_reset" />
  <connection
    kind="reset"
    version="20.1"

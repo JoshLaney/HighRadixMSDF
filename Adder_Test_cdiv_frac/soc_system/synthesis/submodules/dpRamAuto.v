@@ -8,7 +8,6 @@ output [31:0] q_arith,
 output reg [31:0] readdata
 );
 
-parameter NEG_EDGE = 0;
 parameter ID = 1;
 
 reg [10:0] addr_hps;
@@ -47,33 +46,18 @@ always@(posedge avalon_clock) begin
 	if(w_inc) addr_hps <= addr_hps + 11'b1;
 end
 
-generate
-if(NEG_EDGE == 0) begin
-	true_dual_port_ram_single_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
-	.data_a(data_hps),
-	.data_b(data_arith),
-	.addr_a(addr_hps),
-	.addr_b(addr_arith),
-	.we_a(we_hps),
-	.we_b(we_arith),
-	.clk(ram_clock),
-	.q_a(q_hps),
-	.q_b(q_arith)
-	);
-end else begin
-	true_dual_port_ram_single_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
-	.data_a(data_hps),
-	.data_b(data_arith),
-	.addr_a(addr_hps),
-	.addr_b(addr_arith),
-	.we_a(we_hps),
-	.we_b(we_arith),
-	.clk(~ram_clock),
-	.q_a(q_hps),
-	.q_b(q_arith)
-	);
-end
-endgenerate
+true_dual_port_ram_dual_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
+.data_a(data_hps),
+.data_b(data_arith),
+.addr_a(addr_hps),
+.addr_b(addr_arith),
+.we_a(we_hps),
+.we_b(we_arith),
+.clk_a(avalon_clock),
+.clk_b(ram_clock),
+.q_a(q_hps),
+.q_b(q_arith)
+);
 
 
 endmodule
@@ -81,21 +65,24 @@ endmodule
 // Quartus Prime Verilog Template
 // True Dual Port RAM with single clock
 
-module true_dual_port_ram_single_clock
+// Quartus Prime Verilog Template
+// True Dual Port RAM with dual clocks
+
+module true_dual_port_ram_dual_clock
 #(parameter DATA_WIDTH=8, parameter ADDR_WIDTH=6)
 (
 	input [(DATA_WIDTH-1):0] data_a, data_b,
 	input [(ADDR_WIDTH-1):0] addr_a, addr_b,
-	input we_a, we_b, clk,
+	input we_a, we_b, clk_a, clk_b,
 	output reg [(DATA_WIDTH-1):0] q_a, q_b
 );
 
 	// Declare the RAM variable
 	reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
 
-	// Port A 
-	always @ (posedge clk)
+	always @ (posedge clk_a)
 	begin
+		// Port A 
 		if (we_a) 
 		begin
 			ram[addr_a] <= data_a;
@@ -105,11 +92,11 @@ module true_dual_port_ram_single_clock
 		begin
 			q_a <= ram[addr_a];
 		end 
-	end 
+	end
 
-	// Port B 
-	always @ (posedge clk)
+	always @ (posedge clk_b)
 	begin
+		// Port B 
 		if (we_b) 
 		begin
 			ram[addr_b] <= data_b;
@@ -122,4 +109,5 @@ module true_dual_port_ram_single_clock
 	end
 
 endmodule
+
 
