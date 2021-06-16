@@ -90,7 +90,7 @@
    {
       datum _sortIndex
       {
-         value = "29";
+         value = "28";
          type = "int";
       }
    }
@@ -98,7 +98,7 @@
    {
       datum _sortIndex
       {
-         value = "27";
+         value = "26";
          type = "int";
       }
    }
@@ -138,7 +138,7 @@
    {
       datum _sortIndex
       {
-         value = "28";
+         value = "29";
          type = "int";
       }
    }
@@ -146,7 +146,7 @@
    {
       datum _sortIndex
       {
-         value = "26";
+         value = "27";
          type = "int";
       }
    }
@@ -2611,28 +2611,6 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_pos.data_in"
-   end="cross_data_delay_pos.data_out">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="data_delay_c_neg.data_in"
-   end="cross_data_delay_neg.data_out">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="data_delay_a_1.data_out"
    end="online_adder_0.a_in">
   <parameter name="endPort" value="" />
@@ -2655,8 +2633,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_pos.data_out"
-   end="dp_ram_c_pos.data_arth">
+   start="cross_data_delay_neg.data_out"
+   end="dp_ram_c_neg.data_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2666,8 +2644,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_c_neg.data_out"
-   end="dp_ram_c_neg.data_arth">
+   start="cross_data_delay_pos.data_out"
+   end="dp_ram_c_pos.data_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2710,6 +2688,28 @@
  <connection
    kind="conduit"
    version="20.1"
+   start="data_delay_c_pos.data_out"
+   end="cross_data_delay_pos.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="data_delay_c_neg.data_out"
+   end="cross_data_delay_neg.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
    start="pll_0.locked"
    end="test_control_unit_0.pll_lock">
   <parameter name="endPort" value="" />
@@ -2722,7 +2722,7 @@
    kind="conduit"
    version="20.1"
    start="arith_out_duplicate_0.neg_out"
-   end="cross_data_delay_neg.data_in">
+   end="data_delay_c_neg.data_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2733,7 +2733,7 @@
    kind="conduit"
    version="20.1"
    start="arith_out_duplicate_0.pos_out"
-   end="cross_data_delay_pos.data_in">
+   end="data_delay_c_pos.data_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />

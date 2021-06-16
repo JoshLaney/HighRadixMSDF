@@ -8,6 +8,7 @@
    <name preferredWidth="186" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
+ <library
+   expandedCategories="Library/Qsys Interconnect,Library/University Program/Audio &amp; Video,Project,Library/University Program,Library/Qsys Interconnect/Memory-Mapped,Library/Basic Functions,Library/Qsys Interconnect/Memory-Mapped Alpha,Library/University Program/Audio &amp; Video/Video,Library/Basic Functions/On Chip Memory,Library" />
  <window width="1631" height="1023" x="49" y="27" />
 </preferences>
