@@ -2,13 +2,13 @@
 # 
 preplace inst soc_system.clk_0 -pg 1 -lvl 1 -y 2570
 preplace inst soc_system.hps_0.clk_0 -pg 1
-preplace inst soc_system.online_adder_0 -pg 1 -lvl 4 -y 1070
-preplace inst soc_system.pll_0 -pg 1 -lvl 2 -y 2410
+preplace inst soc_system.online_adder_0 -pg 1 -lvl 4 -y 1090
+preplace inst soc_system.pll_0 -pg 1 -lvl 2 -y 2350
 preplace inst soc_system.hps_0.axi_sdram -pg 1
 preplace inst soc_system -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst soc_system.hps_0.timer0 -pg 1
 preplace inst soc_system.clock_div_0 -pg 1 -lvl 3 -y 2270
-preplace inst soc_system.arith_out_duplicate_0 -pg 1 -lvl 4 -y 510
+preplace inst soc_system.arith_out_duplicate_0 -pg 1 -lvl 4 -y 530
 preplace inst soc_system.hps_0.timer1 -pg 1
 preplace inst soc_system.hps_0.i2c0 -pg 1
 preplace inst soc_system.hps_0.timer2 -pg 1
@@ -18,22 +18,22 @@ preplace inst soc_system.hps_0.timer3 -pg 1
 preplace inst soc_system.hps_0.wd_timer1 -pg 1
 preplace inst soc_system.hps_0.i2c2 -pg 1
 preplace inst soc_system.hps_0.qspi -pg 1
-preplace inst soc_system.dp_ram_c_pos -pg 1 -lvl 4 -y 750
+preplace inst soc_system.div_data_delay_pos -pg 1 -lvl 4 -y 690
+preplace inst soc_system.dp_ram_c_pos -pg 1 -lvl 4 -y 770
 preplace inst soc_system.hps_0.gpio0 -pg 1
 preplace inst soc_system.hps_0.i2c3 -pg 1
 preplace inst soc_system.hps_0.clkmgr -pg 1
-preplace inst soc_system.mux_a -pg 1 -lvl 4 -y 1410
+preplace inst soc_system.mux_a -pg 1 -lvl 4 -y 1430
 preplace inst soc_system.hps_0.gpio1 -pg 1
 preplace inst soc_system.hps_0.arm_a9_0 -pg 1
 preplace inst soc_system.hps_0.L2 -pg 1
-preplace inst soc_system.mux_b -pg 1 -lvl 4 -y 2330
+preplace inst soc_system.mux_b -pg 1 -lvl 4 -y 2350
 preplace inst soc_system.hps_0.gpio2 -pg 1
 preplace inst soc_system.hps_0.arm_a9_1 -pg 1
-preplace inst soc_system.dp_ram_a_pos -pg 1 -lvl 4 -y 1510
-preplace inst soc_system.data_delay_c_pos_0 -pg 1 -lvl 4 -y 590
+preplace inst soc_system.dp_ram_a_pos -pg 1 -lvl 4 -y 1530
+preplace inst soc_system.data_delay_c_pos_0 -pg 1 -lvl 4 -y 610
 preplace inst soc_system.hps_0.uart0 -pg 1
-preplace inst soc_system.test_control_unit_0 -pg 1 -lvl 4 -y 1670
-preplace inst soc_system.data_delay_c_pos_1 -pg 1 -lvl 4 -y 670
+preplace inst soc_system.test_control_unit_0 -pg 1 -lvl 4 -y 1690
 preplace inst soc_system.hps_0.uart1 -pg 1
 preplace inst soc_system.hps_0.spim0 -pg 1
 preplace inst soc_system.hps_0.spim1 -pg 1
@@ -45,21 +45,22 @@ preplace inst soc_system.hps_0.axi_ocram -pg 1
 preplace inst soc_system.addr_delay_c_neg_0 -pg 1 -lvl 4 -y 30
 preplace inst soc_system.hps_0.sdmmc -pg 1
 preplace inst soc_system.addr_delay_c_neg_1 -pg 1 -lvl 4 -y 110
-preplace inst soc_system.dp_ram_b_neg -pg 1 -lvl 4 -y 2170
-preplace inst soc_system.data_delay_b_0 -pg 1 -lvl 4 -y 2090
-preplace inst soc_system.data_delay_a_0 -pg 1 -lvl 4 -y 1170
-preplace inst soc_system.addr_delay_c_pos_0 -pg 1 -lvl 4 -y 990
-preplace inst soc_system.addr_delay_c_pos_1 -pg 1 -lvl 4 -y 910
+preplace inst soc_system.dp_ram_b_neg -pg 1 -lvl 4 -y 2190
+preplace inst soc_system.data_delay_b_0 -pg 1 -lvl 4 -y 2110
+preplace inst soc_system.data_delay_a_0 -pg 1 -lvl 4 -y 1190
+preplace inst soc_system.addr_delay_c_pos_0 -pg 1 -lvl 4 -y 1010
+preplace inst soc_system.addr_delay_c_pos_1 -pg 1 -lvl 4 -y 930
 preplace inst soc_system.hps_0.arm_gic_0 -pg 1
 preplace inst soc_system.hps_0.rstmgr -pg 1
 preplace inst soc_system.hps_0.usb0 -pg 1
-preplace inst soc_system.dp_ram_b_pos -pg 1 -lvl 4 -y 1930
+preplace inst soc_system.dp_ram_b_pos -pg 1 -lvl 4 -y 1950
 preplace inst soc_system.hps_0.scu -pg 1
 preplace inst soc_system.hps_0.usb1 -pg 1
 preplace inst soc_system.mm_bridge_0 -pg 1 -lvl 3 -y 2570
 preplace inst soc_system.hps_0.hps_io -pg 1
-preplace inst soc_system.dp_ram_a_neg -pg 1 -lvl 4 -y 1250
+preplace inst soc_system.dp_ram_a_neg -pg 1 -lvl 4 -y 1270
 preplace inst soc_system.hps_0.nand0 -pg 1
+preplace inst soc_system.div_data_delay_neg -pg 1 -lvl 4 -y 370
 preplace inst soc_system.hps_0.gmac0 -pg 1
 preplace inst soc_system.hps_0 -pg 1 -lvl 4 -y 2700
 preplace inst soc_system.hps_0.hps_io.border -pg 1
@@ -71,55 +72,54 @@ preplace inst soc_system.hps_0.eosc2 -pg 1
 preplace inst soc_system.hps_0.fpga_interfaces -pg 1
 preplace inst soc_system.hps_0.dcan1 -pg 1
 preplace inst soc_system.hps_0.f2s_sdram_ref_clk -pg 1
-preplace inst soc_system.mux_ctrl_0 -pg 1 -lvl 4 -y 2430
-preplace inst soc_system.dp_ram_c_neg -pg 1 -lvl 4 -y 270
+preplace inst soc_system.mux_ctrl_0 -pg 1 -lvl 4 -y 2450
+preplace inst soc_system.dp_ram_c_neg -pg 1 -lvl 4 -y 210
 preplace inst soc_system.hps_0.sdrctl -pg 1
 preplace inst soc_system.hps_0.dma -pg 1
-preplace inst soc_system.data_delay_c_neg_0 -pg 1 -lvl 4 -y 430
-preplace inst soc_system.data_delay_c_neg_1 -pg 1 -lvl 4 -y 190
+preplace inst soc_system.data_delay_c_neg_0 -pg 1 -lvl 4 -y 450
 preplace inst soc_system.pll_reconfig_0 -pg 1 -lvl 4 -y 2530
 preplace inst soc_system.hps_0.bridges -pg 1
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)arith_out_duplicate_0.data_in,(SLAVE)online_adder_0.c_out) 1 3 1 1040
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)dp_ram_c_neg.clock_reset,(SLAVE)pll_0.reset,(SLAVE)dp_ram_b_pos.clock_reset,(MASTER)clk_0.clk_reset,(SLAVE)pll_reconfig_0.mgmt_reset,(SLAVE)clock_div_0.clock_reset,(SLAVE)mm_bridge_0.reset,(SLAVE)mux_ctrl_0.clock_reset,(SLAVE)dp_ram_a_neg.clock_reset,(SLAVE)dp_ram_a_pos.clock_reset,(SLAVE)test_control_unit_0.reset_sink,(SLAVE)dp_ram_c_pos.clock_reset,(SLAVE)dp_ram_b_neg.clock_reset) 1 1 3 320 2600 590 2340 920
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.write_neg,(SLAVE)addr_delay_c_neg_0.addr_in) 1 3 1 960
-preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)soc_system.clk,(SLAVE)clk_0.clk_in) 1 0 1 NJ
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_neg_0.data_out,(SLAVE)div_data_delay_neg.data_in) 1 3 1 1090
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)arith_out_duplicate_0.data_in,(SLAVE)online_adder_0.c_out) 1 3 1 1050
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.write_neg,(SLAVE)addr_delay_c_neg_0.addr_in) 1 3 1 970
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_neg_0.addr_out,(SLAVE)addr_delay_c_neg_1.addr_in) 1 3 1 1090
 preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)soc_system.reset,(SLAVE)clk_0.clk_in_reset) 1 0 1 NJ
-preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)hps_0.memory,(SLAVE)soc_system.memory) 1 0 4 NJ 2750 NJ 2750 NJ 2750 NJ
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_b_pos.q_arth,(SLAVE)mux_b.pos) 1 3 1 1040
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_a_neg,(SLAVE)dp_ram_a_neg.addr_arth) 1 3 1 1060
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_ctrl_0.ctrl_a,(SLAVE)mux_a.mux_ctrl) 1 3 1 980
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.clock_sink,(SLAVE)mm_bridge_0.clk,(SLAVE)dp_ram_c_pos.clock_sink,(MASTER)clk_0.clk,(SLAVE)dp_ram_b_pos.clock_sink,(SLAVE)dp_ram_a_neg.clock_sink,(SLAVE)dp_ram_b_neg.clock_sink,(SLAVE)pll_0.refclk,(SLAVE)dp_ram_a_pos.clock_sink,(SLAVE)hps_0.h2f_lw_axi_clock,(SLAVE)dp_ram_c_neg.clock_sink,(SLAVE)pll_reconfig_0.mgmt_clk) 1 1 3 300 2580 570 2730 880
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_c_neg.data_arth,(SLAVE)data_delay_c_neg_1.data_out) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_a_pos,(SLAVE)dp_ram_a_pos.addr_arth) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_a.data_out,(SLAVE)data_delay_a_0.data_in) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_b.mux_ctrl,(SLAVE)mux_ctrl_0.ctrl_b) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_b_pos,(SLAVE)dp_ram_b_pos.addr_arth) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_pos_0.data_out,(SLAVE)data_delay_c_pos_1.data_in) 1 3 1 1100
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(MASTER)clock_div_0.clk_pos,(SLAVE)addr_delay_c_pos_0.clock,(SLAVE)dp_ram_a_pos.pll_clk,(SLAVE)dp_ram_c_pos.pll_clk,(SLAVE)addr_delay_c_pos_1.clock,(SLAVE)data_delay_c_pos_1.clock,(SLAVE)test_control_unit_0.pll_clock_pos,(SLAVE)dp_ram_b_pos.pll_clk) 1 3 1 860
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_b_0.data_in,(SLAVE)mux_b.data_out) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_neg_1.addr_out,(SLAVE)dp_ram_c_neg.addr_arth) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_b.neg,(SLAVE)dp_ram_b_neg.q_arth) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)online_adder_0.b_in,(SLAVE)data_delay_b_0.data_out) 1 3 1 1020
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_a.pos,(SLAVE)dp_ram_a_pos.q_arth) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_pos_1.addr_out,(SLAVE)dp_ram_c_pos.addr_arth) 1 3 1 1080
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)arith_out_duplicate_0.neg_out,(SLAVE)data_delay_c_neg_0.data_in) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)pll_0.locked,(SLAVE)test_control_unit_0.pll_lock) 1 1 3 360 2380 NJ 2380 900
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)online_adder_0.a_in,(SLAVE)data_delay_a_0.data_out) 1 3 1 1060
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)pll_0.reconfig_from_pll,(SLAVE)pll_reconfig_0.reconfig_from_pll) 1 1 3 340 2540 NJ 2540 820
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)pll_reconfig_0.mgmt_avalon_slave,(SLAVE)dp_ram_a_pos.avalon_slave_0,(SLAVE)test_control_unit_0.avalon_slave_0,(SLAVE)dp_ram_b_neg.avalon_slave_0,(MASTER)mm_bridge_0.m0,(SLAVE)dp_ram_c_pos.avalon_slave_0,(SLAVE)dp_ram_a_neg.avalon_slave_0,(SLAVE)dp_ram_b_pos.avalon_slave_0,(SLAVE)dp_ram_c_neg.avalon_slave_0) 1 3 1 840
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)mux_ctrl_0.clock_sink,(SLAVE)data_delay_b_0.clock,(SLAVE)clock_div_0.clock_sink,(SLAVE)data_delay_c_pos_0.clock,(SLAVE)online_adder_0.clock,(MASTER)pll_0.outclk0,(SLAVE)data_delay_c_neg_0.clock,(SLAVE)data_delay_a_0.clock) 1 2 2 610 2360 940
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_pos_1.data_out,(SLAVE)dp_ram_c_pos.data_arth) 1 3 1 1060
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_pos_0.addr_out,(SLAVE)addr_delay_c_pos_1.addr_in) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_pos_0.addr_in,(SLAVE)test_control_unit_0.write_pos) 1 3 1 1000
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)pll_reconfig_0.reconfig_to_pll,(SLAVE)pll_0.reconfig_to_pll) 1 1 3 360 2560 NJ 2560 800
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(MASTER)hps_0.h2f_lw_axi_master,(SLAVE)mm_bridge_0.s0) 1 2 3 610 2660 NJ 2660 1410
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_neg_1.data_in,(SLAVE)data_delay_c_neg_0.data_out) 1 3 1 1040
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_b_neg,(SLAVE)dp_ram_b_neg.addr_arth) 1 3 1 1060
-preplace netloc EXPORT<net_container>soc_system</net_container>(MASTER)soc_system.hps_0_h2f_reset,(MASTER)hps_0.h2f_reset) 1 4 1 N
-preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)dp_ram_b_neg.pll_clk,(SLAVE)dp_ram_a_neg.pll_clk,(MASTER)clock_div_0.clk_neg,(SLAVE)data_delay_c_neg_1.clock,(SLAVE)addr_delay_c_neg_1.clock,(SLAVE)dp_ram_c_neg.pll_clk,(SLAVE)test_control_unit_0.pll_clock_neg,(SLAVE)addr_delay_c_neg_0.clock) 1 3 1 820
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_a.neg,(SLAVE)dp_ram_a_neg.q_arth) 1 3 1 1100
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_neg_1.addr_in,(SLAVE)addr_delay_c_neg_0.addr_out) 1 3 1 1100
-preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)hps_0.hps_io,(SLAVE)soc_system.hps_0_hps_io) 1 0 4 NJ 2710 NJ 2710 NJ 2710 NJ
-preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_pos_0.data_in,(SLAVE)arith_out_duplicate_0.pos_out) 1 3 1 1100
-levelinfo -pg 1 0 90 1560
-levelinfo -hier soc_system 100 130 390 640 1220 1430
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_a_neg,(SLAVE)dp_ram_a_neg.addr_arth) 1 3 1 1070
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_b.data_out,(SLAVE)data_delay_b_0.data_in) 1 3 1 1090
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)div_data_delay_pos.data_out,(SLAVE)dp_ram_c_pos.data_arth) 1 3 1 1070
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_a.data_out,(SLAVE)data_delay_a_0.data_in) 1 3 1 1090
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_a_pos.addr_arth,(SLAVE)test_control_unit_0.read_a_pos) 1 3 1 1090
+preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)clk_0.clk_in,(SLAVE)soc_system.clk) 1 0 1 NJ
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.read_b_pos,(SLAVE)dp_ram_b_pos.addr_arth) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_b.pos,(SLAVE)dp_ram_b_pos.q_arth) 1 3 1 1050
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.pll_lock,(SLAVE)pll_0.locked) 1 1 3 360 2340 NJ 2360 890
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_a_pos.q_arth,(SLAVE)mux_a.pos) 1 3 1 1110
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)mm_bridge_0.reset,(SLAVE)test_control_unit_0.reset_sink,(SLAVE)dp_ram_a_pos.clock_reset,(SLAVE)pll_reconfig_0.mgmt_reset,(SLAVE)pll_0.reset,(SLAVE)dp_ram_b_neg.clock_reset,(MASTER)clk_0.clk_reset,(SLAVE)dp_ram_c_pos.clock_reset,(SLAVE)dp_ram_a_neg.clock_reset,(SLAVE)dp_ram_c_neg.clock_reset,(SLAVE)dp_ram_b_pos.clock_reset) 1 1 3 320 2600 590 2520 930
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_b.neg,(SLAVE)dp_ram_b_neg.q_arth) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_c_pos.addr_arth,(SLAVE)addr_delay_c_pos_1.addr_out) 1 3 1 1090
+preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)soc_system.memory,(SLAVE)hps_0.memory) 1 0 4 NJ 2750 NJ 2750 NJ 2750 NJ
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)div_data_delay_pos.data_in,(SLAVE)data_delay_c_pos_0.data_out) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_pos_1.addr_in,(SLAVE)addr_delay_c_pos_0.addr_out) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)arith_out_duplicate_0.neg_out,(SLAVE)data_delay_c_neg_0.data_in) 1 3 1 1110
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)dp_ram_c_neg.clock_sink,(SLAVE)dp_ram_a_pos.clock_sink,(SLAVE)test_control_unit_0.clock_sink,(SLAVE)pll_reconfig_0.mgmt_clk,(SLAVE)dp_ram_c_pos.clock_sink,(SLAVE)dp_ram_a_neg.clock_sink,(SLAVE)pll_0.refclk,(SLAVE)dp_ram_b_neg.clock_sink,(SLAVE)hps_0.h2f_lw_axi_clock,(SLAVE)dp_ram_b_pos.clock_sink,(SLAVE)mm_bridge_0.clk,(MASTER)clk_0.clk) 1 1 3 300 2500 570 2500 870
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)online_adder_0.a_in,(SLAVE)data_delay_a_0.data_out) 1 3 1 1070
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)pll_0.reconfig_from_pll,(SLAVE)pll_reconfig_0.reconfig_from_pll) 1 1 3 340 2540 NJ 2540 NJ
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_c_neg.addr_arth,(SLAVE)addr_delay_c_neg_1.addr_out) 1 3 1 1090
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_a_neg.q_arth,(SLAVE)mux_a.neg) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)dp_ram_b_neg.addr_arth,(SLAVE)test_control_unit_0.read_b_neg) 1 3 1 1070
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_ctrl_0.ctrl_b,(SLAVE)mux_b.mux_ctrl) 1 3 1 1090
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)test_control_unit_0.write_pos,(SLAVE)addr_delay_c_pos_0.addr_in) 1 3 1 1010
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)pll_reconfig_0.reconfig_to_pll,(SLAVE)pll_0.reconfig_to_pll) 1 1 3 360 2560 NJ 2560 NJ
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(MASTER)hps_0.h2f_lw_axi_master,(SLAVE)mm_bridge_0.s0) 1 2 3 590 2660 NJ 2660 1420
+preplace netloc EXPORT<net_container>soc_system</net_container>(SLAVE)soc_system.hps_0_hps_io,(SLAVE)hps_0.hps_io) 1 0 4 NJ 2710 NJ 2710 NJ 2710 NJ
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)pll_reconfig_0.mgmt_avalon_slave,(SLAVE)test_control_unit_0.avalon_slave_0,(SLAVE)dp_ram_c_neg.avalon_slave_0,(SLAVE)dp_ram_c_pos.avalon_slave_0,(MASTER)mm_bridge_0.m0,(SLAVE)dp_ram_a_pos.avalon_slave_0,(SLAVE)dp_ram_b_pos.avalon_slave_0,(SLAVE)dp_ram_a_neg.avalon_slave_0,(SLAVE)dp_ram_b_neg.avalon_slave_0) 1 3 1 830
+preplace netloc EXPORT<net_container>soc_system</net_container>(MASTER)hps_0.h2f_reset,(MASTER)soc_system.hps_0_h2f_reset) 1 4 1 N
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(MASTER)clock_div_0.clk_pos,(SLAVE)addr_delay_c_pos_0.clock,(SLAVE)test_control_unit_0.pll_clock_pos,(SLAVE)dp_ram_c_pos.pll_clk,(SLAVE)addr_delay_c_pos_1.clock,(SLAVE)dp_ram_a_pos.pll_clk,(SLAVE)dp_ram_b_pos.pll_clk) 1 3 1 850
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)mux_a.mux_ctrl,(SLAVE)mux_ctrl_0.ctrl_a) 1 3 1 990
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)clock_div_0.clock_sink,(SLAVE)div_data_delay_neg.pll_clock,(SLAVE)online_adder_0.clock,(SLAVE)div_data_delay_pos.pll_clock,(SLAVE)data_delay_b_0.clock,(SLAVE)mux_ctrl_0.clock_sink,(MASTER)pll_0.outclk0,(SLAVE)data_delay_a_0.clock,(SLAVE)data_delay_c_neg_0.clock,(SLAVE)data_delay_c_pos_0.clock) 1 2 2 590 2340 950
+preplace netloc FAN_OUT<net_container>soc_system</net_container>(SLAVE)addr_delay_c_neg_1.clock,(SLAVE)dp_ram_b_neg.pll_clk,(SLAVE)test_control_unit_0.pll_clock_neg,(MASTER)clock_div_0.clk_neg,(SLAVE)dp_ram_c_neg.pll_clk,(SLAVE)dp_ram_a_neg.pll_clk,(SLAVE)addr_delay_c_neg_0.clock) 1 3 1 910
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_c_pos_0.data_in,(SLAVE)arith_out_duplicate_0.pos_out) 1 3 1 1110
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)div_data_delay_neg.data_out,(SLAVE)dp_ram_c_neg.data_arth) 1 3 1 1050
+preplace netloc POINT_TO_POINT<net_container>soc_system</net_container>(SLAVE)data_delay_b_0.data_out,(SLAVE)online_adder_0.b_in) 1 3 1 1030
+levelinfo -pg 1 0 90 1570
+levelinfo -hier soc_system 100 130 390 640 1230 1440

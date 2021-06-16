@@ -23,18 +23,6 @@ create_generated_clock \
 -name clk_neg \
 [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
 
-create_generated_clock \
--divide_by 2 \
--source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
--name clk_neg_delay \
-[get_registers soc_system:soc_inst|div_data_delay:div_data_delay_neg|clk_div]
-
-create_generated_clock \
--divide_by 2 \
--source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
--name clk_pos_delay \
-[get_registers soc_system:soc_inst|div_data_delay:div_data_delay_pos|clk_div]
-
 #create_generated_clock \
 -source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos] \
 -invert \
