@@ -13,7 +13,7 @@
    {
       datum _sortIndex
       {
-         value = "17";
+         value = "15";
          type = "int";
       }
    }
@@ -21,23 +21,7 @@
    {
       datum _sortIndex
       {
-         value = "18";
-         type = "int";
-      }
-   }
-   element addr_delay_c_neg_2
-   {
-      datum _sortIndex
-      {
-         value = "19";
-         type = "int";
-      }
-   }
-   element addr_delay_c_neg_3
-   {
-      datum _sortIndex
-      {
-         value = "20";
+         value = "16";
          type = "int";
       }
    }
@@ -57,27 +41,11 @@
          type = "int";
       }
    }
-   element addr_delay_c_pos_2
-   {
-      datum _sortIndex
-      {
-         value = "14";
-         type = "int";
-      }
-   }
-   element addr_delay_c_pos_3
-   {
-      datum _sortIndex
-      {
-         value = "15";
-         type = "int";
-      }
-   }
    element arith_out_duplicate_0
    {
       datum _sortIndex
       {
-         value = "32";
+         value = "24";
          type = "int";
       }
    }
@@ -102,19 +70,27 @@
          type = "int";
       }
    }
+   element clocked_mux_a
+   {
+      datum _sortIndex
+      {
+         value = "18";
+         type = "int";
+      }
+   }
+   element clocked_mux_b
+   {
+      datum _sortIndex
+      {
+         value = "20";
+         type = "int";
+      }
+   }
    element data_delay_a_0
    {
       datum _sortIndex
       {
-         value = "23";
-         type = "int";
-      }
-   }
-   element data_delay_a_1
-   {
-      datum _sortIndex
-      {
-         value = "24";
+         value = "19";
          type = "int";
       }
    }
@@ -122,31 +98,7 @@
    {
       datum _sortIndex
       {
-         value = "26";
-         type = "int";
-      }
-   }
-   element data_delay_b_1
-   {
-      datum _sortIndex
-      {
-         value = "27";
-         type = "int";
-      }
-   }
-   element data_delay_c_neg
-   {
-      datum _sortIndex
-      {
-         value = "31";
-         type = "int";
-      }
-   }
-   element data_delay_c_pos
-   {
-      datum _sortIndex
-      {
-         value = "29";
+         value = "21";
          type = "int";
       }
    }
@@ -210,7 +162,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "14";
          type = "int";
       }
    }
@@ -255,7 +207,7 @@
    {
       datum _sortIndex
       {
-         value = "30";
+         value = "23";
          type = "int";
       }
    }
@@ -263,7 +215,7 @@
    {
       datum _sortIndex
       {
-         value = "28";
+         value = "22";
          type = "int";
       }
    }
@@ -288,35 +240,11 @@
          type = "String";
       }
    }
-   element mux_a
-   {
-      datum _sortIndex
-      {
-         value = "22";
-         type = "int";
-      }
-   }
-   element mux_b
-   {
-      datum _sortIndex
-      {
-         value = "25";
-         type = "int";
-      }
-   }
-   element mux_ctrl_0
-   {
-      datum _sortIndex
-      {
-         value = "33";
-         type = "int";
-      }
-   }
    element online_adder_0
    {
       datum _sortIndex
       {
-         value = "21";
+         value = "17";
          type = "int";
       }
    }
@@ -1352,22 +1280,10 @@
  <module name="addr_delay_c_neg_1" kind="addr_delay" version="1.0" enabled="1">
   <parameter name="ADDR_WIDTH" value="11" />
  </module>
- <module name="addr_delay_c_neg_2" kind="addr_delay" version="1.0" enabled="1">
-  <parameter name="ADDR_WIDTH" value="11" />
- </module>
- <module name="addr_delay_c_neg_3" kind="addr_delay" version="1.0" enabled="1">
-  <parameter name="ADDR_WIDTH" value="11" />
- </module>
  <module name="addr_delay_c_pos_0" kind="addr_delay" version="1.0" enabled="1">
   <parameter name="ADDR_WIDTH" value="11" />
  </module>
  <module name="addr_delay_c_pos_1" kind="addr_delay" version="1.0" enabled="1">
-  <parameter name="ADDR_WIDTH" value="11" />
- </module>
- <module name="addr_delay_c_pos_2" kind="addr_delay" version="1.0" enabled="1">
-  <parameter name="ADDR_WIDTH" value="11" />
- </module>
- <module name="addr_delay_c_pos_3" kind="addr_delay" version="1.0" enabled="1">
   <parameter name="ADDR_WIDTH" value="11" />
  </module>
  <module
@@ -1384,23 +1300,17 @@
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
  <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
- <module name="data_delay_a_0" kind="data_delay" version="1.0" enabled="1">
+ <module name="clocked_mux_a" kind="clocked_mux" version="1.0" enabled="1">
   <parameter name="WIDTH" value="30" />
  </module>
- <module name="data_delay_a_1" kind="data_delay" version="1.0" enabled="1">
+ <module name="clocked_mux_b" kind="clocked_mux" version="1.0" enabled="1">
+  <parameter name="WIDTH" value="30" />
+ </module>
+ <module name="data_delay_a_0" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="30" />
  </module>
  <module name="data_delay_b_0" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="30" />
- </module>
- <module name="data_delay_b_1" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="30" />
- </module>
- <module name="data_delay_c_neg" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="32" />
- </module>
- <module name="data_delay_c_pos" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="32" />
  </module>
  <module name="dp_ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
   <parameter name="ID" value="3" />
@@ -1955,7 +1865,7 @@
    kind="mc_data_delay"
    version="1.0"
    enabled="1">
-  <parameter name="INVERT" value="0" />
+  <parameter name="NEG" value="1" />
   <parameter name="WIDTH" value="32" />
  </module>
  <module
@@ -1963,7 +1873,7 @@
    kind="mc_data_delay"
    version="1.0"
    enabled="1">
-  <parameter name="INVERT" value="1" />
+  <parameter name="NEG" value="0" />
   <parameter name="WIDTH" value="32" />
  </module>
  <module
@@ -1984,13 +1894,6 @@
   <parameter name="USE_AUTO_ADDRESS_WIDTH" value="1" />
   <parameter name="USE_RESPONSE" value="0" />
  </module>
- <module name="mux_a" kind="arith_in_mux" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="30" />
- </module>
- <module name="mux_b" kind="arith_in_mux" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="30" />
- </module>
- <module name="mux_ctrl_0" kind="mux_ctrl" version="1.0" enabled="1" />
  <module name="online_adder_0" kind="online_adder" version="1.0" enabled="1">
   <parameter name="RADIX" value="2" />
   <parameter name="WIDTH" value="15" />
@@ -2357,16 +2260,6 @@
    kind="clock"
    version="20.1"
    start="clock_div_0.clk_neg"
-   end="addr_delay_c_neg_2.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_neg"
-   end="addr_delay_c_neg_3.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_neg"
    end="mc_data_delay_neg.div_clock" />
  <connection
    kind="clock"
@@ -2398,16 +2291,6 @@
    version="20.1"
    start="clock_div_0.clk_pos"
    end="addr_delay_c_pos_0.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_pos"
-   end="addr_delay_c_pos_2.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_pos"
-   end="addr_delay_c_pos_3.clock" />
  <connection
    kind="clock"
    version="20.1"
@@ -2452,32 +2335,17 @@
    kind="clock"
    version="20.1"
    start="pll_0.outclk0"
-   end="data_delay_a_1.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="data_delay_b_1.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="data_delay_c_neg.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="data_delay_c_pos.clock" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="mux_ctrl_0.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
    end="clock_div_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
+   end="clocked_mux_b.clock_sink" />
+ <connection
+   kind="clock"
+   version="20.1"
+   start="pll_0.outclk0"
+   end="clocked_mux_a.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
@@ -2546,17 +2414,6 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="addr_delay_c_pos_2.addr_in"
-   end="addr_delay_c_pos_1.addr_out">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="addr_delay_c_neg_0.addr_in"
    end="test_control_unit_0.write_neg">
   <parameter name="endPort" value="" />
@@ -2568,18 +2425,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="addr_delay_c_pos_3.addr_out"
-   end="dp_ram_c_pos.addr_arth">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="addr_delay_c_neg_3.addr_out"
+   start="addr_delay_c_neg_1.addr_out"
    end="dp_ram_c_neg.addr_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2590,52 +2436,8 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="addr_delay_c_neg_1.addr_out"
-   end="addr_delay_c_neg_2.addr_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="addr_delay_c_pos_2.addr_out"
-   end="addr_delay_c_pos_3.addr_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="addr_delay_c_neg_2.addr_out"
-   end="addr_delay_c_neg_3.addr_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mux_ctrl_0.ctrl_a"
-   end="mux_a.mux_ctrl">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mux_ctrl_0.ctrl_b"
-   end="mux_b.mux_ctrl">
+   start="addr_delay_c_pos_1.addr_out"
+   end="dp_ram_c_pos.addr_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2656,29 +2458,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_a_1.data_in"
-   end="data_delay_a_0.data_out">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mc_data_delay_neg.data_in"
-   end="data_delay_c_neg.data_out">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="data_delay_a_1.data_out"
+   start="data_delay_a_0.data_out"
    end="online_adder_0.a_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2689,7 +2469,7 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="data_delay_b_1.data_out"
+   start="data_delay_b_0.data_out"
    end="online_adder_0.b_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
@@ -2722,50 +2502,6 @@
  <connection
    kind="conduit"
    version="20.1"
-   start="mux_a.data_out"
-   end="data_delay_a_0.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="mux_b.data_out"
-   end="data_delay_b_0.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="data_delay_b_0.data_out"
-   end="data_delay_b_1.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="data_delay_c_pos.data_out"
-   end="mc_data_delay_pos.data_in">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
    start="pll_0.locked"
    end="test_control_unit_0.pll_lock">
   <parameter name="endPort" value="" />
@@ -2777,8 +2513,30 @@
  <connection
    kind="conduit"
    version="20.1"
+   start="clocked_mux_a.neg_in"
+   end="dp_ram_a_neg.q_arth">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
    start="arith_out_duplicate_0.neg_out"
-   end="data_delay_c_neg.data_in">
+   end="mc_data_delay_neg.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="clocked_mux_b.pos_in"
+   end="dp_ram_b_pos.q_arth">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2789,7 +2547,7 @@
    kind="conduit"
    version="20.1"
    start="arith_out_duplicate_0.pos_out"
-   end="data_delay_c_pos.data_in">
+   end="mc_data_delay_pos.data_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2800,29 +2558,7 @@
    kind="conduit"
    version="20.1"
    start="dp_ram_b_neg.q_arth"
-   end="mux_b.neg">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="dp_ram_a_neg.q_arth"
-   end="mux_a.neg">
-  <parameter name="endPort" value="" />
-  <parameter name="endPortLSB" value="0" />
-  <parameter name="startPort" value="" />
-  <parameter name="startPortLSB" value="0" />
-  <parameter name="width" value="0" />
- </connection>
- <connection
-   kind="conduit"
-   version="20.1"
-   start="dp_ram_b_pos.q_arth"
-   end="mux_b.pos">
+   end="clocked_mux_b.neg_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />
@@ -2833,7 +2569,29 @@
    kind="conduit"
    version="20.1"
    start="dp_ram_a_pos.q_arth"
-   end="mux_a.pos">
+   end="clocked_mux_a.pos_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="clocked_mux_a.q_out"
+   end="data_delay_a_0.data_in">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="conduit"
+   version="20.1"
+   start="clocked_mux_b.q_out"
+   end="data_delay_b_0.data_in">
   <parameter name="endPort" value="" />
   <parameter name="endPortLSB" value="0" />
   <parameter name="startPort" value="" />

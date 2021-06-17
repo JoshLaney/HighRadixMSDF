@@ -1,7 +1,7 @@
 module mc_data_delay (pll_clock, div_clock, data_in, data_out);
 
 parameter WIDTH = 32;
-parameter INVERT = 0;
+parameter NEG = 0;
 // signals for connecting to the Avalon fabric 
 input pll_clock, div_clock;
 input [WIDTH-1:0] data_in;
@@ -11,9 +11,9 @@ output [WIDTH-1:0] data_out;
 (* preserve="true" *) reg enable;
 
 always@(posedge pll_clock) begin
-	enable <= enable + 1'b1;
+	enable <= ~enable;
 	data_mid_fast <= data_in;
-	if(INVERT[0]^enable) begin
+	if(NEG[0]^enable) begin
 		data_mid_slow <= data_mid_fast;
 	end
 end
