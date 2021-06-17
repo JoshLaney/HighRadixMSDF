@@ -48,6 +48,12 @@ set_false_path -from [get_registers {*test_control_unit_0|done_*}] -to [get_regi
 set_false_path -from [get_registers {*test_control_unit_0|go_*}] -to [get_registers {*test_control_unit_0|go_*_1*}]
 set_false_path -from [get_registers {*test_control_unit_0|num[*]*}] -to [get_registers {*test_control_unit_0|num_*_1[*]}]
 set_false_path -from [get_registers {*test_control_unit_0|set_addr[*]*}] -to [get_registers {*test_control_unit_0|set_addr_*_1[*]}]
+
+#set_multicycle_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] \
+ -to [get_clocks {clk_neg clk_pos}] -setup -start 2
+set_multicycle_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] \
+ -to [get_clocks {clk_neg clk_pos}] -hold -start 1
+
 #set_max_delay -from [get_registers {soc_system:soc_inst|*data_mid*}] -to [get_registers soc_system:soc_inst|*data_out*] 4.0
 #set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2
 #set_max_delay -from [get_keepers *\|gen*] -to * 2
