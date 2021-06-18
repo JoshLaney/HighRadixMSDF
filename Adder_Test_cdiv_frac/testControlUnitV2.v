@@ -112,7 +112,7 @@ always@(posedge pll_clock_pos) begin
 		we_pos_delay <= 1'b0;
 		we_pos <= we_pos_delay;
 
-		r_addr_pos_cnt <= set_addr_pos_1;
+		r_addr_pos_cnt <= set_addr_pos_2;
 		w_addr_pos_delay <= r_addr_pos_cnt;
 
 		w_addr_pos_cnt <= w_addr_pos_delay;
