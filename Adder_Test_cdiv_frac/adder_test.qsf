@@ -645,7 +645,7 @@ set_global_assignment -name POWER_REPORT_POWER_DISSIPATION ON
 set_global_assignment -name POWER_OUTPUT_SAF_NAME soc_system.asf
 
 set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
-set_global_assignment -name OPTIMIZE_HOLD_TIMING "IO PATHS AND MINIMUM TPD PATHS"
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name ALLOW_REGISTER_DUPLICATION ON
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "PASSIVE SERIAL"

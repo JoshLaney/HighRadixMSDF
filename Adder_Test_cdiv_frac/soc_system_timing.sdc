@@ -39,8 +39,8 @@ derive_clock_uncertainty
 #set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
 #set_false_path -from [get_keepers *ram_a*portb_we*] -to [get_keepers *ram_a*]
 #set_false_path -from [get_keepers *ram_b*portb_we*] -to [get_keepers *ram_b*]
-set_false_path -from [get_keepers {*ram_b*portb_we_reg}] -to [get_keepers {*data_delay_b*|data_out* *online_adder*}]
-set_false_path -from [get_keepers {*ram_a*portb_we_reg}] -to [get_keepers {*data_delay_a*|data_out* *online_adder*}]
+set_false_path -from [get_keepers *ram_b*portb_we_reg] -to [get_keepers *mux_b|data_mid*]
+set_false_path -from [get_keepers *ram_a*portb_we_reg] -to [get_keepers *mux_a|data_mid*]
 #set_false_path -from [get_keepers {*ram_c*porta_we_reg}] -to [get_clocks {*clk_pos* *clk_neg*}]
 
 #Avalon-Tester cross domain paths
@@ -49,14 +49,19 @@ set_false_path -from [get_registers {*test_control_unit_0|go_*}] -to [get_regist
 set_false_path -from [get_registers {*test_control_unit_0|num[*]*}] -to [get_registers {*test_control_unit_0|num_*_1[*]}]
 set_false_path -from [get_registers {*test_control_unit_0|set_addr[*]*}] -to [get_registers {*test_control_unit_0|set_addr_*_1[*]}]
 
+set_multicycle_path 2 -to [get_fanouts [get_pins soc_inst|clocked_mux_*|enable|q]] \
+-through [get_pins -compatibility_mode *clocked_mux*|ena] -end -setup
+set_multicycle_path 1 -to [get_fanouts [get_pins soc_inst|clocked_mux_*|enable|q]] \
+-through [get_pins -compatibility_mode *clocked_mux*|ena] -end -hold
 
 set_multicycle_path 2 -to [get_fanouts [get_pins soc_inst|mc_data_delay_*|enable|q]] \
 -through [get_pins -compatibility_mode *mc*|ena] -end -setup
 set_multicycle_path 1 -to [get_fanouts [get_pins soc_inst|mc_data_delay_*|enable|q]] \
 -through [get_pins -compatibility_mode *mc*|ena] -end -hold
-set_multicycle_path 2 -from [get_registers {*data_mid_slow*}] \
+
+set_multicycle_path 2 -from [get_registers {*data_mid*}] \
  -to [get_registers {*data_delay*data_out*}] -start -setup
-set_multicycle_path 1 -from [get_registers {*data_mid_slow*}] \
+set_multicycle_path 1 -from [get_registers {*data_mid*}] \
  -to [get_registers {*data_delay*data_out*}] -start -hold
 
 #set_max_delay -from [get_registers {soc_system:soc_inst|*data_mid*}] -to [get_registers soc_system:soc_inst|*data_out*] 4.0
