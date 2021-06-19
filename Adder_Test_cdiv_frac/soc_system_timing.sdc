@@ -49,10 +49,15 @@ set_false_path -from [get_registers {*test_control_unit_0|go_*}] -to [get_regist
 set_false_path -from [get_registers {*test_control_unit_0|num[*]*}] -to [get_registers {*test_control_unit_0|num_*_1[*]}]
 set_false_path -from [get_registers {*test_control_unit_0|set_addr[*]*}] -to [get_registers {*test_control_unit_0|set_addr_*_1[*]}]
 
-#set_multicycle_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] \
- -to [get_clocks {clk_neg clk_pos}] -setup -start 2
-set_multicycle_path -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}] \
- -to [get_clocks {clk_neg clk_pos}] -hold -start 1
+
+set_multicycle_path 2 -to [get_fanouts [get_pins soc_inst|mc_data_delay_*|enable|q]] \
+-through [get_pins -compatibility_mode *mc*|ena] -end -setup
+set_multicycle_path 1 -to [get_fanouts [get_pins soc_inst|mc_data_delay_*|enable|q]] \
+-through [get_pins -compatibility_mode *mc*|ena] -end -hold
+set_multicycle_path 2 -from [get_registers {*data_mid_slow*}] \
+ -to [get_registers {*data_delay*data_out*}] -start -setup
+set_multicycle_path 1 -from [get_registers {*data_mid_slow*}] \
+ -to [get_registers {*data_delay*data_out*}] -start -hold
 
 #set_max_delay -from [get_registers {soc_system:soc_inst|*data_mid*}] -to [get_registers soc_system:soc_inst|*data_out*] 4.0
 #set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2

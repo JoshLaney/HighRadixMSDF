@@ -90,7 +90,7 @@ module soc_system (
 
 	wire         clock_div_0_clk_neg_clk;                                        // clock_div_0:clk_neg -> [addr_delay_c_neg_0:pll_clock, addr_delay_c_neg_1:pll_clock, addr_delay_c_neg_2:pll_clock, dp_ram_a_neg:ram_clock, dp_ram_b_neg:ram_clock, dp_ram_c_neg:ram_clock, mc_data_delay_neg:div_clock, test_control_unit_0:pll_clock_neg]
 	wire         clock_div_0_clk_pos_clk;                                        // clock_div_0:clk_pos -> [addr_delay_c_pos_0:pll_clock, addr_delay_c_pos_1:pll_clock, addr_delay_c_pos_2:pll_clock, dp_ram_a_pos:ram_clock, dp_ram_b_pos:ram_clock, dp_ram_c_pos:ram_clock, mc_data_delay_pos:div_clock, test_control_unit_0:pll_clock_pos]
-	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [clock_div_0:clock, clocked_mux_a:clock, clocked_mux_b:clock, data_delay_a_0:pll_clock, data_delay_a_1:pll_clock, data_delay_b_0:pll_clock, data_delay_b_1:pll_clock, data_delay_c_neg:pll_clock, data_delay_c_pos:pll_clock, mc_data_delay_neg:pll_clock, mc_data_delay_pos:pll_clock, online_adder_0:clock]
+	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [clock_div_0:clock, clocked_mux_a:clock, clocked_mux_b:clock, data_delay_a_1:pll_clock, data_delay_b_1:pll_clock, data_delay_c_neg:pll_clock, data_delay_c_pos:pll_clock, mc_data_delay_neg:pll_clock, mc_data_delay_pos:pll_clock, online_adder_0:clock]
 	wire  [10:0] test_control_unit_0_read_a_neg_addr;                            // test_control_unit_0:r_addr_a_neg -> dp_ram_a_neg:addr_arith
 	wire         test_control_unit_0_read_a_neg_we;                              // test_control_unit_0:we_read_a_neg -> dp_ram_a_neg:we_arith
 	wire  [10:0] test_control_unit_0_read_a_pos_addr;                            // test_control_unit_0:r_addr_a_pos -> dp_ram_a_pos:addr_arith
@@ -117,8 +117,6 @@ module soc_system (
 	wire  [29:0] data_delay_b_1_data_out_data;                                   // data_delay_b_1:data_out -> online_adder_0:y_in
 	wire  [31:0] mc_data_delay_pos_data_out_data;                                // mc_data_delay_pos:data_out -> dp_ram_c_pos:data_arith
 	wire  [31:0] mc_data_delay_neg_data_out_data;                                // mc_data_delay_neg:data_out -> dp_ram_c_neg:data_arith
-	wire  [29:0] data_delay_b_0_data_out_data;                                   // data_delay_b_0:data_out -> data_delay_b_1:data_in
-	wire  [29:0] data_delay_a_0_data_out_data;                                   // data_delay_a_0:data_out -> data_delay_a_1:data_in
 	wire  [31:0] data_delay_c_pos_data_out_data;                                 // data_delay_c_pos:data_out -> mc_data_delay_pos:data_in
 	wire  [31:0] data_delay_c_neg_data_out_data;                                 // data_delay_c_neg:data_out -> mc_data_delay_neg:data_in
 	wire         pll_0_locked_export;                                            // pll_0:locked -> test_control_unit_0:pll_lock
@@ -127,8 +125,8 @@ module soc_system (
 	wire  [31:0] arith_out_duplicate_0_pos_out_data;                             // arith_out_duplicate_0:pos_out -> data_delay_c_pos:data_in
 	wire  [31:0] dp_ram_b_neg_q_arth_data;                                       // dp_ram_b_neg:q_arith -> clocked_mux_b:neg_in
 	wire  [31:0] dp_ram_a_pos_q_arth_data;                                       // dp_ram_a_pos:q_arith -> clocked_mux_a:pos_in
-	wire  [29:0] clocked_mux_a_q_out_data;                                       // clocked_mux_a:q_out -> data_delay_a_0:data_in
-	wire  [29:0] clocked_mux_b_q_out_data;                                       // clocked_mux_b:q_out -> data_delay_b_0:data_in
+	wire  [29:0] clocked_mux_a_q_out_data;                                       // clocked_mux_a:q_out -> data_delay_a_1:data_in
+	wire  [29:0] clocked_mux_b_q_out_data;                                       // clocked_mux_b:q_out -> data_delay_b_1:data_in
 	wire  [10:0] test_control_unit_0_read_b_pos_addr;                            // test_control_unit_0:r_addr_b_pos -> dp_ram_b_pos:addr_arith
 	wire         test_control_unit_0_read_b_pos_we;                              // test_control_unit_0:we_read_b_pos -> dp_ram_b_pos:we_arith
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
@@ -310,7 +308,8 @@ module soc_system (
 	);
 
 	clocked_mux #(
-		.WIDTH (30)
+		.WIDTH  (30),
+		.INVERT (0)
 	) clocked_mux_a (
 		.clock  (pll_0_outclk0_clk),        // clock_sink.clk
 		.neg_in (dp_ram_a_neg_q_arth_data), //     neg_in.data
@@ -319,7 +318,8 @@ module soc_system (
 	);
 
 	clocked_mux #(
-		.WIDTH (30)
+		.WIDTH  (30),
+		.INVERT (0)
 	) clocked_mux_b (
 		.clock  (pll_0_outclk0_clk),        // clock_sink.clk
 		.neg_in (dp_ram_b_neg_q_arth_data), //     neg_in.data
@@ -329,33 +329,17 @@ module soc_system (
 
 	data_delay #(
 		.WIDTH (30)
-	) data_delay_a_0 (
-		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
-		.data_in   (clocked_mux_a_q_out_data),     //  data_in.data
-		.data_out  (data_delay_a_0_data_out_data)  // data_out.data
-	);
-
-	data_delay #(
-		.WIDTH (30)
 	) data_delay_a_1 (
 		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
-		.data_in   (data_delay_a_0_data_out_data), //  data_in.data
+		.data_in   (clocked_mux_a_q_out_data),     //  data_in.data
 		.data_out  (data_delay_a_1_data_out_data)  // data_out.data
-	);
-
-	data_delay #(
-		.WIDTH (30)
-	) data_delay_b_0 (
-		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
-		.data_in   (clocked_mux_b_q_out_data),     //  data_in.data
-		.data_out  (data_delay_b_0_data_out_data)  // data_out.data
 	);
 
 	data_delay #(
 		.WIDTH (30)
 	) data_delay_b_1 (
 		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
-		.data_in   (data_delay_b_0_data_out_data), //  data_in.data
+		.data_in   (clocked_mux_b_q_out_data),     //  data_in.data
 		.data_out  (data_delay_b_1_data_out_data)  // data_out.data
 	);
 
@@ -601,8 +585,8 @@ module soc_system (
 	);
 
 	mc_data_delay #(
-		.WIDTH (32),
-		.NEG   (1)
+		.WIDTH  (32),
+		.INVERT (0)
 	) mc_data_delay_neg (
 		.data_out  (mc_data_delay_neg_data_out_data), //  data_out.data
 		.data_in   (data_delay_c_neg_data_out_data),  //   data_in.data
@@ -611,8 +595,8 @@ module soc_system (
 	);
 
 	mc_data_delay #(
-		.WIDTH (32),
-		.NEG   (0)
+		.WIDTH  (32),
+		.INVERT (1)
 	) mc_data_delay_pos (
 		.data_out  (mc_data_delay_pos_data_out_data), //  data_out.data
 		.data_in   (data_delay_c_pos_data_out_data),  //   data_in.data
