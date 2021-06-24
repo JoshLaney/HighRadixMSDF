@@ -22,14 +22,6 @@
          type = "boolean";
       }
    }
-   element clock_div_0
-   {
-      datum _sortIndex
-      {
-         value = "6";
-         type = "int";
-      }
-   }
    element hps_0
    {
       datum _sortIndex
@@ -968,6 +960,14 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
 }
 ]]></parameter>
  <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
@@ -1008,7 +1008,6 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -1624,7 +1623,7 @@
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
-  <parameter name="gui_divide_factor_c0" value="12" />
+  <parameter name="gui_divide_factor_c0" value="10" />
   <parameter name="gui_divide_factor_c1" value="24" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />
@@ -1676,7 +1675,7 @@
   <parameter name="gui_frac_multiply_factor" value="214748365" />
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
-  <parameter name="gui_multiply_factor" value="24" />
+  <parameter name="gui_multiply_factor" value="20" />
   <parameter name="gui_number_of_clocks" value="1" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />
@@ -1734,10 +1733,10 @@
   <parameter name="gui_phase_shift_deg8" value="0.0" />
   <parameter name="gui_phase_shift_deg9" value="0.0" />
   <parameter name="gui_phout_division" value="1" />
-  <parameter name="gui_pll_auto_reset" value="Off" />
+  <parameter name="gui_pll_auto_reset" value="On" />
   <parameter name="gui_pll_bandwidth_preset" value="Low" />
   <parameter name="gui_pll_cascading_mode">Create an adjpllin signal to connect with an upstream PLL</parameter>
-  <parameter name="gui_pll_mode" value="Integer-N PLL" />
+  <parameter name="gui_pll_mode" value="Fractional-N PLL" />
   <parameter name="gui_ps_units0" value="ps" />
   <parameter name="gui_ps_units1" value="degrees" />
   <parameter name="gui_ps_units10" value="ps" />
@@ -1820,23 +1819,8 @@
  <connection
    kind="clock"
    version="20.1"
-   start="clock_div_0.clock_neg"
-   end="pllTest_0.pll_1" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clock_pos"
+   start="pll_0.outclk0"
    end="pllTest_0.pll_0" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="clock_div_0.clock_sink" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="pllTest_0.pll_2" />
  <connection
    kind="conduit"
    version="20.1"
@@ -1886,11 +1870,6 @@
    version="20.1"
    start="clk_0.clk_reset"
    end="pllTest_0.reset_sink" />
- <connection
-   kind="reset"
-   version="20.1"
-   start="clk_0.clk_reset"
-   end="clock_div_0.reset_sink" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />
