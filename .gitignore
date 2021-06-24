@@ -59,10 +59,8 @@ incremental_db/
 db/
 PLLJ_PLLSPE_INFO.txt # The generated PLL specification file
 
-Reports/
 Papers/
 PRiME_OpenCL-kapow_fpga16/
-FPGAFiles/
 
 # Word temporary
 ~$*.docx*
