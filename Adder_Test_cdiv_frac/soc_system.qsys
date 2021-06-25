@@ -1375,7 +1375,7 @@
    kind="arith_out_duplicate"
    version="1.0"
    enabled="1">
-  <parameter name="WIDTH" value="32" />
+  <parameter name="WIDTH" value="24" />
  </module>
  <module name="clk_0" kind="clock_source" version="20.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
@@ -1386,17 +1386,17 @@
  <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
  <module name="clocked_mux_a" kind="clocked_mux" version="1.0" enabled="1">
   <parameter name="INVERT" value="1" />
-  <parameter name="WIDTH" value="30" />
+  <parameter name="WIDTH" value="20" />
  </module>
  <module name="clocked_mux_b" kind="clocked_mux" version="1.0" enabled="1">
   <parameter name="INVERT" value="1" />
-  <parameter name="WIDTH" value="30" />
+  <parameter name="WIDTH" value="20" />
  </module>
  <module name="data_delay_a_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="30" />
+  <parameter name="WIDTH" value="20" />
  </module>
  <module name="data_delay_b_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="30" />
+  <parameter name="WIDTH" value="20" />
  </module>
  <module name="data_delay_neg_0" kind="data_delay" version="1.0" enabled="1">
   <parameter name="WIDTH" value="32" />
@@ -1987,8 +1987,8 @@
   <parameter name="USE_RESPONSE" value="0" />
  </module>
  <module name="online_adder_0" kind="online_adder" version="1.0" enabled="1">
-  <parameter name="RADIX" value="2" />
-  <parameter name="WIDTH" value="15" />
+  <parameter name="RADIX" value="8" />
+  <parameter name="WIDTH" value="5" />
  </module>
  <module name="pll_0" kind="altera_pll" version="20.1" enabled="1">
   <parameter name="debug_print_output" value="false" />

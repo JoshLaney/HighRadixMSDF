@@ -7,6 +7,31 @@ import lib.fractional_pll as pll
 import os
 import time
 import math
+import sys
+
+RADIX=int(sys.argv[1])
+WIDTH=int(sys.argv[2])
+A=RADIX-1
+D=int(math.log(RADIX,2)+1)
+MASK=(2**D)-1
+
+a_p = 'add/r%d_w%d/a_p_data.txt' % (RADIX,WIDTH)
+b_p = 'add/r%d_w%d/b_p_data.txt' % (RADIX,WIDTH)
+c_p = 'add/r%d_w%d/c_p_data.txt' % (RADIX,WIDTH)
+gold_p = 'add/r%d_w%d/c_p_data_GOLD.txt' % (RADIX,WIDTH)
+a_n = 'add/r%d_w%d/a_n_data.txt' % (RADIX,WIDTH)
+b_n = 'add/r%d_w%d/b_n_data.txt' % (RADIX,WIDTH)
+c_n = 'add/r%d_w%d/c_n_data.txt' % (RADIX,WIDTH)
+gold_n = 'add/r%d_w%d/c_n_data_GOLD.txt' % (RADIX,WIDTH)
+rbf= './program_fpga.sh add/r%d_w%d/r%d_w%d.rbf' % (RADIX,WIDTH,RADIX,WIDTH)
+
+print 'Programming FPGA'
+os.popen(rbf)
+cat = os.popen('cat /sys/class/fpga/fpga0/status')
+if(cat.read() != 'user mode\n'):
+    print 'PROGRAMING ERROR'
+    exit()
+time.sleep(1)
 
 tcu_regs= {
     'go': 4*0,
@@ -66,7 +91,7 @@ print('IP contacted successfully')
 n=0 #number of additions
 
 print('Filling a_p_ram')
-a_file = open('a_p_data.txt', 'r')
+a_file = open(a_p, 'r')
 a_p_ram.write(ram_regs['addr'], 0)
 a_p_ram.write(ram_regs['we'], 1)
 for a_line in a_file:
@@ -77,7 +102,7 @@ a_file.close()
 #print(a_p_ram.read(ram_regs['addr']))
     
 print('Filling b_p_ram')
-b_file = open('b_p_data.txt', 'r')
+b_file = open(b_p, 'r')
 b_p_ram.write(ram_regs['addr'], 0)
 b_p_ram.write(ram_regs['we'], 1)
 for b_line in b_file:
@@ -86,7 +111,7 @@ b_p_ram.write(ram_regs['we'], 0)
 b_file.close()
 
 print('Filling a_n_ram')
-a_file = open('a_n_data.txt', 'r')
+a_file = open(a_n, 'r')
 a_n_ram.write(ram_regs['addr'], 0)
 a_n_ram.write(ram_regs['we'], 1)
 for a_line in a_file:
@@ -96,7 +121,7 @@ a_file.close()
 #print(a_n_ram.read(ram_regs['addr']))
     
 print('Filling b_n_ram')
-b_file = open('b_n_data.txt', 'r')
+b_file = open(b_n, 'r')
 b_n_ram.write(ram_regs['addr'], 0)
 b_n_ram.write(ram_regs['we'], 1)
 for b_line in b_file:
@@ -124,40 +149,40 @@ while (f_try!=f_previous):
     while (tcu.read(tcu_regs['go']) != 0):
         pass
 
-    c_file = open('c_p_data.txt', 'w')
+    c_file = open(c_p, 'w')
     c_p_ram.write(ram_regs['addr'], 0)
     for i in range(n):
         c_num = c_p_ram.read(ram_regs['data'])
         c_val = 0
-        for j in range(0,16):
-            c_dig = (c_num&(3<<(j*2)))>>(j*2)
-            if c_dig == 3: c_dig = -1
+        for j in range(0,WIDTH+1):
+            c_dig = (c_num&(MASK<<(j*D)))>>(j*D)
+            if c_dig > A: c_dig = (-1<<D)|c_dig
             #elif c_dig == 2: print('ERROR c_dig 2???')
             #if c_dig > 1 or c_dig < -1: print('Error c_dig out of bounds?????')
-            c_val += c_dig*(2**j)
+            c_val += c_dig*(RADIX**j)
         c_file.write('%d\n' %c_val)
     c_file.close()
 
 
-    c_file = open('c_n_data.txt', 'w')
+    c_file = open(c_n, 'w')
     c_n_ram.write(ram_regs['addr'], 0)
     for i in range(n):
         c_num = c_n_ram.read(ram_regs['data'])
         c_val = 0
-        for j in range(0,16):
-            c_dig = (c_num&(3<<(j*2)))>>(j*2)
-            if c_dig == 3: c_dig = -1
-            #elif c_dig == 2: #print('ERROR c_dig 2???')
-            #if c_dig > 1 or c_dig < -1: #print('Error c_dig out of bounds?????')
-            c_val += c_dig*(2**j)
+        for j in range(0,WIDTH+1):
+            c_dig = (c_num&(MASK<<(j*D)))>>(j*D)
+            if c_dig > A: c_dig = (-1<<D)|c_dig
+            #elif c_dig == 2: print('ERROR c_dig 2???')
+            #if c_dig > 1 or c_dig < -1: print('Error c_dig out of bounds?????')
+            c_val += c_dig*(RADIX**j)
         c_file.write('%d\n' %c_val)
     c_file.close()
 
 
 
     #print('Comparing c_p_data.txt to c_p_data_GOLD.txt')
-    diff_pos = os.popen('diff c_p_data.txt c_p_data_GOLD.txt')
-    diff_neg = os.popen('diff c_n_data.txt c_n_data_GOLD.txt')
+    diff_pos = os.popen('diff '+c_p+' '+gold_p)
+    diff_neg = os.popen('diff '+c_n+' '+gold_n)
     output_pos = diff_pos.read()
     output_neg = diff_neg.read()
     if (output_pos != '' or output_neg != '') :

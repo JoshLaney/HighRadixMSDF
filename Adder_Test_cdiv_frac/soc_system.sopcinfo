@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="soc_system" kind="soc_system" version="1.0" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.06.19.07:11:33 -->
+ <!-- 2021.06.25.03:29:50 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1624111404</value>
+  <value>1624616490</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -1536,7 +1536,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>32</value>
+   <value>24</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -1689,7 +1689,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>24</width>
     <role>data</role>
    </port>
   </interface>
@@ -2378,7 +2378,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>30</value>
+   <value>20</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2584,7 +2584,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_out</name>
     <direction>Output</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -2598,7 +2598,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>30</value>
+   <value>20</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2804,7 +2804,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_out</name>
     <direction>Output</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -2818,7 +2818,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>30</value>
+   <value>20</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2926,7 +2926,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -2971,7 +2971,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -2985,7 +2985,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>30</value>
+   <value>20</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3093,7 +3093,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -3138,7 +3138,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -80361,7 +80361,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="RADIX">
    <type>int</type>
-   <value>2</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -80369,7 +80369,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="WIDTH">
    <type>int</type>
-   <value>15</value>
+   <value>5</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -80432,7 +80432,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>x_in</name>
     <direction>Input</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -80477,7 +80477,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>y_in</name>
     <direction>Input</direction>
-    <width>30</width>
+    <width>20</width>
     <role>data</role>
    </port>
   </interface>
@@ -80522,7 +80522,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>s_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>24</width>
     <role>data</role>
    </port>
   </interface>
