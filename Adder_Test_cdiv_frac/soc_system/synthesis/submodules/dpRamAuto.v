@@ -1,52 +1,347 @@
 module dpRam 
 (
 input avalon_clock, ram_clock, resetn, read, write, we_arith,
-input [2:0] address,
+input [3:0] address,
 input [10:0] addr_arith,
-input [31:0] writedata, data_arith,
-output [31:0] q_arith,
+input [31:0] writedata, 
+input [DATA_WIDTH-1:0] data_arith,
+output [DATA_WIDTH-1:0] q_arith,
 output reg [31:0] readdata
 );
 
 parameter ID = 1;
+parameter DATA_WIDTH = 32;
+parameter ADDR_WIDTH = 11;
 
 reg [10:0] addr_hps;
-reg [31:0] data_hps;
-wire [31:0] q_hps;
+reg [DATA_WIDTH-1:0] data_hps;
+wire [DATA_WIDTH-1:0] q_hps;
 reg we_hps, w_inc, r_inc_inhibit;
 
-always@(posedge avalon_clock) begin
-	w_inc <= 1'b0;
-	r_inc_inhibit <= 1'b0;
-	if(write) begin
-		case(address)
-			3'b000: begin
-				data_hps <= writedata;
-				w_inc <= 1'b1;
-			end
-			3'b001: addr_hps <= writedata[10:0];
-			3'b010: we_hps <= writedata[0];
-			default: ;
-		endcase
-	end
-	if(read) begin
-		case(address)
-			3'b000: begin
-				readdata <= q_hps;
-				if (~r_inc_inhibit)
-					addr_hps <= addr_hps + 11'd1;
-				r_inc_inhibit <= 1'b1;
-			end
-			3'b001: readdata <= addr_hps;
-			3'b010: readdata <= we_hps;
-			3'b011: readdata <= ID;
-			default: ;
-		endcase
-	end
-	if(w_inc) addr_hps <= addr_hps + 11'b1;
-end
+generate
+if(DATA_WIDTH<=32) begin
 
-true_dual_port_ram_dual_clock #(.DATA_WIDTH(32), .ADDR_WIDTH(11)) dpr(
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin
+					data_hps <= writedata[DATA_WIDTH-1:0];
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata[DATA_WIDTH-1:0] <= q_hps;
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if(DATA_WIDTH>32 && DATA_WIDTH<=64) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[DATA_WIDTH-1:32] <= writedata[(DATA_WIDTH-32)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata[(DATA_WIDTH-32)-1:0] <= q_hps[DATA_WIDTH-1:32];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if (DATA_WIDTH>64 && DATA_WIDTH<=96) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[DATA_WIDTH-1:64] <= writedata[(DATA_WIDTH-64)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata[(DATA_WIDTH-64)-1:0] <= q_hps[DATA_WIDTH-1:64];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if (DATA_WIDTH>96 && DATA_WIDTH<=128) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[95:64] <= writedata;
+				4'b0101: data_hps[DATA_WIDTH-1:96] <= writedata[(DATA_WIDTH-96)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata <= q_hps[95:64];
+				4'b0101: readdata[(DATA_WIDTH-96)-1:0] <= q_hps[DATA_WIDTH-1:96];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if (DATA_WIDTH>128 && DATA_WIDTH<=160) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[95:64] <= writedata;
+				4'b0101: data_hps[127:96] <= writedata;
+				4'b0110: data_hps[DATA_WIDTH-1:128] <= writedata[(DATA_WIDTH-128)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata <= q_hps[95:64];
+				4'b0101: readdata <= q_hps[127:96];
+				4'b0110: readdata[(DATA_WIDTH-128)-1:0] <= q_hps[DATA_WIDTH-1:128];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if (DATA_WIDTH>160 && DATA_WIDTH<=192) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[95:64] <= writedata;
+				4'b0101: data_hps[127:96] <= writedata;
+				4'b0110: data_hps[159:128] <= writedata;
+				4'b0111: data_hps[DATA_WIDTH-1:160] <= writedata[(DATA_WIDTH-160)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata <= q_hps[95:64];
+				4'b0101: readdata <= q_hps[127:96];
+				4'b0110: readdata <= q_hps[159:128];
+				4'b0111: readdata[(DATA_WIDTH-160)-1:0] <= q_hps[DATA_WIDTH-1:160];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else if (DATA_WIDTH>192 && DATA_WIDTH<=224) begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[95:64] <= writedata;
+				4'b0101: data_hps[127:96] <= writedata;
+				4'b0110: data_hps[159:128] <= writedata;
+				4'b0111: data_hps[191:160] <= writedata;
+				4'b1000: data_hps[DATA_WIDTH-1:192] <= writedata[(DATA_WIDTH-192)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata <= q_hps[95:64];
+				4'b0101: readdata <= q_hps[127:96];
+				4'b0110: readdata <= q_hps[159:128];
+				4'b0111: readdata <= q_hps[191:160];
+				4'b1000: readdata[(DATA_WIDTH-192)-1:0] <= q_hps[DATA_WIDTH-1:192];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end else begin
+
+	always@(posedge avalon_clock) begin
+		w_inc <= 1'b0;
+		r_inc_inhibit <= 1'b0;
+		if(write) begin
+			case(address)
+				4'b0000: begin 
+					data_hps[31:0] <= writedata;
+					w_inc<=1'b1;
+				end
+				4'b0001: addr_hps <= writedata[10:0];
+				4'b0010: we_hps <= writedata[0];
+				4'b0011: data_hps[63:32] <= writedata;
+				4'b0100: data_hps[95:64] <= writedata;
+				4'b0101: data_hps[127:96] <= writedata;
+				4'b0110: data_hps[159:128] <= writedata;
+				4'b0111: data_hps[191:160] <= writedata;
+				4'b1000: data_hps[223:192] <= writedata;
+				4'b1001: data_hps[DATA_WIDTH-1:224] <= writedata[(DATA_WIDTH-224)-1:0];
+				default: ;
+			endcase
+		end
+		if(read) begin
+			case(address)
+				4'b0000: begin
+					readdata <= q_hps[31:0];
+					if (~r_inc_inhibit)
+						addr_hps <= addr_hps + 11'd1;
+					r_inc_inhibit <= 1'b1;
+				end
+				4'b0001: readdata <= addr_hps;
+				4'b0010: readdata <= we_hps;
+				4'b0011: readdata <= q_hps[63:32];
+				4'b0100: readdata <= q_hps[95:64];
+				4'b0101: readdata <= q_hps[127:96];
+				4'b0110: readdata <= q_hps[159:128];
+				4'b0111: readdata <= q_hps[191:160];
+				4'b1000: readdata <= q_hps[223:192];
+				4'b1001: readdata[(DATA_WIDTH-224)-1:0] <= q_hps[DATA_WIDTH-1:224];
+				4'b1010: readdata <= ID;
+				default: ;
+			endcase
+		end
+		if(w_inc) addr_hps <= addr_hps + 11'b1;
+	end
+
+end endgenerate
+
+true_dual_port_ram_dual_clock #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH)) dpr(
 .data_a(data_hps),
 .data_b(data_arith),
 .addr_a(addr_hps),

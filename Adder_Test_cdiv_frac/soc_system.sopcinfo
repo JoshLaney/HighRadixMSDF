@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="soc_system" kind="soc_system" version="1.0" fabric="QSYS">
  <!-- Format version 20.1 720 (Future versions may contain additional information.) -->
- <!-- 2021.06.25.03:29:50 -->
+ <!-- 2021.06.27.03:06:35 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1624616490</value>
+  <value>1624787905</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -1534,9 +1534,17 @@ parameters are a RESULT of the module parameters. -->
    path="arith_out_duplicate_0">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
-  <parameter name="WIDTH">
+  <parameter name="IN_WIDTH">
    <type>int</type>
-   <value>24</value>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="OUT_WIDTH">
+   <type>int</type>
+   <value>64</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -1599,7 +1607,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>neg_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -1644,7 +1652,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>pos_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -1689,7 +1697,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>24</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -2376,9 +2384,17 @@ parameters are a RESULT of the module parameters. -->
    path="clocked_mux_a">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
-  <parameter name="WIDTH">
+  <parameter name="IN_WIDTH">
    <type>int</type>
-   <value>20</value>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="OUT_WIDTH">
+   <type>int</type>
+   <value>62</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2494,7 +2510,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>neg_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -2539,7 +2555,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>pos_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -2584,7 +2600,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_out</name>
     <direction>Output</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -2596,9 +2612,17 @@ parameters are a RESULT of the module parameters. -->
    path="clocked_mux_b">
   <!-- Describes a single module. Module parameters are
 the requested settings for a module instance. -->
-  <parameter name="WIDTH">
+  <parameter name="IN_WIDTH">
    <type>int</type>
-   <value>20</value>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="OUT_WIDTH">
+   <type>int</type>
+   <value>62</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2714,7 +2738,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>neg_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -2759,7 +2783,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>pos_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -2804,7 +2828,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_out</name>
     <direction>Output</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -2818,7 +2842,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>20</value>
+   <value>62</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2926,7 +2950,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -2971,7 +2995,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -2985,7 +3009,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>20</value>
+   <value>62</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3093,7 +3117,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -3138,7 +3162,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -3152,7 +3176,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>32</value>
+   <value>64</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3260,7 +3284,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -3305,7 +3329,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -3319,7 +3343,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>32</value>
+   <value>64</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3427,7 +3451,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -3472,7 +3496,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -3483,6 +3507,22 @@ the requested settings for a module instance. -->
   <parameter name="ID">
    <type>int</type>
    <value>3</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3587,7 +3627,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -3910,7 +3950,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -4045,7 +4085,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -4090,7 +4130,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -4157,6 +4197,22 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
    <value>UNKNOWN</value>
@@ -4256,7 +4312,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -4579,7 +4635,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -4714,7 +4770,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -4759,7 +4815,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -4826,6 +4882,22 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
    <value>UNKNOWN</value>
@@ -4925,7 +4997,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -5248,7 +5320,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -5383,7 +5455,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -5428,7 +5500,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -5495,6 +5567,22 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
    <value>UNKNOWN</value>
@@ -5594,7 +5682,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -5917,7 +6005,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -6052,7 +6140,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -6097,7 +6185,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -6164,6 +6252,22 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
    <value>UNKNOWN</value>
@@ -6263,7 +6367,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -6586,7 +6690,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -6721,7 +6825,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -6766,7 +6870,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -6833,6 +6937,22 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
+  <parameter name="DATA_WIDTH">
+   <type>int</type>
+   <value>64</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="ADDR_WIDTH">
+   <type>int</type>
+   <value>10</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
   <parameter name="deviceFamily">
    <type>java.lang.String</type>
    <value>UNKNOWN</value>
@@ -6932,7 +7052,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>32</value>
+    <value>64</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -7255,7 +7375,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>address</name>
     <direction>Input</direction>
-    <width>3</width>
+    <width>4</width>
     <role>address</role>
    </port>
   </interface>
@@ -7390,7 +7510,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>q_arith</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -7435,7 +7555,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_arith</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -23171,14 +23291,14 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>s0</slaveName>
     <name>mm_bridge_0.s0</name>
     <baseAddress>0</baseAddress>
-    <span>512</span>
+    <span>1024</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>test_control_unit_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>test_control_unit_0.avalon_slave_0</name>
-    <baseAddress>192</baseAddress>
+    <baseAddress>384</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -23186,32 +23306,32 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dp_ram_c_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_neg.avalon_slave_0</name>
-    <baseAddress>128</baseAddress>
-    <span>32</span>
+    <baseAddress>256</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_c_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_pos.avalon_slave_0</name>
-    <baseAddress>160</baseAddress>
-    <span>32</span>
+    <baseAddress>320</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_neg.avalon_slave_0</name>
-    <baseAddress>64</baseAddress>
-    <span>32</span>
+    <baseAddress>128</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_pos.avalon_slave_0</name>
-    <baseAddress>96</baseAddress>
-    <span>32</span>
+    <baseAddress>192</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
@@ -23219,22 +23339,22 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_neg.avalon_slave_0</name>
     <baseAddress>0</baseAddress>
-    <span>32</span>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_a_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_pos.avalon_slave_0</name>
-    <baseAddress>32</baseAddress>
-    <span>32</span>
+    <baseAddress>64</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pll_reconfig_0</moduleName>
     <slaveName>mgmt_avalon_slave</slaveName>
     <name>pll_reconfig_0.mgmt_avalon_slave</name>
-    <baseAddress>256</baseAddress>
+    <baseAddress>512</baseAddress>
     <span>256</span>
    </memoryBlock>
   </interface>
@@ -49159,14 +49279,14 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>s0</slaveName>
     <name>mm_bridge_0.s0</name>
     <baseAddress>0</baseAddress>
-    <span>512</span>
+    <span>1024</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>test_control_unit_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>test_control_unit_0.avalon_slave_0</name>
-    <baseAddress>192</baseAddress>
+    <baseAddress>384</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -49174,32 +49294,32 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dp_ram_c_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_neg.avalon_slave_0</name>
-    <baseAddress>128</baseAddress>
-    <span>32</span>
+    <baseAddress>256</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_c_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_pos.avalon_slave_0</name>
-    <baseAddress>160</baseAddress>
-    <span>32</span>
+    <baseAddress>320</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_neg.avalon_slave_0</name>
-    <baseAddress>64</baseAddress>
-    <span>32</span>
+    <baseAddress>128</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_pos.avalon_slave_0</name>
-    <baseAddress>96</baseAddress>
-    <span>32</span>
+    <baseAddress>192</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
@@ -49207,22 +49327,22 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_neg.avalon_slave_0</name>
     <baseAddress>0</baseAddress>
-    <span>32</span>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_a_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_pos.avalon_slave_0</name>
-    <baseAddress>32</baseAddress>
-    <span>32</span>
+    <baseAddress>64</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pll_reconfig_0</moduleName>
     <slaveName>mgmt_avalon_slave</slaveName>
     <name>pll_reconfig_0.mgmt_avalon_slave</name>
-    <baseAddress>256</baseAddress>
+    <baseAddress>512</baseAddress>
     <span>256</span>
    </memoryBlock>
   </interface>
@@ -50350,14 +50470,14 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>s0</slaveName>
     <name>mm_bridge_0.s0</name>
     <baseAddress>4280287232</baseAddress>
-    <span>512</span>
+    <span>1024</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>test_control_unit_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>test_control_unit_0.avalon_slave_0</name>
-    <baseAddress>4280287424</baseAddress>
+    <baseAddress>4280287616</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -50365,32 +50485,32 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dp_ram_c_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_neg.avalon_slave_0</name>
-    <baseAddress>4280287360</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287488</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_c_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_pos.avalon_slave_0</name>
-    <baseAddress>4280287392</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287552</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_neg.avalon_slave_0</name>
-    <baseAddress>4280287296</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287360</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_pos.avalon_slave_0</name>
-    <baseAddress>4280287328</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287424</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
@@ -50398,22 +50518,22 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_neg.avalon_slave_0</name>
     <baseAddress>4280287232</baseAddress>
-    <span>32</span>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_a_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_pos.avalon_slave_0</name>
-    <baseAddress>4280287264</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287296</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pll_reconfig_0</moduleName>
     <slaveName>mgmt_avalon_slave</slaveName>
     <name>pll_reconfig_0.mgmt_avalon_slave</name>
-    <baseAddress>4280287488</baseAddress>
+    <baseAddress>4280287744</baseAddress>
     <span>256</span>
    </memoryBlock>
    <memoryBlock>
@@ -51237,14 +51357,14 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>s0</slaveName>
     <name>mm_bridge_0.s0</name>
     <baseAddress>4280287232</baseAddress>
-    <span>512</span>
+    <span>1024</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>test_control_unit_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>test_control_unit_0.avalon_slave_0</name>
-    <baseAddress>4280287424</baseAddress>
+    <baseAddress>4280287616</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -51252,32 +51372,32 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dp_ram_c_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_neg.avalon_slave_0</name>
-    <baseAddress>4280287360</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287488</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_c_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_pos.avalon_slave_0</name>
-    <baseAddress>4280287392</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287552</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_neg.avalon_slave_0</name>
-    <baseAddress>4280287296</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287360</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_pos.avalon_slave_0</name>
-    <baseAddress>4280287328</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287424</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
@@ -51285,22 +51405,22 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_neg.avalon_slave_0</name>
     <baseAddress>4280287232</baseAddress>
-    <span>32</span>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_a_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_pos.avalon_slave_0</name>
-    <baseAddress>4280287264</baseAddress>
-    <span>32</span>
+    <baseAddress>4280287296</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pll_reconfig_0</moduleName>
     <slaveName>mgmt_avalon_slave</slaveName>
     <name>pll_reconfig_0.mgmt_avalon_slave</name>
-    <baseAddress>4280287488</baseAddress>
+    <baseAddress>4280287744</baseAddress>
     <span>256</span>
    </memoryBlock>
    <memoryBlock>
@@ -78907,7 +79027,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>32</value>
+   <value>64</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -78978,7 +79098,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -79023,7 +79143,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -79127,7 +79247,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="WIDTH">
    <type>int</type>
-   <value>32</value>
+   <value>64</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -79198,7 +79318,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_out</name>
     <direction>Output</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -79243,7 +79363,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>data_in</name>
     <direction>Input</direction>
-    <width>32</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -79371,7 +79491,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="SYSINFO_ADDR_WIDTH">
    <type>int</type>
-   <value>9</value>
+   <value>10</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -79389,7 +79509,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="AUTO_ADDRESS_WIDTH">
    <type>int</type>
-   <value>9</value>
+   <value>10</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -79397,7 +79517,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="HDL_ADDR_WIDTH">
    <type>int</type>
-   <value>9</value>
+   <value>10</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>false</visible>
@@ -79607,7 +79727,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>512</value>
+    <value>1024</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -79936,7 +80056,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>s0_address</name>
     <direction>Input</direction>
-    <width>9</width>
+    <width>10</width>
     <role>address</role>
    </port>
    <port>
@@ -80259,7 +80379,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>m0_address</name>
     <direction>Output</direction>
-    <width>9</width>
+    <width>10</width>
     <role>address</role>
    </port>
    <port>
@@ -80291,7 +80411,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>test_control_unit_0</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>test_control_unit_0.avalon_slave_0</name>
-    <baseAddress>192</baseAddress>
+    <baseAddress>384</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -80299,32 +80419,32 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>dp_ram_c_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_neg.avalon_slave_0</name>
-    <baseAddress>128</baseAddress>
-    <span>32</span>
+    <baseAddress>256</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_c_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_c_pos.avalon_slave_0</name>
-    <baseAddress>160</baseAddress>
-    <span>32</span>
+    <baseAddress>320</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_neg</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_neg.avalon_slave_0</name>
-    <baseAddress>64</baseAddress>
-    <span>32</span>
+    <baseAddress>128</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_b_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_b_pos.avalon_slave_0</name>
-    <baseAddress>96</baseAddress>
-    <span>32</span>
+    <baseAddress>192</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
@@ -80332,22 +80452,22 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_neg.avalon_slave_0</name>
     <baseAddress>0</baseAddress>
-    <span>32</span>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>dp_ram_a_pos</moduleName>
     <slaveName>avalon_slave_0</slaveName>
     <name>dp_ram_a_pos.avalon_slave_0</name>
-    <baseAddress>32</baseAddress>
-    <span>32</span>
+    <baseAddress>64</baseAddress>
+    <span>64</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pll_reconfig_0</moduleName>
     <slaveName>mgmt_avalon_slave</slaveName>
     <name>pll_reconfig_0.mgmt_avalon_slave</name>
-    <baseAddress>256</baseAddress>
+    <baseAddress>512</baseAddress>
     <span>256</span>
    </memoryBlock>
   </interface>
@@ -80361,7 +80481,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="RADIX">
    <type>int</type>
-   <value>8</value>
+   <value>2</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -80369,7 +80489,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="WIDTH">
    <type>int</type>
-   <value>5</value>
+   <value>31</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -80432,7 +80552,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>x_in</name>
     <direction>Input</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -80477,7 +80597,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>y_in</name>
     <direction>Input</direction>
-    <width>20</width>
+    <width>62</width>
     <role>data</role>
    </port>
   </interface>
@@ -80522,7 +80642,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>s_out</name>
     <direction>Output</direction>
-    <width>24</width>
+    <width>64</width>
     <role>data</role>
    </port>
   </interface>
@@ -85393,7 +85513,7 @@ parameters are a RESULT of the module parameters. -->
 the requested settings for a module instance. -->
   <parameter name="ID">
    <type>int</type>
-   <value>1</value>
+   <value>8</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94363,7 +94483,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00c0</value>
+   <value>0x0180</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94414,7 +94534,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0080</value>
+   <value>0x0100</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94465,7 +94585,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x00a0</value>
+   <value>0x0140</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94516,7 +94636,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0040</value>
+   <value>0x0080</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94567,7 +94687,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0060</value>
+   <value>0x00c0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94669,7 +94789,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0020</value>
+   <value>0x0040</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -94720,7 +94840,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0100</value>
+   <value>0x0200</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

@@ -115,22 +115,22 @@ module soc_system (
 	wire         addr_delay_c_neg_2_addr_out_we;                                 // addr_delay_c_neg_2:e_out -> addr_delay_c_neg_3:e_in
 	wire  [10:0] addr_delay_c_pos_2_addr_out_addr;                               // addr_delay_c_pos_2:addr_out -> addr_delay_c_pos_3:addr_in
 	wire         addr_delay_c_pos_2_addr_out_we;                                 // addr_delay_c_pos_2:e_out -> addr_delay_c_pos_3:e_in
-	wire  [23:0] online_adder_0_c_out_data;                                      // online_adder_0:s_out -> arith_out_duplicate_0:data_in
-	wire  [19:0] data_delay_a_0_data_out_data;                                   // data_delay_a_0:data_out -> online_adder_0:x_in
-	wire  [19:0] data_delay_b_0_data_out_data;                                   // data_delay_b_0:data_out -> online_adder_0:y_in
-	wire  [31:0] mc_data_delay_pos_data_out_data;                                // mc_data_delay_pos:data_out -> dp_ram_c_pos:data_arith
-	wire  [31:0] mc_data_delay_neg_data_out_data;                                // mc_data_delay_neg:data_out -> dp_ram_c_neg:data_arith
-	wire  [31:0] data_delay_pos_0_data_out_data;                                 // data_delay_pos_0:data_out -> mc_data_delay_pos:data_in
-	wire  [31:0] data_delay_neg_0_data_out_data;                                 // data_delay_neg_0:data_out -> mc_data_delay_neg:data_in
+	wire  [63:0] online_adder_0_c_out_data;                                      // online_adder_0:s_out -> arith_out_duplicate_0:data_in
+	wire  [61:0] data_delay_a_0_data_out_data;                                   // data_delay_a_0:data_out -> online_adder_0:x_in
+	wire  [61:0] data_delay_b_0_data_out_data;                                   // data_delay_b_0:data_out -> online_adder_0:y_in
+	wire  [63:0] mc_data_delay_pos_data_out_data;                                // mc_data_delay_pos:data_out -> dp_ram_c_pos:data_arith
+	wire  [63:0] mc_data_delay_neg_data_out_data;                                // mc_data_delay_neg:data_out -> dp_ram_c_neg:data_arith
+	wire  [63:0] data_delay_pos_0_data_out_data;                                 // data_delay_pos_0:data_out -> mc_data_delay_pos:data_in
+	wire  [63:0] data_delay_neg_0_data_out_data;                                 // data_delay_neg_0:data_out -> mc_data_delay_neg:data_in
 	wire         pll_0_locked_export;                                            // pll_0:locked -> test_control_unit_0:pll_lock
-	wire  [31:0] dp_ram_a_neg_q_arth_data;                                       // dp_ram_a_neg:q_arith -> clocked_mux_a:neg_in
-	wire  [31:0] arith_out_duplicate_0_neg_out_data;                             // arith_out_duplicate_0:neg_out -> data_delay_neg_0:data_in
-	wire  [31:0] dp_ram_b_pos_q_arth_data;                                       // dp_ram_b_pos:q_arith -> clocked_mux_b:pos_in
-	wire  [31:0] arith_out_duplicate_0_pos_out_data;                             // arith_out_duplicate_0:pos_out -> data_delay_pos_0:data_in
-	wire  [31:0] dp_ram_b_neg_q_arth_data;                                       // dp_ram_b_neg:q_arith -> clocked_mux_b:neg_in
-	wire  [31:0] dp_ram_a_pos_q_arth_data;                                       // dp_ram_a_pos:q_arith -> clocked_mux_a:pos_in
-	wire  [19:0] clocked_mux_a_q_out_data;                                       // clocked_mux_a:q_out -> data_delay_a_0:data_in
-	wire  [19:0] clocked_mux_b_q_out_data;                                       // clocked_mux_b:q_out -> data_delay_b_0:data_in
+	wire  [63:0] dp_ram_a_neg_q_arth_data;                                       // dp_ram_a_neg:q_arith -> clocked_mux_a:neg_in
+	wire  [63:0] arith_out_duplicate_0_neg_out_data;                             // arith_out_duplicate_0:neg_out -> data_delay_neg_0:data_in
+	wire  [63:0] dp_ram_b_pos_q_arth_data;                                       // dp_ram_b_pos:q_arith -> clocked_mux_b:pos_in
+	wire  [63:0] arith_out_duplicate_0_pos_out_data;                             // arith_out_duplicate_0:pos_out -> data_delay_pos_0:data_in
+	wire  [63:0] dp_ram_b_neg_q_arth_data;                                       // dp_ram_b_neg:q_arith -> clocked_mux_b:neg_in
+	wire  [63:0] dp_ram_a_pos_q_arth_data;                                       // dp_ram_a_pos:q_arith -> clocked_mux_a:pos_in
+	wire  [61:0] clocked_mux_a_q_out_data;                                       // clocked_mux_a:q_out -> data_delay_a_0:data_in
+	wire  [61:0] clocked_mux_b_q_out_data;                                       // clocked_mux_b:q_out -> data_delay_b_0:data_in
 	wire  [10:0] test_control_unit_0_read_b_pos_addr;                            // test_control_unit_0:r_addr_b_pos -> dp_ram_b_pos:addr_arith
 	wire         test_control_unit_0_read_b_pos_we;                              // test_control_unit_0:we_read_b_pos -> dp_ram_b_pos:we_arith
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
@@ -176,7 +176,7 @@ module soc_system (
 	wire  [31:0] mm_interconnect_0_mm_bridge_0_s0_readdata;                      // mm_bridge_0:s0_readdata -> mm_interconnect_0:mm_bridge_0_s0_readdata
 	wire         mm_interconnect_0_mm_bridge_0_s0_waitrequest;                   // mm_bridge_0:s0_waitrequest -> mm_interconnect_0:mm_bridge_0_s0_waitrequest
 	wire         mm_interconnect_0_mm_bridge_0_s0_debugaccess;                   // mm_interconnect_0:mm_bridge_0_s0_debugaccess -> mm_bridge_0:s0_debugaccess
-	wire   [8:0] mm_interconnect_0_mm_bridge_0_s0_address;                       // mm_interconnect_0:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
+	wire   [9:0] mm_interconnect_0_mm_bridge_0_s0_address;                       // mm_interconnect_0:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
 	wire         mm_interconnect_0_mm_bridge_0_s0_read;                          // mm_interconnect_0:mm_bridge_0_s0_read -> mm_bridge_0:s0_read
 	wire   [3:0] mm_interconnect_0_mm_bridge_0_s0_byteenable;                    // mm_interconnect_0:mm_bridge_0_s0_byteenable -> mm_bridge_0:s0_byteenable
 	wire         mm_interconnect_0_mm_bridge_0_s0_readdatavalid;                 // mm_bridge_0:s0_readdatavalid -> mm_interconnect_0:mm_bridge_0_s0_readdatavalid
@@ -186,7 +186,7 @@ module soc_system (
 	wire         mm_bridge_0_m0_waitrequest;                                     // mm_interconnect_1:mm_bridge_0_m0_waitrequest -> mm_bridge_0:m0_waitrequest
 	wire  [31:0] mm_bridge_0_m0_readdata;                                        // mm_interconnect_1:mm_bridge_0_m0_readdata -> mm_bridge_0:m0_readdata
 	wire         mm_bridge_0_m0_debugaccess;                                     // mm_bridge_0:m0_debugaccess -> mm_interconnect_1:mm_bridge_0_m0_debugaccess
-	wire   [8:0] mm_bridge_0_m0_address;                                         // mm_bridge_0:m0_address -> mm_interconnect_1:mm_bridge_0_m0_address
+	wire   [9:0] mm_bridge_0_m0_address;                                         // mm_bridge_0:m0_address -> mm_interconnect_1:mm_bridge_0_m0_address
 	wire         mm_bridge_0_m0_read;                                            // mm_bridge_0:m0_read -> mm_interconnect_1:mm_bridge_0_m0_read
 	wire   [3:0] mm_bridge_0_m0_byteenable;                                      // mm_bridge_0:m0_byteenable -> mm_interconnect_1:mm_bridge_0_m0_byteenable
 	wire         mm_bridge_0_m0_readdatavalid;                                   // mm_interconnect_1:mm_bridge_0_m0_readdatavalid -> mm_bridge_0:m0_readdatavalid
@@ -199,32 +199,32 @@ module soc_system (
 	wire         mm_interconnect_1_test_control_unit_0_avalon_slave_0_write;     // mm_interconnect_1:test_control_unit_0_avalon_slave_0_write -> test_control_unit_0:write
 	wire  [31:0] mm_interconnect_1_test_control_unit_0_avalon_slave_0_writedata; // mm_interconnect_1:test_control_unit_0_avalon_slave_0_writedata -> test_control_unit_0:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_readdata;         // dp_ram_c_neg:readdata -> mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_address -> dp_ram_c_neg:address
+	wire   [3:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_address -> dp_ram_c_neg:address
 	wire         mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_read -> dp_ram_c_neg:read
 	wire         mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_write -> dp_ram_c_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_writedata -> dp_ram_c_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_readdata;         // dp_ram_c_pos:readdata -> mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_address -> dp_ram_c_pos:address
+	wire   [3:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_address -> dp_ram_c_pos:address
 	wire         mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_read -> dp_ram_c_pos:read
 	wire         mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_write -> dp_ram_c_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_writedata -> dp_ram_c_pos:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_readdata;         // dp_ram_b_neg:readdata -> mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_address -> dp_ram_b_neg:address
+	wire   [3:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_address -> dp_ram_b_neg:address
 	wire         mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_read -> dp_ram_b_neg:read
 	wire         mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_write -> dp_ram_b_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_writedata -> dp_ram_b_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_readdata;         // dp_ram_b_pos:readdata -> mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_address -> dp_ram_b_pos:address
+	wire   [3:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_address -> dp_ram_b_pos:address
 	wire         mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_read -> dp_ram_b_pos:read
 	wire         mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_write -> dp_ram_b_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_writedata -> dp_ram_b_pos:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_readdata;         // dp_ram_a_neg:readdata -> mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_address -> dp_ram_a_neg:address
+	wire   [3:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_address -> dp_ram_a_neg:address
 	wire         mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_read -> dp_ram_a_neg:read
 	wire         mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_write -> dp_ram_a_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_writedata -> dp_ram_a_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_readdata;         // dp_ram_a_pos:readdata -> mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_readdata
-	wire   [2:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_address -> dp_ram_a_pos:address
+	wire   [3:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_address -> dp_ram_a_pos:address
 	wire         mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_read -> dp_ram_a_pos:read
 	wire         mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_write -> dp_ram_a_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_writedata -> dp_ram_a_pos:writedata
@@ -318,7 +318,8 @@ module soc_system (
 	);
 
 	arith_out_duplicate #(
-		.WIDTH (24)
+		.IN_WIDTH  (64),
+		.OUT_WIDTH (64)
 	) arith_out_duplicate_0 (
 		.neg_out (arith_out_duplicate_0_neg_out_data), // neg_out.data
 		.pos_out (arith_out_duplicate_0_pos_out_data), // pos_out.data
@@ -332,8 +333,9 @@ module soc_system (
 	);
 
 	clocked_mux #(
-		.WIDTH  (20),
-		.INVERT (1)
+		.IN_WIDTH  (64),
+		.OUT_WIDTH (62),
+		.INVERT    (1)
 	) clocked_mux_a (
 		.clock  (pll_0_outclk0_clk),        // clock_sink.clk
 		.neg_in (dp_ram_a_neg_q_arth_data), //     neg_in.data
@@ -342,8 +344,9 @@ module soc_system (
 	);
 
 	clocked_mux #(
-		.WIDTH  (20),
-		.INVERT (1)
+		.IN_WIDTH  (64),
+		.OUT_WIDTH (62),
+		.INVERT    (1)
 	) clocked_mux_b (
 		.clock  (pll_0_outclk0_clk),        // clock_sink.clk
 		.neg_in (dp_ram_b_neg_q_arth_data), //     neg_in.data
@@ -352,7 +355,7 @@ module soc_system (
 	);
 
 	data_delay #(
-		.WIDTH (20)
+		.WIDTH (62)
 	) data_delay_a_0 (
 		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
 		.data_in   (clocked_mux_a_q_out_data),     //  data_in.data
@@ -360,7 +363,7 @@ module soc_system (
 	);
 
 	data_delay #(
-		.WIDTH (20)
+		.WIDTH (62)
 	) data_delay_b_0 (
 		.pll_clock (pll_0_outclk0_clk),            //    clock.clk
 		.data_in   (clocked_mux_b_q_out_data),     //  data_in.data
@@ -368,7 +371,7 @@ module soc_system (
 	);
 
 	data_delay #(
-		.WIDTH (32)
+		.WIDTH (64)
 	) data_delay_neg_0 (
 		.pll_clock (pll_0_outclk0_clk),                  //    clock.clk
 		.data_in   (arith_out_duplicate_0_neg_out_data), //  data_in.data
@@ -376,7 +379,7 @@ module soc_system (
 	);
 
 	data_delay #(
-		.WIDTH (32)
+		.WIDTH (64)
 	) data_delay_pos_0 (
 		.pll_clock (pll_0_outclk0_clk),                  //    clock.clk
 		.data_in   (arith_out_duplicate_0_pos_out_data), //  data_in.data
@@ -384,7 +387,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (3)
+		.ID         (3),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_a_neg (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -401,7 +406,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (2)
+		.ID         (2),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_a_pos (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -418,7 +425,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (5)
+		.ID         (5),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_b_neg (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -435,7 +444,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (4)
+		.ID         (4),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_b_pos (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -452,7 +463,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (7)
+		.ID         (7),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_c_neg (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -469,7 +482,9 @@ module soc_system (
 	);
 
 	dpRam #(
-		.ID (6)
+		.ID         (6),
+		.DATA_WIDTH (64),
+		.ADDR_WIDTH (10)
 	) dp_ram_c_pos (
 		.resetn       (~rst_controller_reset_out_reset),                         //    clock_reset.reset_n
 		.writedata    (mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_writedata), // avalon_slave_0.writedata
@@ -609,7 +624,7 @@ module soc_system (
 	);
 
 	mc_data_delay #(
-		.WIDTH  (32),
+		.WIDTH  (64),
 		.INVERT (0)
 	) mc_data_delay_neg (
 		.data_out  (mc_data_delay_neg_data_out_data), //  data_out.data
@@ -619,7 +634,7 @@ module soc_system (
 	);
 
 	mc_data_delay #(
-		.WIDTH  (32),
+		.WIDTH  (64),
 		.INVERT (1)
 	) mc_data_delay_pos (
 		.data_out  (mc_data_delay_pos_data_out_data), //  data_out.data
@@ -631,7 +646,7 @@ module soc_system (
 	altera_avalon_mm_bridge #(
 		.DATA_WIDTH        (32),
 		.SYMBOL_WIDTH      (8),
-		.HDL_ADDR_WIDTH    (9),
+		.HDL_ADDR_WIDTH    (10),
 		.BURSTCOUNT_WIDTH  (1),
 		.PIPELINE_COMMAND  (1),
 		.PIPELINE_RESPONSE (1)
@@ -663,8 +678,8 @@ module soc_system (
 	);
 
 	rRp_add_clocked #(
-		.RADIX (8),
-		.WIDTH (5)
+		.RADIX (2),
+		.WIDTH (31)
 	) online_adder_0 (
 		.x_in  (data_delay_a_0_data_out_data), //  a_in.data
 		.y_in  (data_delay_b_0_data_out_data), //  b_in.data
@@ -706,7 +721,7 @@ module soc_system (
 	);
 
 	testControlUnit #(
-		.ID (1)
+		.ID (8)
 	) test_control_unit_0 (
 		.writedata     (mm_interconnect_1_test_control_unit_0_avalon_slave_0_writedata), // avalon_slave_0.writedata
 		.readdata      (mm_interconnect_1_test_control_unit_0_avalon_slave_0_readdata),  //               .readdata

@@ -1304,6 +1304,38 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element test_control_unit_0
    {
       datum _sortIndex
@@ -1375,7 +1407,8 @@
    kind="arith_out_duplicate"
    version="1.0"
    enabled="1">
-  <parameter name="WIDTH" value="24" />
+  <parameter name="IN_WIDTH" value="64" />
+  <parameter name="OUT_WIDTH" value="64" />
  </module>
  <module name="clk_0" kind="clock_source" version="20.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
@@ -1386,40 +1419,54 @@
  <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
  <module name="clocked_mux_a" kind="clocked_mux" version="1.0" enabled="1">
   <parameter name="INVERT" value="1" />
-  <parameter name="WIDTH" value="20" />
+  <parameter name="IN_WIDTH" value="64" />
+  <parameter name="OUT_WIDTH" value="62" />
  </module>
  <module name="clocked_mux_b" kind="clocked_mux" version="1.0" enabled="1">
   <parameter name="INVERT" value="1" />
-  <parameter name="WIDTH" value="20" />
+  <parameter name="IN_WIDTH" value="64" />
+  <parameter name="OUT_WIDTH" value="62" />
  </module>
  <module name="data_delay_a_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="20" />
+  <parameter name="WIDTH" value="62" />
  </module>
  <module name="data_delay_b_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="20" />
+  <parameter name="WIDTH" value="62" />
  </module>
  <module name="data_delay_neg_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="32" />
+  <parameter name="WIDTH" value="64" />
  </module>
  <module name="data_delay_pos_0" kind="data_delay" version="1.0" enabled="1">
-  <parameter name="WIDTH" value="32" />
+  <parameter name="WIDTH" value="64" />
  </module>
  <module name="dp_ram_a_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="3" />
  </module>
  <module name="dp_ram_a_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="2" />
  </module>
  <module name="dp_ram_b_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="5" />
  </module>
  <module name="dp_ram_b_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="4" />
  </module>
  <module name="dp_ram_c_neg" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="7" />
  </module>
  <module name="dp_ram_c_pos" kind="dp_ram" version="1.0" enabled="1">
+  <parameter name="ADDR_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="64" />
   <parameter name="ID" value="6" />
  </module>
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
@@ -1958,7 +2005,7 @@
    version="1.0"
    enabled="1">
   <parameter name="INVERT" value="0" />
-  <parameter name="WIDTH" value="32" />
+  <parameter name="WIDTH" value="64" />
  </module>
  <module
    name="mc_data_delay_pos"
@@ -1966,7 +2013,7 @@
    version="1.0"
    enabled="1">
   <parameter name="INVERT" value="1" />
-  <parameter name="WIDTH" value="32" />
+  <parameter name="WIDTH" value="64" />
  </module>
  <module
    name="mm_bridge_0"
@@ -1982,13 +2029,13 @@
   <parameter name="PIPELINE_COMMAND" value="1" />
   <parameter name="PIPELINE_RESPONSE" value="1" />
   <parameter name="SYMBOL_WIDTH" value="8" />
-  <parameter name="SYSINFO_ADDR_WIDTH" value="9" />
+  <parameter name="SYSINFO_ADDR_WIDTH" value="10" />
   <parameter name="USE_AUTO_ADDRESS_WIDTH" value="1" />
   <parameter name="USE_RESPONSE" value="0" />
  </module>
  <module name="online_adder_0" kind="online_adder" version="1.0" enabled="1">
-  <parameter name="RADIX" value="8" />
-  <parameter name="WIDTH" value="5" />
+  <parameter name="RADIX" value="2" />
+  <parameter name="WIDTH" value="31" />
  </module>
  <module name="pll_0" kind="altera_pll" version="20.1" enabled="1">
   <parameter name="debug_print_output" value="false" />
@@ -2208,7 +2255,7 @@
    kind="test_control_unit"
    version="1.0"
    enabled="1">
-  <parameter name="ID" value="1" />
+  <parameter name="ID" value="8" />
  </module>
  <connection
    kind="avalon"
@@ -2225,7 +2272,7 @@
    start="mm_bridge_0.m0"
    end="test_control_unit_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00c0" />
+  <parameter name="baseAddress" value="0x0180" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2234,7 +2281,7 @@
    start="mm_bridge_0.m0"
    end="dp_ram_c_neg.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0080" />
+  <parameter name="baseAddress" value="0x0100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2243,7 +2290,7 @@
    start="mm_bridge_0.m0"
    end="dp_ram_c_pos.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00a0" />
+  <parameter name="baseAddress" value="0x0140" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2252,7 +2299,7 @@
    start="mm_bridge_0.m0"
    end="dp_ram_b_neg.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0040" />
+  <parameter name="baseAddress" value="0x0080" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2261,7 +2308,7 @@
    start="mm_bridge_0.m0"
    end="dp_ram_b_pos.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0060" />
+  <parameter name="baseAddress" value="0x00c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2279,7 +2326,7 @@
    start="mm_bridge_0.m0"
    end="dp_ram_a_pos.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0020" />
+  <parameter name="baseAddress" value="0x0040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2288,7 +2335,7 @@
    start="mm_bridge_0.m0"
    end="pll_reconfig_0.mgmt_avalon_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0100" />
+  <parameter name="baseAddress" value="0x0200" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="20.1" start="clk_0.clk" end="mm_bridge_0.clk" />

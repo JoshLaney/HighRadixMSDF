@@ -1,1 +1,1 @@
- create_clock -period 2 -name clock [get_ports {clock}]
+ create_clock -period 1 -name clock [get_ports {clock}]

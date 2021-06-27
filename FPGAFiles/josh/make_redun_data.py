@@ -7,6 +7,8 @@ WIDTH=int(sys.argv[2])
 A=RADIX-1
 D=int(math.log(RADIX,2)+1)
 MASK=(2**D)-1
+BITS=D*WIDTH
+WORDS=max(int(math.ceil(math.log(BITS,2))),5)
 
 a_p = 'add/r%d_w%d/a_p_data.txt' % (RADIX,WIDTH)
 b_p = 'add/r%d_w%d/b_p_data.txt' % (RADIX,WIDTH)
@@ -19,7 +21,7 @@ print('Filling a_p_data.txt with random ints')
 print('Filling b_p_data.txt with random ints')
 print('Storing a+b in c_p_data_GOLD.txt')
 
-for i in range(0,2**11-1):
+for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0
@@ -52,7 +54,7 @@ a_n_file = open(a_n, 'w')
 b_n_file = open(b_n, 'w')
 gold_n_file = open(gold_n, 'w')
 
-for i in range (0, 2**11-1):
+for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0
