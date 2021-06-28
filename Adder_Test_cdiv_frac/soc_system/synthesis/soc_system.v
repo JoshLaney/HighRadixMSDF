@@ -184,7 +184,7 @@ module soc_system (
 	wire  [31:0] mm_interconnect_0_mm_bridge_0_s0_readdata;                      // mm_bridge_0:s0_readdata -> mm_interconnect_0:mm_bridge_0_s0_readdata
 	wire         mm_interconnect_0_mm_bridge_0_s0_waitrequest;                   // mm_bridge_0:s0_waitrequest -> mm_interconnect_0:mm_bridge_0_s0_waitrequest
 	wire         mm_interconnect_0_mm_bridge_0_s0_debugaccess;                   // mm_interconnect_0:mm_bridge_0_s0_debugaccess -> mm_bridge_0:s0_debugaccess
-	wire   [9:0] mm_interconnect_0_mm_bridge_0_s0_address;                       // mm_interconnect_0:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
+	wire  [10:0] mm_interconnect_0_mm_bridge_0_s0_address;                       // mm_interconnect_0:mm_bridge_0_s0_address -> mm_bridge_0:s0_address
 	wire         mm_interconnect_0_mm_bridge_0_s0_read;                          // mm_interconnect_0:mm_bridge_0_s0_read -> mm_bridge_0:s0_read
 	wire   [3:0] mm_interconnect_0_mm_bridge_0_s0_byteenable;                    // mm_interconnect_0:mm_bridge_0_s0_byteenable -> mm_bridge_0:s0_byteenable
 	wire         mm_interconnect_0_mm_bridge_0_s0_readdatavalid;                 // mm_bridge_0:s0_readdatavalid -> mm_interconnect_0:mm_bridge_0_s0_readdatavalid
@@ -194,7 +194,7 @@ module soc_system (
 	wire         mm_bridge_0_m0_waitrequest;                                     // mm_interconnect_1:mm_bridge_0_m0_waitrequest -> mm_bridge_0:m0_waitrequest
 	wire  [31:0] mm_bridge_0_m0_readdata;                                        // mm_interconnect_1:mm_bridge_0_m0_readdata -> mm_bridge_0:m0_readdata
 	wire         mm_bridge_0_m0_debugaccess;                                     // mm_bridge_0:m0_debugaccess -> mm_interconnect_1:mm_bridge_0_m0_debugaccess
-	wire   [9:0] mm_bridge_0_m0_address;                                         // mm_bridge_0:m0_address -> mm_interconnect_1:mm_bridge_0_m0_address
+	wire  [10:0] mm_bridge_0_m0_address;                                         // mm_bridge_0:m0_address -> mm_interconnect_1:mm_bridge_0_m0_address
 	wire         mm_bridge_0_m0_read;                                            // mm_bridge_0:m0_read -> mm_interconnect_1:mm_bridge_0_m0_read
 	wire   [3:0] mm_bridge_0_m0_byteenable;                                      // mm_bridge_0:m0_byteenable -> mm_interconnect_1:mm_bridge_0_m0_byteenable
 	wire         mm_bridge_0_m0_readdatavalid;                                   // mm_interconnect_1:mm_bridge_0_m0_readdatavalid -> mm_bridge_0:m0_readdatavalid
@@ -207,32 +207,32 @@ module soc_system (
 	wire         mm_interconnect_1_test_control_unit_0_avalon_slave_0_write;     // mm_interconnect_1:test_control_unit_0_avalon_slave_0_write -> test_control_unit_0:write
 	wire  [31:0] mm_interconnect_1_test_control_unit_0_avalon_slave_0_writedata; // mm_interconnect_1:test_control_unit_0_avalon_slave_0_writedata -> test_control_unit_0:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_readdata;         // dp_ram_c_neg:readdata -> mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_address -> dp_ram_c_neg:address
+	wire   [4:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_address -> dp_ram_c_neg:address
 	wire         mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_read -> dp_ram_c_neg:read
 	wire         mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_write -> dp_ram_c_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_c_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_c_neg_avalon_slave_0_writedata -> dp_ram_c_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_readdata;         // dp_ram_c_pos:readdata -> mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_address -> dp_ram_c_pos:address
+	wire   [4:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_address -> dp_ram_c_pos:address
 	wire         mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_read -> dp_ram_c_pos:read
 	wire         mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_write -> dp_ram_c_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_c_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_c_pos_avalon_slave_0_writedata -> dp_ram_c_pos:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_readdata;         // dp_ram_b_neg:readdata -> mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_address -> dp_ram_b_neg:address
+	wire   [4:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_address -> dp_ram_b_neg:address
 	wire         mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_read -> dp_ram_b_neg:read
 	wire         mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_write -> dp_ram_b_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_b_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_b_neg_avalon_slave_0_writedata -> dp_ram_b_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_readdata;         // dp_ram_b_pos:readdata -> mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_address -> dp_ram_b_pos:address
+	wire   [4:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_address -> dp_ram_b_pos:address
 	wire         mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_read -> dp_ram_b_pos:read
 	wire         mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_write -> dp_ram_b_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_b_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_b_pos_avalon_slave_0_writedata -> dp_ram_b_pos:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_readdata;         // dp_ram_a_neg:readdata -> mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_address -> dp_ram_a_neg:address
+	wire   [4:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_address -> dp_ram_a_neg:address
 	wire         mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_read -> dp_ram_a_neg:read
 	wire         mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_write -> dp_ram_a_neg:write
 	wire  [31:0] mm_interconnect_1_dp_ram_a_neg_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_a_neg_avalon_slave_0_writedata -> dp_ram_a_neg:writedata
 	wire  [31:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_readdata;         // dp_ram_a_pos:readdata -> mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_readdata
-	wire   [3:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_address -> dp_ram_a_pos:address
+	wire   [4:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_address;          // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_address -> dp_ram_a_pos:address
 	wire         mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_read;             // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_read -> dp_ram_a_pos:read
 	wire         mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_write;            // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_write -> dp_ram_a_pos:write
 	wire  [31:0] mm_interconnect_1_dp_ram_a_pos_avalon_slave_0_writedata;        // mm_interconnect_1:dp_ram_a_pos_avalon_slave_0_writedata -> dp_ram_a_pos:writedata
@@ -706,7 +706,7 @@ module soc_system (
 	altera_avalon_mm_bridge #(
 		.DATA_WIDTH        (32),
 		.SYMBOL_WIDTH      (8),
-		.HDL_ADDR_WIDTH    (10),
+		.HDL_ADDR_WIDTH    (11),
 		.BURSTCOUNT_WIDTH  (1),
 		.PIPELINE_COMMAND  (1),
 		.PIPELINE_RESPONSE (1)
