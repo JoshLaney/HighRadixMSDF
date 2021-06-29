@@ -12,58 +12,93 @@ output reg [31:0] readdata
 parameter ID = 1;
 parameter DATA_WIDTH = 32;
 parameter ADDR_WIDTH = 11;
-localparam DIV_32 = (DATA_WIDTH+31)/32;
+//localparam DIV_32 = (DATA_WIDTH+31)/32;
 
 reg [10:0] addr_hps;
-reg [DATA_WIDTH-1:0] data_hps;
-wire [DATA_WIDTH-1:0] q_hps;
+reg [511:0] data_hps;
+wire [511:0] q_hps;
 reg we_hps, w_inc, r_inc_inhibit;
 
+integer i,j;
 
 always@(posedge avalon_clock) begin
 	w_inc <= 1'b0;
 	r_inc_inhibit <= 1'b0;
 	if(write) begin
-		case(address)
-			0: begin
-				data_hps <= writedata;
-				w_inc<=1'b1;
+		if(address==0) begin
+			data_hps[31:0] <= writedata;
+			w_inc<=1'b1;
+		end
+		else if(address==1) addr_hps <= writedata[10:0];
+		else if(address==2) we_hps <= writedata[0];
+		else begin
+			for(i = 1; i<16; i= i+1) begin
+				if(address==(i+3)) data_hps[i*32+:32] <= writedata;
 			end
-			1: addr_hps <= writedata[10:0];
-			2: we_hps <= writedata[0];
-			default: ;
-		endcase
+		end
 	end
 	if(read) begin
-		case(address)
-			0: begin
-				readdata <= q_hps[31:0];
-				if (~r_inc_inhibit)
-					addr_hps <= addr_hps + 11'd1;
-				r_inc_inhibit <= 1'b1;
+		if(address==0) begin
+			readdata <= q_hps[31:0];
+			if (~r_inc_inhibit)
+				addr_hps <= addr_hps + 11'd1;
+			r_inc_inhibit <= 1'b1;
+		end
+		else if (address==1) readdata <= addr_hps;
+		else if (address==2) readdata <= we_hps;
+		else if (address==3) readdata <= ID;
+		else begin
+			for(j = 1; j<16; j = j+1) begin
+				if (address==(j+3)) readdata <= q_hps[32*j+:32];
 			end
-			1: readdata <= addr_hps;
-			2: readdata <= we_hps;
-			3: readdata <= ID;
-			default: ;
-		endcase
+		end
 	end
 	if(w_inc) addr_hps <= addr_hps + 11'b1;
 end
 
-generate
-	genvar i;
-	for(i=1; i<DIV_32; i=i+1) begin : large_widths
-		always@(posedge avalon_clock) begin
-			if(write) begin
-				if(address==(i+3)) data_hps[i*32 +: 32] <= writedata;
-			end
-			if(read) begin
-				if(address==(i+3)) readdata <= q_hps[i*32 +: 32];
-			end
-		end
-	end
-endgenerate
+// always@(posedge avalon_clock) begin
+// 	w_inc <= 1'b0;
+// 	r_inc_inhibit <= 1'b0;
+// 	if(write) begin
+// 		case(address)
+// 			0: begin
+// 				data_hps <= writedata;
+// 				w_inc<=1'b1;
+// 			end
+// 			1: addr_hps <= writedata[10:0];
+// 			2: we_hps <= writedata[0];
+// 			default: ;
+// 		endcase
+// 	end
+// 	if(read) begin
+// 			0: begin
+// 				readdata <= q_hps[31:0];
+// 				if (~r_inc_inhibit)
+// 					addr_hps <= addr_hps + 11'd1;
+// 				r_inc_inhibit <= 1'b1;
+// 			end
+// 			1: readdata <= addr_hps;
+// 			2: readdata <= we_hps;
+// 			3: readdata <= ID;
+// 			default: ;
+// 		endcase
+// 	end
+// 	if(w_inc) addr_hps <= addr_hps + 11'b1;
+// end
+
+// generate
+// 	genvar i;
+// 	for(i=1; i<16; i=i+1) begin : large_widths
+// 		always@(posedge avalon_clock) begin
+// 			if(write) begin
+// 				if(address==(i+3)) data_hps[i*32 +: 32] <= writedata;
+// 			end
+// 			if(read) begin
+// 				if(address==(i+3)) readdata <= q_hps[i*32 +: 32];
+// 			end
+// 		end
+// 	end
+// endgenerate
 
 // generate
 // if(DATA_WIDTH<=32) begin
