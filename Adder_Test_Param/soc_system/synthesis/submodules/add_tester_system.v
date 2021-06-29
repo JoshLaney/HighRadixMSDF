@@ -130,13 +130,13 @@ addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_2(
 	.pll_clock(clk_pos), .addr_in(addr_cp_2), .addr_out(addr_cp_3),
 	.e_in(we_cp_2), .e_out(we_cp_3)
 	);
-addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_3(
-	.pll_clock(clk_pos), .addr_in(addr_cp_3), .addr_out(addr_cp_4),
-	.e_in(we_cp_3), .e_out(we_cp_4)
-	);
+// addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_3(
+// 	.pll_clock(clk_pos), .addr_in(addr_cp_3), .addr_out(addr_cp_4),
+// 	.e_in(we_cp_3), .e_out(we_cp_4)
+// 	);
 addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_4(
-	.pll_clock(clk_pos), .addr_in(addr_cp_4), .addr_out(addr_cp_5),
-	.e_in(we_cp_4), .e_out(we_cp_5)
+	.pll_clock(clk_pos), .addr_in(addr_cp_3), .addr_out(addr_cp_5),
+	.e_in(we_cp_3), .e_out(we_cp_5)
 	);
 
 //NEGATIVE ADDER DELAYS
@@ -152,55 +152,55 @@ addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_2(
 	.pll_clock(clk_neg), .addr_in(addr_cn_2), .addr_out(addr_cn_3),
 	.e_in(we_cn_2), .e_out(we_cn_3)
 	);
-addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_3(
-	.pll_clock(clk_neg), .addr_in(addr_cn_3), .addr_out(addr_cn_4),
-	.e_in(we_cn_3), .e_out(we_cn_4)
-	);
+// addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_3(
+// 	.pll_clock(clk_neg), .addr_in(addr_cn_3), .addr_out(addr_cn_4),
+// 	.e_in(we_cn_3), .e_out(we_cn_4)
+// 	);
 addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_4(
-	.pll_clock(clk_neg), .addr_in(addr_cn_4), .addr_out(addr_cn_5),
-	.e_in(we_cn_4), .e_out(we_cn_5)
+	.pll_clock(clk_neg), .addr_in(addr_cn_3), .addr_out(addr_cn_5),
+	.e_in(we_cn_3), .e_out(we_cn_5)
 	);
 
 //DATA A PATH TO ADDER
 clocked_mux #(.IN_WIDTH(BITS), .OUT_WIDTH(BITS), .INVERT(1)) clocked_mux_a(
-	.clock(pll_clk), .pos_in(q_ap), .neg_in(q_an), .q_out(in_a_0)
+	.clock(pll_clk), .pos_in(q_ap), .neg_in(q_an), .q_out(in_a_1)
 	);
-data_delay #(.WIDTH(BITS)) dd_a_0(
-	.pll_clock(pll_clk), .data_in(in_a_0), .data_out(in_a_1)
-	);
+// data_delay #(.WIDTH(BITS)) dd_a_0(
+// 	.pll_clock(pll_clk), .data_in(in_a_0), .data_out(in_a_1)
+// 	);
 data_delay #(.WIDTH(BITS)) dd_a_1(
 	.pll_clock(pll_clk), .data_in(in_a_1), .data_out(in_a_2)
 	);
 
 //DATA B PATH TO ADDER
 clocked_mux #(.IN_WIDTH(BITS), .OUT_WIDTH(BITS), .INVERT(1)) clocked_mux_b(
-	.clock(pll_clk), .pos_in(q_bp), .neg_in(q_bn), .q_out(in_b_0)
+	.clock(pll_clk), .pos_in(q_bp), .neg_in(q_bn), .q_out(in_b_1)
 	);
-data_delay #(.WIDTH(BITS)) dd_b_0(
-	.pll_clock(pll_clk), .data_in(in_b_0), .data_out(in_b_1)
-	);
+// data_delay #(.WIDTH(BITS)) dd_b_0(
+// 	.pll_clock(pll_clk), .data_in(in_b_0), .data_out(in_b_1)
+// 	);
 data_delay #(.WIDTH(BITS)) dd_b_1(
 	.pll_clock(pll_clk), .data_in(in_b_1), .data_out(in_b_2)
 	);
 
 //DATA C POS PATH FROM ADDER
 data_delay #(.WIDTH(BITS_OUT)) dd_cp_0(
-	.pll_clock(pll_clk), .data_in(sum), .data_out(out_cp_0)
+	.pll_clock(pll_clk), .data_in(sum), .data_out(out_cp_1)
 	);
-data_delay #(.WIDTH(BITS_OUT)) dd_cp_1(
-	.pll_clock(pll_clk), .data_in(out_cp_0), .data_out(out_cp_1)
-	);
+// data_delay #(.WIDTH(BITS_OUT)) dd_cp_1(
+// 	.pll_clock(pll_clk), .data_in(out_cp_0), .data_out(out_cp_1)
+// 	);
 mc_data_delay #(.WIDTH(BITS_OUT), .INVERT(1)) mc_dd_cp(
 	.pll_clock(pll_clk), .div_clock(clk_pos), .data_in(out_cp_1), .data_out(out_cp_2)
 	);
 
 //DATA C NEG PATH FROM ADDER
 data_delay #(.WIDTH(BITS_OUT)) dd_cn_0(
-	.pll_clock(pll_clk), .data_in(sum), .data_out(out_cn_0)
+	.pll_clock(pll_clk), .data_in(sum), .data_out(out_cn_1)
 	);
-data_delay #(.WIDTH(BITS_OUT)) dd_cn_1(
-	.pll_clock(pll_clk), .data_in(out_cn_0), .data_out(out_cn_1)
-	);
+// data_delay #(.WIDTH(BITS_OUT)) dd_cn_1(
+// 	.pll_clock(pll_clk), .data_in(out_cn_0), .data_out(out_cn_1)
+// 	);
 mc_data_delay #(.WIDTH(BITS_OUT), .INVERT(0)) mc_dd_cn(
 	.pll_clock(pll_clk), .div_clock(clk_neg), .data_in(out_cn_1), .data_out(out_cn_2)
 	);
