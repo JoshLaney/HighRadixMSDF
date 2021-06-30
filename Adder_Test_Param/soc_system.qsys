@@ -1844,7 +1844,7 @@
   <parameter name="gui_divide_factor_c7" value="1" />
   <parameter name="gui_divide_factor_c8" value="1" />
   <parameter name="gui_divide_factor_c9" value="1" />
-  <parameter name="gui_divide_factor_n" value="4" />
+  <parameter name="gui_divide_factor_n" value="5" />
   <parameter name="gui_dps_cntr" value="C0" />
   <parameter name="gui_dps_dir" value="Positive" />
   <parameter name="gui_dps_num" value="1" />
@@ -1878,7 +1878,7 @@
   <parameter name="gui_frac_multiply_factor" value="214748365" />
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
-  <parameter name="gui_multiply_factor" value="112" />
+  <parameter name="gui_multiply_factor" value="126" />
   <parameter name="gui_number_of_clocks" value="1" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />

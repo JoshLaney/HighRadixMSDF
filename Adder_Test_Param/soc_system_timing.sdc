@@ -64,6 +64,7 @@ set_multicycle_path 2 -from [get_registers {*mc*data_mid*}] \
 set_multicycle_path 1 -from [get_registers {*mc*data_mid*}] \
  -to [get_registers {*mc*data_out*}] -start -hold
 
+#set_max_delay -from [get_registers *rRp_add*] -to [get_registers *rRp_add*s_out*] 1
 #set_max_delay -from [get_registers {soc_system:soc_inst|*data_mid*}] -to [get_registers soc_system:soc_inst|*data_out*] 4.0
 #set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2
 #set_max_delay -from [get_keepers *\|gen*] -to * 2
