@@ -88,9 +88,7 @@ module soc_system (
 		input  wire        reset_reset_n                          //           reset.reset_n
 	);
 
-	wire         clock_div_0_clk_neg_clk;                                        // clock_div_0:clk_neg -> add_tester_system_0:clk_neg
-	wire         clock_div_0_clk_pos_clk;                                        // clock_div_0:clk_pos -> add_tester_system_0:clk_pos
-	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> [add_tester_system_0:pll_clk, clock_div_0:clock]
+	wire         pll_0_outclk0_clk;                                              // pll_0:outclk_0 -> add_tester_system_0:pll_clk
 	wire         pll_0_locked_export;                                            // pll_0:locked -> add_tester_system_0:pll_lock
 	wire  [63:0] pll_0_reconfig_from_pll_reconfig_from_pll;                      // pll_0:reconfig_from_pll -> pll_reconfig_0:reconfig_from_pll
 	wire  [63:0] pll_reconfig_0_reconfig_to_pll_reconfig_to_pll;                 // pll_reconfig_0:reconfig_to_pll -> pll_0:reconfig_to_pll
@@ -226,8 +224,6 @@ module soc_system (
 		.writedata_tcu (mm_interconnect_1_add_tester_system_0_tcu_writedata), //           .writedata
 		.readdata_tcu  (mm_interconnect_1_add_tester_system_0_tcu_readdata),  //           .readdata
 		.pll_clk       (pll_0_outclk0_clk),                                   //  pll_clock.clk
-		.clk_pos       (clock_div_0_clk_pos_clk),                             //    clk_pos.clk
-		.clk_neg       (clock_div_0_clk_neg_clk),                             //    clk_neg.clk
 		.avalon_clk    (clk_clk),                                             // clock_sink.clk
 		.resetn        (~rst_controller_reset_out_reset),                     // reset_sink.reset_n
 		.pll_lock      (pll_0_locked_export),                                 //   pll_lock.export
@@ -236,12 +232,6 @@ module soc_system (
 		.address_rap   (mm_interconnect_1_add_tester_system_0_rap_address),   //           .address
 		.writedata_rap (mm_interconnect_1_add_tester_system_0_rap_writedata), //           .writedata
 		.readdata_rap  (mm_interconnect_1_add_tester_system_0_rap_readdata)   //           .readdata
-	);
-
-	clock_div clock_div_0 (
-		.clock   (pll_0_outclk0_clk),       // clock_sink.clk
-		.clk_pos (clock_div_0_clk_pos_clk), //    clk_pos.clk
-		.clk_neg (clock_div_0_clk_neg_clk)  //    clk_neg.clk
 	);
 
 	soc_system_hps_0 #(

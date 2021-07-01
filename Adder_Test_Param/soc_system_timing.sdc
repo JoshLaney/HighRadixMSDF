@@ -2,48 +2,56 @@
 create_clock -period 20 [get_ports fpga_clk_50]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_tx_clock_connection_clk]
 create_clock -period 40 [get_ports eth_tse_0_pcs_mac_rx_clock_connection_clk]
-derive_pll_clocks
 
+#derive_pll_clocks
 
-#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[0]}]
-#create_generated_clock -name PLL_C0 -source [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}] [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[1]}]
-#create_generated_clock -name PLL_C2 -multiply_by 2 -source [soc_inst|pll_0|altera_pll_i|cyclonev_pll|inclk[0]}][get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|clk[2]}]
+create_clock -name pll_clk -period 3\
+ [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]
 
 create_generated_clock \
--divide_by 2 \
--source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
--name clk_pos \
-[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
+	-divide_by 2 \
+	-source [get_pins {soc_inst|add_tester_system_0|clk_div|clk_pos|clk}] \
+	-name clk_pos \
+	[get_pins {soc_inst|add_tester_system_0|clk_div|clk_pos|q}]
 
-#neg clock follows pos clock, but it's reg is clocked by the pll output there it's source is the pll
-create_generated_clock \
--divide_by 2 \
--invert \
--source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
--name clk_neg \
-[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
+create_generated_clock\
+	-divide_by 2 \
+	-invert \
+	-source [get_pins {soc_inst|add_tester_system_0|clk_div|clk_neg|clk}] \
+	-name clk_neg \
+	[get_pins {soc_inst|add_tester_system_0|clk_div|clk_neg|q}]
+
 
 #create_generated_clock \
--source [get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos] \
--invert \
--name clk_neg \
-[get_nets *clock_div_0_clock_neg_clk]
+#-multiply_by 8 \
+#-divide_by 1\
+#-source [get_ports fpga_clk_50] \
+#-name clk_tb \
+#[get_pins -compatibility_mode *counter[0].output_counter|divclk*]
+#
+#create_generated_clock \
+#-divide_by 2 \
+#-source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
+#-name clk_pos \
+#[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_pos]
+#
+##neg clock follows pos clock, but it's reg is clocked by the pll output there it's source is the pll
+#create_generated_clock \
+#-divide_by 2 \
+#-invert \
+#-source {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} \
+#-name clk_neg \
+#[get_registers soc_system:soc_inst|clock_div:clock_div_0|clk_neg]
+
 
 derive_clock_uncertainty
 
-#set_false_path -from {fpga_clk_50} -to {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk clk_pos clk_neg}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk  clk_pos clk_neg} -to {fpga_clk_50}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|x[*]}
-#set_false_path -from {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[1].output_counter|divclk} -to {soc_system:soc_inst|rRp_add:online_adder_0|y[*]}
-#set_false_path -from [get_keepers *ram_a*portb_we*] -to [get_keepers *ram_a*]
-#set_false_path -from [get_keepers *ram_b*portb_we*] -to [get_keepers *ram_b*]
-set_false_path -from [get_keepers *ram_b*portb_we_reg] -to [get_keepers *mux_b|data_mid*]
-set_false_path -from [get_keepers *ram_a*portb_we_reg] -to [get_keepers *mux_a|data_mid*]
-#set_false_path -from [get_keepers {*ram_c*porta_we_reg}] -to [get_clocks {*clk_pos* *clk_neg*}]
 
-#Avalon-Tester cross domain paths
+set_false_path -from [get_keepers *ram_a*portb_we_reg] -to [get_keepers *mux_a|data_mid*]
+set_false_path -from [get_keepers *ram_b*portb_we_reg] -to [get_keepers *mux_b|data_mid*]
+
+
+#Avalon <-> Tester cross domain paths
 set_false_path -from [get_registers {*tcu|done_*}] -to [get_registers {*tcu|done_*_1*}]
 set_false_path -from [get_registers {*tcu|go_*}] -to [get_registers {*tcu|go_*_1*}]
 set_false_path -from [get_registers {*tcu|num[*]*}] -to [get_registers {*tcu|num_*_1[*]}]
@@ -64,12 +72,13 @@ set_multicycle_path 2 -from [get_registers {*mc*data_mid*}] \
 set_multicycle_path 1 -from [get_registers {*mc*data_mid*}] \
  -to [get_registers {*mc*data_out*}] -start -hold
 
-#set_max_delay -from [get_registers *rRp_add*] -to [get_registers *rRp_add*s_out*] 1
-#set_max_delay -from [get_registers {soc_system:soc_inst|*data_mid*}] -to [get_registers soc_system:soc_inst|*data_out*] 4.0
-#set_max_delay -from [get_clocks {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[*].output_counter|divclk}] -to [get_keepers {*trace*|dcfifo*}] 2
-#set_max_delay -from [get_keepers *\|gen*] -to * 2
-#set_max_delay -from [get_keepers *|fclk_data_in*] -to * 2
 
+
+ 
+ 
+ 
+ 
+ 
 # for enhancing USB BlasterII to be reliable, 25MHz
 create_clock -name {altera_reserved_tck} -period 40 {altera_reserved_tck}
 set_input_delay -clock altera_reserved_tck -clock_fall 3 [get_ports altera_reserved_tdi]

@@ -1,5 +1,5 @@
 module add_tester_system(
-	input avalon_clk, pll_clk, clk_pos, clk_neg, resetn,
+	input avalon_clk, pll_clk, resetn,
 	
 	input read_rap, write_rap,
 	input [4:0] address_rap,
@@ -47,6 +47,9 @@ localparam BITS = DW*DIGITS;
 localparam BITS_OUT = BITS+DW;
 localparam W32 = 32*((BITS+32-1)/32);
 
+//INTERNAL CLOCKS
+wire clk_neg, clk_pos;
+
 //ADDRESSES
 wire[ADDR_WIDTH-1:0] addr_ap, addr_an, addr_bp, addr_bn;
 wire[ADDR_WIDTH-1:0] addr_cp_0, addr_cp_1, addr_cp_2, addr_cp_3, addr_cp_4, addr_cp_5;
@@ -68,6 +71,9 @@ wire[BITS_OUT-1:0] out_cn_0, out_cn_1, out_cn_2;
 rRp_add_clocked #(.RADIX(RADIX), .WIDTH(DIGITS)) adder(
 	.clock(pll_clk), .x_in(in_a_2), .y_in(in_b_2), .s_out(sum)
 	);
+//CLOCK DIVIDER
+clock_div clk_div(
+	.clock(pll_clk), .clk_pos(clk_pos), .clk_neg(clk_neg));
 
 //RAMS
 dpRam #(.ID(2), .DATA_WIDTH(W32), .ADDR_WIDTH(ADDR_WIDTH)) ram_ap(

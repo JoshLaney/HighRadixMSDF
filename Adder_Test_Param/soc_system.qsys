@@ -13,7 +13,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "5";
          type = "int";
       }
    }
@@ -28,14 +28,6 @@
       {
          value = "1";
          type = "boolean";
-      }
-   }
-   element clock_div_0
-   {
-      datum _sortIndex
-      {
-         value = "4";
-         type = "int";
       }
    }
    element hps_0
@@ -55,7 +47,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "4";
          type = "int";
       }
       datum sopceditor_expanded
@@ -93,6 +85,14 @@
       datum baseAddress
       {
          value = "256";
+         type = "String";
+      }
+   }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
          type = "String";
       }
    }
@@ -1213,7 +1213,6 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="clock_div_0" kind="clock_div" version="1.0" enabled="1" />
  <module name="hps_0" kind="altera_hps" version="20.1" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -1826,7 +1825,7 @@
   <parameter name="gui_channel_spacing" value="0.0" />
   <parameter name="gui_clk_bad" value="false" />
   <parameter name="gui_device_speed_grade" value="1" />
-  <parameter name="gui_divide_factor_c0" value="4" />
+  <parameter name="gui_divide_factor_c0" value="5" />
   <parameter name="gui_divide_factor_c1" value="32" />
   <parameter name="gui_divide_factor_c10" value="1" />
   <parameter name="gui_divide_factor_c11" value="1" />
@@ -1844,7 +1843,7 @@
   <parameter name="gui_divide_factor_c7" value="1" />
   <parameter name="gui_divide_factor_c8" value="1" />
   <parameter name="gui_divide_factor_c9" value="1" />
-  <parameter name="gui_divide_factor_n" value="5" />
+  <parameter name="gui_divide_factor_n" value="10" />
   <parameter name="gui_dps_cntr" value="C0" />
   <parameter name="gui_dps_dir" value="Positive" />
   <parameter name="gui_dps_num" value="1" />
@@ -1878,7 +1877,7 @@
   <parameter name="gui_frac_multiply_factor" value="214748365" />
   <parameter name="gui_fractional_cout" value="32" />
   <parameter name="gui_mif_generate" value="false" />
-  <parameter name="gui_multiply_factor" value="126" />
+  <parameter name="gui_multiply_factor" value="100" />
   <parameter name="gui_number_of_clocks" value="1" />
   <parameter name="gui_operation_mode" value="normal" />
   <parameter name="gui_output_clock_frequency0" value="100.0" />
@@ -2073,21 +2072,6 @@
    start="clk_0.clk"
    end="pll_reconfig_0.mgmt_clk" />
  <connection kind="clock" version="20.1" start="clk_0.clk" end="pll_0.refclk" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_neg"
-   end="add_tester_system_0.clk_neg" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="clock_div_0.clk_pos"
-   end="add_tester_system_0.clk_pos" />
- <connection
-   kind="clock"
-   version="20.1"
-   start="pll_0.outclk0"
-   end="clock_div_0.clock_sink" />
  <connection
    kind="clock"
    version="20.1"
