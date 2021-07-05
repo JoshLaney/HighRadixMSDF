@@ -197,7 +197,7 @@ plot(r4_w8_bf_loc(:,1), r4_w8_bf_loc(:,3), '-d', 'Color',[0 .9 0])
 plot(r8_w5_bf_loc(:,1), r8_w5_bf_loc(:,3), '-p', 'Color',[0 0 .9])
 plot(control_w15_bf_loc(:,1), control_w15_bf_loc(:,3), '-*', 'Color',[0 0 0])
 hold off
-title('Avg ming bit 32bits')
+title('Avg min bit 32bits')
 xlabel('freqeuncy (MHz)')
 ylabel('lsb flipped')
 legend('r2 w15','r4 w8','r8 w5','control w15')
