@@ -21,4 +21,4 @@ dd if="$RBF" of=/dev/fpga0 || exit 1
 set_bridge hps2fpga 1
 set_bridge fpga2hps 1
 set_bridge lwhps2fpga 1
-cat /sys/class/fpga/fpga0/status
+#cat /sys/class/fpga/fpga0/status

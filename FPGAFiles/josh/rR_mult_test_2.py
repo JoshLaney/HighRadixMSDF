@@ -258,7 +258,7 @@ for i in range(n):
         sub_c_num = c_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
     c_val = 0
-    for j in range(0,WIDTH+1):
+    for j in range(0,2*WIDTH+1):
         c_dig = (c_num&(MASK<<int(j*D)))>>int(j*D)
         if c_dig > A: c_dig = (-1<<int(D))|c_dig
         #elif c_dig == 2: print('ERROR c_dig 2???')
@@ -278,7 +278,7 @@ for i in range(n):
         sub_c_num = c_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
     c_val = 0
-    for j in range(0,WIDTH+1):
+    for j in range(0,2*WIDTH+1):
         c_dig = (c_num&(MASK<<int(j*D)))>>int(j*D)
         if c_dig > A: c_dig = (-1<<int(D))|c_dig
         #elif c_dig == 2: print('ERROR c_dig 2???')

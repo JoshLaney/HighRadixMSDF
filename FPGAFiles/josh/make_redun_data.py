@@ -7,7 +7,7 @@ WIDTH=int(sys.argv[2])
 A=RADIX-1
 D=int(math.log(RADIX,2)+1)
 MASK=(2**D)-1
-BITS=D*WIDTH
+BITS=D*WIDTH+D
 WORDS=max(int(math.ceil(math.log(BITS,2))),5)
 
 a_p = 'add/r%d_w%d/a_p_data.txt' % (RADIX,WIDTH)

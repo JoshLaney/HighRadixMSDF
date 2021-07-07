@@ -486,5 +486,3 @@ module true_dual_port_ram_dual_clock
 	end
 
 endmodule
-
-

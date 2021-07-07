@@ -84,7 +84,7 @@ else if (J<0) begin
 		.s(w_1));
 end
 
-else if(J<WIDTH-4) begin
+else if(J<=WIDTH-4) begin
 	reg [D*(WIDTH+6)-1: 0] pp_x;
 	reg [D*(WIDTH+6)-1: 0] pp_y;
 	reg [D*(WIDTH+6)-1: 0] p_val;
@@ -115,7 +115,8 @@ else if(J<WIDTH-4) begin
 
 		pp_y[D*(WIDTH+6)-1 -: D*5] <= 128'b0;
 		pp_y[D*(WIDTH+1)-1 -: D*(J+1+4)] <= y_j_1;
-		pp_y[0 +: D*(WIDTH-J-4)] <= 128'b0;
+		if(J<WIDTH-4)
+			pp_y[0 +: D*(WIDTH-J-4)] <= 128'b0;
 	end
 
 	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_xy(
@@ -164,6 +165,8 @@ else if(J<WIDTH-4) begin
 			p_val[D*(WIDTH+3) +: D] <= (-1*(v_est/(RADIX*RADIX)-1));
 			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
 		end
+		// p_val <= 128'b0;
+		// p <= 0;
 	end
 
 	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_w(
@@ -171,93 +174,6 @@ else if(J<WIDTH-4) begin
 		.y(v),
 		.s(w_1));
 
-end
-
-else if(J==WIDTH-4) begin
-	reg [D*(WIDTH+6)-1: 0] pp_x;
-	reg [D*(WIDTH+6)-1: 0] pp_y;
-	reg [D*(WIDTH+6)-1: 0] p_val;
-	reg signed [D-1:0] v_i;
-	reg [D*(WIDTH+6)-1: 0] w_shift;
-
-	wire [D*(J+4) -1: 0] x_j;
-	wire [D*(J+4+1) -1: 0] y_j_1;
-	wire [D*(WIDTH+6)-1: 0] x_y;
-	wire [D*(WIDTH+6)-1: 0] v;
-
-	integer v_est;
-	integer i;
-
-	rR_mult_pp #(.RADIX(RADIX), .J(J)) x_sel(
-		.a(x[D*WIDTH-1 -: D*(J+3)]),
-		.b(y[D*(WIDTH-J-3)-1 -: D]), 
-		.pp(x_j));
-	rR_mult_pp #(.RADIX(RADIX), .J(J+1)) y_sel(
-		.a(y[D*WIDTH-1 -: D*(J+1+3)]),
-		.b(x[D*(WIDTH-J-3)-1 -: D]), 
-		.pp(y_j_1));
-
-	always @(x_j, y_j_1) begin
-		pp_x[D*(WIDTH+6)-1 -: D*5] <= 128'b0;
-		pp_x[D*(WIDTH+1)-1 -: D*(J+4)] <= x_j;
-		pp_x[0 +: D*(WIDTH-J-3)] <= 128'b0;
-
-		pp_y[D*(WIDTH+6)-1 -: D*5] <= 128'b0;
-		pp_y[D*(WIDTH+1)-1 -: D*(J+1+4)] <= y_j_1;
-	end
-
-	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_xy(
-		.x(pp_x),
-		.y(pp_y),
-		.s(x_y));
-
-	always@(w) begin
-		w_shift[0 +: D] <= 128'b0;
-		w_shift[D*(WIDTH+6)-1 : D] <= w[0 +: D*(WIDTH+5)];
-	end
-
-	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_v(
-		.x(w_shift),
-		.y(x_y),
-		.s(v));
-
-	always @(v, v_est) begin
-		v_est=0;
-		for(i = 0; i<5; i=i+1) begin
-			v_i = v[D*(WIDTH+6-i)-1 -: D];
-			v_est = v_est + v_i*(RADIX**(4-i));
-		end
-		v_est = v_est + (RADIX*RADIX)/2;
-		if(v_est>=(RADIX**3)) begin
-			p <= RADIX-1;
-			p_val[D*(WIDTH+6)-1 -: 2*D] <= 128'b0;
-			p_val[D*(WIDTH+3) +: D] <= (-1*(RADIX-1));
-			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
-		end
-		else if(v_est<=(-1*RADIX*RADIX*(RADIX-1))) begin
-			p <= -1*(RADIX-1);
-			p_val[D*(WIDTH+6)-1 -: 2*D] <= 128'b0;
-			p_val[D*(WIDTH+3) +: D] <= (RADIX-1);
-			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
-		end
-		else if(v_est>=0) begin
-			p <= v_est/(RADIX*RADIX);
-			p_val[D*(WIDTH+6)-1 -: 2*D] <= 128'b0;
-			p_val[D*(WIDTH+3) +: D] <= (-1*v_est/(RADIX*RADIX));
-			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
-		end
-		else begin
-			p <= v_est/(RADIX*RADIX) - 1;
-			p_val[D*(WIDTH+6)-1 -: 2*D] <= 128'b0;
-			p_val[D*(WIDTH+3) +: D] <= (-1*(v_est/(RADIX*RADIX)-1));
-			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
-		end
-	end
-
-	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_w(
-		.x(p_val),
-		.y(v),
-		.s(w_1));
 end
 
 else begin
@@ -303,6 +219,8 @@ else begin
 			p_val[D*(WIDTH+3) +: D] <= (-1*(v_est/(RADIX*RADIX)-1));
 			p_val[0 +: D*(WIDTH+3)] <= 128'b0;
 		end
+		// p_val <= 128'b0;
+		// p <= 0;
 	end
 
 	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_w(

@@ -132,6 +132,8 @@ for a_line in a_file:
 a_p_ram.write(ram_regs['we'], 0)
 a_file.close()
 
+print n
+
 c_file = open(c_p, 'w')
 a_p_ram.write(ram_regs['addr'], 0)
 for i in range(n):
