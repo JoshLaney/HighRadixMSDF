@@ -16,6 +16,7 @@ TRYS=int(sys.argv[3])
 A=RADIX-1
 D=math.floor(math.log(RADIX,2)+1)
 BITS=D*WIDTH
+BITS_OUT = BITS + D
 MASK=int((2**D)-1)
 
 a_p = 'add/r%d_w%d/a_p_data.txt' % (RADIX,WIDTH)
@@ -82,7 +83,7 @@ c_n_ram = module.module(axi, 0x0280)
 f_sum = 0
 start_time = time.time()
 for x in range(1, TRYS+1):
-    print 'Trail', x
+    print 'R',RADIX,'W',WIDTH,'Trial', x
     f_min=100000000
     f_max=600000000
 
@@ -192,7 +193,7 @@ for x in range(1, TRYS+1):
         c_p_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -212,7 +213,7 @@ for x in range(1, TRYS+1):
         c_n_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -260,7 +261,7 @@ for x in range(1, TRYS+1):
         c_p_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -272,7 +273,7 @@ for x in range(1, TRYS+1):
         c_n_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -380,7 +381,7 @@ for x in range(1, TRYS+1):
             gold_val = long(line.strip('\n'))
             gold_vec = long(p_vec_file.readline().strip('\n'))
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -459,7 +460,7 @@ for x in range(1, TRYS+1):
             gold_val = long(line.strip('\n'))
             gold_vec = long(n_vec_file.readline().strip('\n'))
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -556,8 +557,8 @@ for x in range(1, TRYS+1):
 
         err_file.write('%d, %f, %d, %d\n' %(ovc_freq,avg_err,max_err,min_err))
         abs_err_file.write('%d, %f, %d\n' %(ovc_freq,avg_abs_err,max_abs_err))
-        mr_err_file.write('%d, %f, %f\n' %(ovc_freq,,avg_mr_err,max_mr_err))
-        bf_loc_file.write('%d, %f, %d, %d, %d\n' %(ovc_freq,avg_min_bf,max_bf,min_bf,bf_illegal,avg_max_bf))
+        mr_err_file.write('%d, %f, %f\n' %(ovc_freq,avg_mr_err,max_mr_err))
+        bf_loc_file.write('%d, %f, %d, %d, %d, %f\n' %(ovc_freq,avg_min_bf,max_bf,min_bf,bf_illegal,avg_max_bf))
         ovc_freq = ovc_freq+1
 
     mr_err_file.close()

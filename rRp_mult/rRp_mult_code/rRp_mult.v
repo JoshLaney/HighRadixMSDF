@@ -7,8 +7,8 @@ module rRp_mult(
 	clock
 );
 
-parameter WIDTH = 4; //number of digits
-parameter RADIX = 4;
+parameter WIDTH = 7; //number of digits
+parameter RADIX = 2;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 
 input clock;

@@ -8,7 +8,7 @@ A=RADIX-1
 D=1
 MASK=1
 BITS=D*WIDTH
-WORDS=max(int(math.ceil(math.log(BITS,2))),5)
+WORDS=int(sys.argv[2])
 
 a_p = 'add/control_w%d/a_p_data.txt' % (WIDTH)
 b_p = 'add/control_w%d/b_p_data.txt' % (WIDTH)
