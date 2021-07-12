@@ -20,8 +20,8 @@ integer i;
 integer x_num;
 integer y_num;
 integer p_num;
-integer p_expected;
-integer p_expected_old;
+integer p_expected[0:WIDTH+3];
+//integer p_expected_old;
 integer tests;
 
 rRp_mult #(.WIDTH(WIDTH), .RADIX(RADIX)) mult(.x_in(x), .y_in(y), .p_out(p), .clock(clk));
@@ -35,7 +35,9 @@ initial begin
 	x_num = 0;
 	y_num = 0;
 	p_num = 0;
-	p_expected = 0;
+	for(i=0;i<=WIDTH+3; i=i+1) begin
+		p_expected[i] = 0;
+	end
 	tests = TESTS -1;
 end
 
@@ -44,7 +46,7 @@ always @(negedge clk)
 		#3;
 		x_num = 0;
 		y_num = 0;
-		p_expected = 0;
+		p_expected[0] = 0;
 		for(i = 0; i<WIDTH; i= i +1) begin
 			x_i = $signed($urandom_range(0,2*A))-A;
 			y_i = $signed($urandom_range(0,2*A))-A;
@@ -54,7 +56,7 @@ always @(negedge clk)
 			x[i*D +: D] = x_i;
 			y[i*D +: D] = y_i;
 		end
-		p_expected = x_num * y_num;
+		p_expected[0] = x_num * y_num;
 	end
 
 always @(posedge clk)
@@ -66,7 +68,7 @@ always @(posedge clk)
 			p_num = p_num + p_i*RADIX**i;
 		end
 		#1
-		if(p_num != p_expected_old)
+		if(p_num != p_expected[WIDTH+3])
 		begin
 			$display("Error at test %d", TESTS-tests);
 			errors = errors + 1;
@@ -79,7 +81,9 @@ always @(posedge clk)
 			$finish;
 		end
 		#1
-		p_expected_old = p_expected;
+		for(i=WIDTH+3;i>=1;i=i-1)begin
+			p_expected[i]=p_expected[i-1];
+		end
 	end
 
 endmodule
