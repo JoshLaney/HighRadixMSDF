@@ -2,9 +2,9 @@
 
 module rRp_mult_tb;
 
-parameter RADIX = 2;
-parameter WIDTH = 7; //number of digits 
-parameter TESTS = 100;
+parameter RADIX = 4;
+parameter WIDTH = 4; //number of digits 
+parameter TESTS = 1000;
 
 localparam A = RADIX - 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit

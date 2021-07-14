@@ -39,13 +39,14 @@ module mult_tester_system(
 
 (* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *)
 
-localparam RADIX = 2;
-localparam DIGITS = 7;
-localparam ADDR_WIDTH = 11;
+localparam RADIX = 1;
+localparam DIGITS = 31;
+localparam ADDR_WIDTH = 9;
 localparam DW = $clog2(RADIX)+1;
 localparam BITS = DW*DIGITS;
 localparam BITS_OUT = 2*BITS+DW;
-localparam W32 = 32*((BITS_OUT+32-1)/32);
+localparam W32 = 128; //32*((BITS_OUT+32-1)/32);
+localparam ADELAY = (DIGITS+3)/2; //celi((DIGITS+2)/2)
 
 //INTERNAL CLOCKS
 wire clk_neg, clk_pos;
@@ -54,8 +55,10 @@ wire clk_neg, clk_pos;
 wire[ADDR_WIDTH-1:0] addr_ap, addr_an, addr_bp, addr_bn;
 wire[ADDR_WIDTH-1:0] addr_cp_0, addr_cp_1, addr_cp_2, addr_cp_3, addr_cp_4, addr_cp_5;
 wire[ADDR_WIDTH-1:0] addr_cn_0, addr_cn_1, addr_cn_2, addr_cn_3, addr_cn_4, addr_cn_5;
+wire[ADDR_WIDTH-1:0] addr_pline_p[0:ADELAY], addr_pline_n[0:ADELAY];
 wire we_cp_0, we_cp_1, we_cp_2, we_cp_3, we_cp_4, we_cp_5;
 wire we_cn_0, we_cn_1, we_cn_2, we_cn_3, we_cn_4, we_cn_5;
+wire we_pline_p[0:ADELAY], we_pline_n[0:ADELAY];
 
 //DATA_INTO_MULT
 wire[BITS-1:0] q_ap, q_an, q_bp, q_bn;
@@ -66,6 +69,8 @@ wire[BITS-1:0] in_b_0, in_b_1, in_b_2;
 wire[BITS_OUT-1:0] prod;
 wire[BITS_OUT-1:0] out_cp_0, out_cp_1, out_cp_2;
 wire[BITS_OUT-1:0] out_cn_0, out_cn_1, out_cn_2;
+
+genvar i;
 
 //MULTIPLIER
 rRp_mult #(.RADIX(RADIX), .WIDTH(DIGITS)) mult(
@@ -118,16 +123,33 @@ testControlUnit #(.ID(8)) tcu(
 	.address(address_tcu), .writedata(writedata_tcu), .readdata(readdata_tcu),
 	.pll_clock_pos(clk_pos), .pll_clock_neg(clk_neg), 
 	.r_addr_a_pos(addr_ap), .r_addr_a_neg(addr_an), .r_addr_b_pos(addr_bp), .r_addr_b_neg(addr_bn),
-	.we_pos(we_cp_0), .w_addr_pos(addr_cp_0),
-	.we_neg(we_cn_0), .w_addr_neg(addr_cn_0),
+	.we_pos(we_pline_p[0]), .w_addr_pos(addr_pline_p[0]),
+	.we_neg(we_pline_n[0]), .w_addr_neg(addr_pline_n[0]),
 	.pll_lock(pll_lock)
 	);
 
 //POSITIVE MULT DELAYS
-addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_0(
-	.pll_clock(clk_pos), .addr_in(addr_cp_0), .addr_out(addr_cp_1),
-	.e_in(we_cp_0), .e_out(we_cp_1)
-	);
+generate
+	if(RADIX>=2) begin
+		for(i=0;i<ADELAY;i=i+1) begin: ad_pline_p
+			addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp(
+				.pll_clock(clk_pos), .addr_in(addr_pline_p[i]), .addr_out(addr_pline_p[i+1]),
+				.e_in(we_pline_p[i]), .e_out(we_pline_p[i+1])
+				);
+		end
+		addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_0(
+			.pll_clock(clk_pos), .addr_in(addr_pline_p[ADELAY]), .addr_out(addr_cp_1),
+			.e_in(we_pline_p[ADELAY]), .e_out(we_cp_1)
+		);
+	end else begin
+		addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_0(
+			.pll_clock(clk_pos), .addr_in(addr_pline_p[0]), .addr_out(addr_cp_1),
+			.e_in(we_pline_p[0]), .e_out(we_cp_1)
+		);
+	end
+endgenerate
+
+
 addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_1(
 	.pll_clock(clk_pos), .addr_in(addr_cp_1), .addr_out(addr_cp_2),
 	.e_in(we_cp_1), .e_out(we_cp_2)
@@ -146,10 +168,26 @@ addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_4(
 	);
 
 //NEGATIVE MULT DELAYS
-addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_0(
-	.pll_clock(clk_neg), .addr_in(addr_cn_0), .addr_out(addr_cn_1),
-	.e_in(we_cn_0), .e_out(we_cn_1)
-	);
+generate
+	if(RADIX>=2) begin
+		for(i=0;i<ADELAY;i=i+1) begin: ad_pline_n
+			addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn(
+				.pll_clock(clk_neg), .addr_in(addr_pline_n[i]), .addr_out(addr_pline_n[i+1]),
+				.e_in(we_pline_n[i]), .e_out(we_pline_n[i+1])
+				);
+		end
+		addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_0(
+			.pll_clock(clk_neg), .addr_in(addr_pline_n[ADELAY]), .addr_out(addr_cn_1),
+			.e_in(we_pline_n[ADELAY]), .e_out(we_cn_1)
+			);
+	end else begin
+		addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_0(
+			.pll_clock(clk_neg), .addr_in(addr_pline_n[0]), .addr_out(addr_cn_1),
+			.e_in(we_pline_n[0]), .e_out(we_cn_1)
+			);
+	end
+endgenerate
+
 addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn_1(
 	.pll_clock(clk_neg), .addr_in(addr_cn_1), .addr_out(addr_cn_2),
 	.e_in(we_cn_1), .e_out(we_cn_2)
@@ -190,23 +228,41 @@ data_delay #(.WIDTH(BITS)) dd_b_1(
 	);
 
 //DATA C POS PATH FROM MULT
-data_delay #(.WIDTH(BITS_OUT)) dd_cp_0(
+generate
+if((((DIGITS+1)/2 - DIGITS/2) == 1) && RADIX>=2) begin //if odd number of pipeline stages, add extra data offset
+	data_delay #(.WIDTH(BITS_OUT)) dd_cp_0(
+		.pll_clock(pll_clk), .data_in(prod), .data_out(out_cp_0)
+		);
+	data_delay #(.WIDTH(BITS_OUT)) dd_cp_1(
+		.pll_clock(pll_clk), .data_in(out_cp_0), .data_out(out_cp_1)
+		);
+end
+else begin
+	data_delay #(.WIDTH(BITS_OUT)) dd_cp_0(
 	.pll_clock(pll_clk), .data_in(prod), .data_out(out_cp_1)
 	);
-// data_delay #(.WIDTH(BITS_OUT)) dd_cp_1(
-// 	.pll_clock(pll_clk), .data_in(out_cp_0), .data_out(out_cp_1)
-// 	);
+end
+endgenerate
 mc_data_delay #(.WIDTH(BITS_OUT), .INVERT(1)) mc_dd_cp(
 	.pll_clock(pll_clk), .div_clock(clk_pos), .data_in(out_cp_1), .data_out(out_cp_2)
 	);
 
 //DATA C NEG PATH FROM MULT
-data_delay #(.WIDTH(BITS_OUT)) dd_cn_0(
+generate
+if((((DIGITS+1)/2 - DIGITS/2) == 1) && RADIX>=2) begin //if odd number of pipeline stages, add extra data offset
+	data_delay #(.WIDTH(BITS_OUT)) dd_cn_0(
+		.pll_clock(pll_clk), .data_in(prod), .data_out(out_cn_0)
+		);
+	data_delay #(.WIDTH(BITS_OUT)) dd_cn_1(
+		.pll_clock(pll_clk), .data_in(out_cn_0), .data_out(out_cn_1)
+		);
+end
+else begin
+	data_delay #(.WIDTH(BITS_OUT)) dd_cn_0(
 	.pll_clock(pll_clk), .data_in(prod), .data_out(out_cn_1)
 	);
-// data_delay #(.WIDTH(BITS_OUT)) dd_cn_1(
-// 	.pll_clock(pll_clk), .data_in(out_cn_0), .data_out(out_cn_1)
-// 	);
+end
+endgenerate
 mc_data_delay #(.WIDTH(BITS_OUT), .INVERT(0)) mc_dd_cn(
 	.pll_clock(pll_clk), .div_clock(clk_neg), .data_in(out_cn_1), .data_out(out_cn_2)
 	);

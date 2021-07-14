@@ -7,24 +7,24 @@ import sys
 import math
 import lib.fractional_pll as pll
 
-RADIX=int(sys.argv[1])
-WIDTH=int(sys.argv[2])
+RADIX=2
+WIDTH=int(sys.argv[1])
 A=RADIX-1
-D=math.floor(math.log(RADIX,2)+1)
-BITS=D*WIDTH
-BITS_OUT = 2*BITS+D
+D=1
+BITS=float(D*WIDTH)
+BITS_OUT=BITS*2+1
 MASK=int((2**D)-1)
 
-a_p = 'mult/r%d_w%d/a_p_data.txt' % (RADIX,WIDTH)
-a_p_test = 'mult/r%d_w%d/a_p_data_TEST.txt' % (RADIX,WIDTH)
-b_p = 'mult/r%d_w%d/b_p_data.txt' % (RADIX,WIDTH)
-c_p = 'mult/r%d_w%d/c_p_data.txt' % (RADIX,WIDTH)
-gold_p = 'mult/r%d_w%d/c_p_data_GOLD.txt' % (RADIX,WIDTH)
-a_n = 'mult/r%d_w%d/a_n_data.txt' % (RADIX,WIDTH)
-b_n = 'mult/r%d_w%d/b_n_data.txt' % (RADIX,WIDTH)
-c_n = 'mult/r%d_w%d/c_n_data.txt' % (RADIX,WIDTH)
-gold_n = 'mult/r%d_w%d/c_n_data_GOLD.txt' % (RADIX,WIDTH)
-rbf= './program_fpga.sh mult/r%d_w%d/r%d_w%d.rbf' % (RADIX,WIDTH,RADIX,WIDTH)
+a_p = 'mult/control_w%d/a_p_data.txt' % (WIDTH)
+a_p_test = 'mult/control_w%d/a_p_data_TEST.txt' % (WIDTH)
+b_p = 'mult/control_w%d/b_p_data.txt' % (WIDTH)
+c_p = 'mult/control_w%d/c_p_data.txt' % (WIDTH)
+gold_p = 'mult/control_w%d/c_p_data_GOLD.txt' % (WIDTH)
+a_n = 'mult/control_w%d/a_n_data.txt' % (WIDTH)
+b_n = 'mult/control_w%d/b_n_data.txt' % (WIDTH)
+c_n = 'mult/control_w%d/c_n_data.txt' % (WIDTH)
+gold_n = 'mult/control_w%d/c_n_data_GOLD.txt' % (WIDTH)
+rbf= './program_fpga.sh mult/control_w%d/control_w%d.rbf' % (WIDTH,WIDTH)
 
 print 'Programming FPGA'
 os.popen(rbf)
@@ -109,7 +109,7 @@ if working != 7:
     exit()
 print('IP contacted successfully')
 
-f_try = pll.set(10000000)
+f_try = pll.set(100000000)
 while(tcu.read(tcu_regs['lock']) != 1):
     pass
 
@@ -119,7 +119,6 @@ print('Filling a_p_ram')
 a_file = open(a_p, 'r')
 a_p_ram.write(ram_regs['addr'], 0)
 a_p_ram.write(ram_regs['we'], 1)
-#print int(math.ceil(BITS/32))
 for a_line in a_file:
     value = int(a_line.strip('\n'))
     for i in range(int(math.ceil(BITS/32)),0,-1):
@@ -148,6 +147,7 @@ diff = os.popen('diff '+c_p+' '+a_p)
 output = diff.read()
 if(output != ''):
     print('fail: writing ram_a_pos')
+    #print output
     exit()
 
 print('Filling b_p_ram')
@@ -258,14 +258,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
-    c_val = 0
-    for j in range(0,2*WIDTH+1):
-        c_dig = (c_num&(MASK<<int(j*D)))>>int(j*D)
-        if c_dig > A: c_dig = (-1<<int(D))|c_dig
-        #elif c_dig == 2: print('ERROR c_dig 2???')
-        #if c_dig > 1 or c_dig < -1: print('Error c_dig out of bounds?????')
-        c_val += c_dig*(RADIX**j)
-    c_file.write('%d\n' %c_val)
+    c_file.write('%d\n' %c_num)
 c_file.close()
 
 
@@ -278,14 +271,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
-    c_val = 0
-    for j in range(0,2*WIDTH+1):
-        c_dig = (c_num&(MASK<<int(j*D)))>>int(j*D)
-        if c_dig > A: c_dig = (-1<<int(D))|c_dig
-        #elif c_dig == 2: print('ERROR c_dig 2???')
-        #if c_dig > 1 or c_dig < -1: print('Error c_dig out of bounds?????')
-        c_val += c_dig*(RADIX**j)
-    c_file.write('%d\n' %c_val)
+    c_file.write('%d\n' %c_num)
 c_file.close()
 
 

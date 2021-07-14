@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import math
 
-RADIX=2
+RADIX=4
 WIDTH=5
 A=RADIX-1
 D=math.floor(math.log(RADIX,2)+1)
@@ -9,11 +9,11 @@ MASK=int((2**D)-1)
 
 
 print("task automatic estimate;")
-print("    input [5*D-1:0] v_est;")
+print("    input [D*(WIDTH+6)-1: 0] v;")
 print("    output [D-1:0] p;")
 print("    output [D*(WIDTH+6)-1: 0] p_val;")
 print("    begin")
-print("        case (v_est)")
+print("        case (v[D*(WIDTH+6)-1 -: 5*D])")
 
 fmt = "            {{0}}'b{{1:0{0}b}}: p = {{2}}'b{{3:0{1}b}};".format(int(WIDTH*D), int(D))
 for a in range(0, (2 ** int(WIDTH*D))):
@@ -26,18 +26,25 @@ for a in range(0, (2 ** int(WIDTH*D))):
             break;
         val += dig*(RADIX**j)
     val = val + int((RADIX*RADIX)/2)
-    if(dig==-1*RADIX): continue
-    if(val>=(RADIX**3)): p = RADIX-1
+    if(dig==-1*RADIX): p = 'XX'
+    elif(val>=(RADIX**3)): p = RADIX-1
     elif(val<=(-1*RADIX*RADIX*(RADIX-1))): p = -1*(RADIX-1)
     elif(val>=0): p = int(float(val)/(RADIX*RADIX))
     else: 
         p= int(float(val)/(RADIX*RADIX)) -1
-    if(p<0):
-        p = p - (p<<int(D))
-    print(fmt.format(int(WIDTH*D),a,int(D),p))
+    if(p=='XX'):
+        case = fmt.format(int(WIDTH*D),a,int(D),0)[:-(int(D)+1)]
+        for x in range(0,int(D)):
+            case += 'X'
+        case += ';'
+        print(case)
+    else:
+        if(p<0):
+            p = p & ~(-1<<int(D))
+        print(fmt.format(int(WIDTH*D),a,int(D),p))
 
 
-print("            default: p = 0;")
+print("            default: ;")
 print("         endcase")
 print("         p_val[D*(WIDTH+6)-1 -: 2*D] = 128'b0;")
 print("         p_val[D*(WIDTH+3) +: D] = (~p+1);")
