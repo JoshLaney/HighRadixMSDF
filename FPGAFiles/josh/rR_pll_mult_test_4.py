@@ -306,6 +306,8 @@ for x in range(1, TRYS+1):
         pass
 
     ovc_freq = int(f_min/1000000) - 10
+    ovc_max = ovc_freq+100
+    if(ovc_max > 600): ovc_max = 600
     print 'Beging overlock tests at', ovc_freq, 'MHz'
 
     mr_err_file = open(mr_err_path, 'a')
@@ -318,7 +320,7 @@ for x in range(1, TRYS+1):
     checkpoint_500 = False
     checkpoint_550 = False
 
-    while(ovc_freq<=300):
+    while(ovc_freq<=ovc_max):
         actual_freq = int(math.ceil(pll.set(ovc_freq*1000000)/1000000))
         if(actual_freq!=ovc_freq):
             if(actual_freq>ovc_freq):
@@ -327,19 +329,19 @@ for x in range(1, TRYS+1):
                 ovc_freq = ovc_freq + 1
                 continue
 
-        if(ovc_freq>=100 and (not checkpoint_400)):
+        if(ovc_freq>=(ovc_max-100) and (not checkpoint_400)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_400 = True
 
-        if(ovc_freq>=150 and (not checkpoint_450)):
+        if(ovc_freq>=(ovc_max-75) and (not checkpoint_450)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_450 = True
 
-        if(ovc_freq>=200 and (not checkpoint_500)):
+        if(ovc_freq>=(ovc_max-50) and (not checkpoint_500)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_500 = True
 
-        if(ovc_freq>=250 and (not checkpoint_550)):
+        if(ovc_freq>=(ovc_max-25) and (not checkpoint_550)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_550 = True
 
