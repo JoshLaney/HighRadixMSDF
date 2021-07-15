@@ -8,15 +8,18 @@ classdef Adder
         abs
         mr
         bits
+        data_points
     end
     methods
-        function obj = Adder(r,w, m, c)
+        function obj = Adder(r,w, dp, m, c)
             obj.radix = r;
             obj.width = w;
             obj.color = c;
             obj.marker = m;
+            obj.data_points=dp;
             if(r>=2)
                 obj.err = condition_data(obj, readmatrix(sprintf('r%d_w%d/r%d_w%d_err.csv',r,w,r,w)));
+        
                 obj.abs = condition_data(obj, readmatrix(sprintf('r%d_w%d/r%d_w%d_abs_err.csv',r,w,r,w)));
                 obj.mr = condition_data(obj, readmatrix(sprintf('r%d_w%d/r%d_w%d_mr_err.csv',r,w,r,w)));
                 obj.bits = normilize_bits(obj, condition_data(obj, readmatrix(sprintf('r%d_w%d/r%d_w%d_bf_loc.csv',r,w,r,w))));
@@ -72,10 +75,10 @@ classdef Adder
             normd = zeros(size(x));
             n_bits = (obj.width+1)*(log2(obj.radix)+1);
             normd(:,1)=x(:,1);
-            for i = 2:(n-1)
+            for i = 2:n
                 normd(:,i)=x(:,i)./n_bits;
             end
-            normd(:,n)=x(:,n)./(n_bits*2047);
+            normd(:,n-1)=x(:,n-1)./(n_bits*obj.data_points);
         end
     end
 end

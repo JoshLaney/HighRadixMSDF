@@ -305,7 +305,10 @@ for x in range(1, TRYS+1):
     while (tcu.read(tcu_regs['go']) != 0):
         pass
 
-    ovc_freq = int(f_min/1000000) - 10
+    ovc_freq_start = int(f_min/1000000) - 10
+    ovc_freq= ovc_freq_start
+    freq_span = 600 - ovc_freq_start
+    prog_bar = int(freq_span/5)
     print 'Beging overlock tests at', ovc_freq, 'MHz'
 
     mr_err_file = open(mr_err_path, 'a')
@@ -327,19 +330,19 @@ for x in range(1, TRYS+1):
                 ovc_freq = ovc_freq + 1
                 continue
 
-        if(ovc_freq>=400 and (not checkpoint_400)):
+        if(ovc_freq>=(600-4*prog_bar) and (not checkpoint_400)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_400 = True
 
-        if(ovc_freq>=450 and (not checkpoint_450)):
+        if(ovc_freq>=(600-3*prog_bar) and (not checkpoint_450)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_450 = True
 
-        if(ovc_freq>=500 and (not checkpoint_500)):
+        if(ovc_freq>=(600-2*prog_bar) and (not checkpoint_500)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_500 = True
 
-        if(ovc_freq>=550 and (not checkpoint_550)):
+        if(ovc_freq>=(600-1*prog_bar) and (not checkpoint_550)):
             print 'reached', ovc_freq, 'MHz'
             checkpoint_550 = True
 
@@ -481,6 +484,9 @@ for x in range(1, TRYS+1):
                     xor_left = int(xor_left/2)
                     left_1 += 1
             if(left_1>max_bf): max_bf = left_1
+            if(left_1>0):
+                avg_max_bf += left_1
+                avg_max_bf_count +=1 
 
             c_val = 0
             for j in range(0,WIDTH+1):
@@ -559,7 +565,12 @@ for x in range(1, TRYS+1):
         abs_err_file.write('%d, %f, %d\n' %(ovc_freq,avg_abs_err,max_abs_err))
         mr_err_file.write('%d, %f, %f\n' %(ovc_freq,avg_mr_err,max_mr_err))
         bf_loc_file.write('%d, %f, %d, %d, %d, %f\n' %(ovc_freq,avg_min_bf,max_bf,min_bf,bf_illegal,avg_max_bf))
-        ovc_freq = ovc_freq+1
+        
+        freq_diff = ovc_freq-ovc_freq_start
+        if(freq_diff<=100): ovc_freq += 1
+        elif(freq_diff<=200): ovc_freq += 5
+        elif(freq_diff<=300): ovc_freq += 10
+        else: ovc_freq += 25
 
     mr_err_file.close()
     err_file.close()
