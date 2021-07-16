@@ -27,7 +27,10 @@ c_prog_m="control_pll_mult_test_4.py"
 # python $r_prog_m 4 15 40
 # python $c_prog_m 31 40
 
-python $r_prog 2 127 80
-python $r_prog 4 64 80
-python $r_prog 8 43 80
-python $c_prog 127 80
+# python $r_prog 2 127 80
+# python $r_prog 4 64 80
+# python $r_prog 8 43 80
+# python $c_prog 127 80
+python $r_prog_m 2 63 80
+python $r_prog_m 4 32 80
+python $c_prog_m 63 80

@@ -19,15 +19,16 @@
 #
 # Quartus Prime
 # Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-# Date created = 11:51:16  July 16, 2021
+# Date created = 15:26:59  July 16, 2021
 #
 # -------------------------------------------------------------------------- #
 
 QUARTUS_VERSION = "20.1"
-DATE = "11:51:16  July 16, 2021"
+DATE = "15:26:59  July 16, 2021"
 
 # Revisions
 
+PROJECT_REVISION = "control_w63"
 PROJECT_REVISION = "r4_w32"
 PROJECT_REVISION = "r2_w63"
 PROJECT_REVISION = "r2_w31"
