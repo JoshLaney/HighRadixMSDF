@@ -3,31 +3,51 @@ set(groot,'defaultLineLineWidth',2.0)
 
 
 Adders_32 = [
-    Adder(2, 15,2*2047, '-s', [0.9 0 0])
-    Adder(4, 8,2*2047, '-d', [0 0.9 0])
-    Adder(8, 5,2*2047, '-p', [0 0 0.9])
-    Adder(1, 15,2*2047, '-*', [0.1 0.1 0.1])
+    Adder(2, 15,2*2047, '-', [0.9 0 0])
+    Adder(4, 8,2*2047, '-', [0 0.9 0])
+    Adder(8, 5,2*2047, '-', [0 0 0.9])
+    Adder(16,4,2*2047, '-', [0.9 0.9 0])
+    Adder(1, 15,2*2047, '-', [0.1 0.1 0.1])
 ];
 
 Adders_64 = [
-    Adder(2, 31,2*1023, '-s', [0.9 0 0])
-    Adder(4, 16,2*1023, '-d', [0 0.9 0])
-    Adder(8, 11,2*1023, '-p', [0 0 0.9])
-    Adder(1, 31,2*1023, '-*', [0.1 0.1 0.1])
+    Adder(2, 31,2*1023, '-', [0.9 0 0])
+    Adder(4, 16,2*1023, '-', [0 0.9 0])
+    Adder(8, 11,2*1023, '-', [0 0 0.9])
+    Adder(1, 31,2*1023, '-', [0.1 0.1 0.1])
 ];
 
 Adders_128 = [
-    Adder(2, 63,2*511, '-s', [0.9 0 0])
-    Adder(4, 32,2*511, '-d', [0 0.9 0])
-    Adder(8, 21,2*511, '-p', [0 0 0.9])
-    Adder(1, 63,2*511, '-*', [0.1 0.1 0.1])
+    Adder(2, 63,2*511, '-', [0.9 0 0])
+    Adder(4, 32,2*511, '-', [0 0.9 0])
+    Adder(8, 21,2*511, '-', [0 0 0.9])
+    Adder(1, 63,2*511, '-', [0.1 0.1 0.1])
+];
+
+Adders_R2 = [
+    Adder(2, 15,2*2047, '-', [0.9 0 0])
+    Adder(2, 31,2*1023, '-', [0 0.9 0])
+    Adder(2, 63,2*511, '-', [0 0 0.9])
+];
+Adders_R4 = [
+    Adder(4, 8,2*2047, '-', [0.9 0 0])
+    Adder(4, 16,2*1023, '-', [0 0.9 0])
+    Adder(4, 32,2*511, '-', [0 0 0.9])
+];
+Adders_R8 = [
+    Adder(8, 5,2*2047, '-', [0.9 0 0])
+    Adder(8, 11,2*1023, '-', [0 0.9 0])
+    Adder(8, 21,2*511, '-', [0 0 0.9])
 ];
 
 fig_num = 1;
-fig_num = make_plots(Adders_32, 32, fig_num);
-fig_num = make_plots(Adders_64, 64, fig_num);
-fig_num = make_plots(Adders_128, 128, fig_num);
-function fig_num = make_plots(Adders, width, fig_num)
+%fig_num = make_plots(Adders_32, '32 Bits', fig_num, {'r2','r4','r8','r16','control'});
+%fig_num = make_plots(Adders_64, '64 Bits', fig_num, {'r2','r4','r8','control'});
+%fig_num = make_plots(Adders_128, '128 Bits', fig_num, {'r2','r4','r8','control'});
+%fig_num = make_plots(Adders_R2, 'Radix 2', fig_num, {'15 dig','31 dig','63 dig'});
+%fig_num = make_plots(Adders_R4, 'Radix 4', fig_num, {'8 dig','16 dig','32 dig'});
+fig_num = make_plots(Adders_R8, 'Radix 8', fig_num, {'5 dig','11 dig','21 dig'});
+function fig_num = make_plots(Adders, width, fig_num, data_lgd)
     figure(fig_num);
     fig_num = fig_num+1;
     tiledlayout('flow','TileSpacing','compact');
@@ -36,19 +56,19 @@ function fig_num = make_plots(Adders, width, fig_num)
         Adders(i).plot(Adders(i).err);
     end
     nexttile(1);
-    title(sprintf('avg ERR %dbits',width))
+    title(sprintf('avg ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('error')
     nexttile(2);
-    title(sprintf('max ERR %dbits',width))
+    title(sprintf('max ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('error')
     nexttile(3);
-    title(sprintf('min ERR %dbits',width))
+    title(sprintf('min ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('error')
     hold off
-    lgd = legend('r2','r4','r8','control');
+    lgd = legend(data_lgd);
     lgd.Layout.Tile = 'east';
 
     figure(fig_num);
@@ -59,15 +79,15 @@ function fig_num = make_plots(Adders, width, fig_num)
         Adders(i).plot(Adders(i).abs);
     end
     nexttile(1);
-    title(sprintf('avg absolute ERR %dbits',width))
+    title(sprintf('avg absolute ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('absolute error')
     nexttile(2);
-    title(sprintf('max absolute ERR %dbits',width))
+    title(sprintf('max absolute ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('absolute error')
     hold off
-    lgd = legend('r2','r4','r8','control');
+    lgd = legend(data_lgd);
     lgd.Layout.Tile = 'east';
 
     figure(fig_num);
@@ -78,15 +98,15 @@ function fig_num = make_plots(Adders, width, fig_num)
         Adders(i).plot(Adders(i).mr);
     end
     nexttile(1);
-    title(sprintf('avg mr ERR %dbits',width))
+    title(sprintf('avg mr ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('mr error')
     nexttile(2);
-    title(sprintf('max mr ERR %dbits',width))
+    title(sprintf('max mr ERR %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('mr error')
     hold off
-    lgd = legend('r2','r4','r8','control');
+    lgd = legend(data_lgd);
     lgd.Layout.Tile = 'east';
 
 
@@ -98,27 +118,27 @@ function fig_num = make_plots(Adders, width, fig_num)
         Adders(i).plot(Adders(i).bits);
     end
     nexttile(1);
-    title(sprintf('avg min flipped %dbits',width))
+    title(sprintf('avg min flipped %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('bit location')
     nexttile(2);
-    title(sprintf('max flipped %dbits',width))
+    title(sprintf('max flipped %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('bit location')
     nexttile(3);
-    title(sprintf('min flipped %dbits',width))
+    title(sprintf('min flipped %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('bit location')
     nexttile(4);
-    title(sprintf('illegal digits %dbits',width))
+    title(sprintf('illegal digits %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('# of digits')
     nexttile(5);
-    title(sprintf('avg max flipped %dbits',width))
+    title(sprintf('avg max flipped %s',width))
     xlabel('freqeuncy (MHz)')
     ylabel('bit location')
     hold off
-    lgd = legend('r2','r4','r8','control');
+    lgd = legend(data_lgd);
     lgd.Layout.Tile = 'east';
 end
 

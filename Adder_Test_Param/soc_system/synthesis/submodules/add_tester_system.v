@@ -40,12 +40,12 @@ module add_tester_system(
 (* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *)
 
 localparam RADIX = 1;
-localparam DIGITS = 63;
-localparam ADDR_WIDTH = 9;
+localparam DIGITS = 127;
+localparam ADDR_WIDTH = 8;
 localparam DW = $clog2(RADIX)+1;
 localparam BITS = DW*DIGITS;
 localparam BITS_OUT = BITS+DW;
-localparam W32 = 128;
+localparam W32 = 256;
 //localparam W32 = 32*((BITS_OUT+32-1)/32);
 
 //INTERNAL CLOCKS

@@ -177,7 +177,7 @@ while (f_try!=f_previous):
     c_p_ram.write(ram_regs['addr'], 0)
     for i in range(n):
         c_num = 0
-        for i in range(int(math.ceil(BITS/32)),0,-1):
+        for i in range(int(math.ceil((BITS+D)/32)),0,-1):
             reg = 'data_%d' % (i*32)
             sub_c_num = c_p_ram.read(ram_regs[reg])
             c_num = c_num + (sub_c_num<<(32*(i-1)))
@@ -196,7 +196,7 @@ while (f_try!=f_previous):
     c_n_ram.write(ram_regs['addr'], 0)
     for i in range(n):
         c_num = 0
-        for i in range(int(math.ceil(BITS/32)),0,-1):
+        for i in range(int(math.ceil((BITS+D)/32)),0,-1):
             reg = 'data_%d' % (i*32)
             sub_c_num = c_n_ram.read(ram_regs[reg])
             c_num = c_num + (sub_c_num<<(32*(i-1)))

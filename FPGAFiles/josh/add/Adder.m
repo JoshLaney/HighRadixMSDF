@@ -45,7 +45,7 @@ classdef Adder
             sorted=x(idx,:);
             [~,n] = size(sorted);
             [C,~,idx] = unique(sorted(:,1),'stable');
-            for i = 3:(min(n,4))
+            for i = 3:(min(n,5))
                 sorted(:,i)=monotonic_data(obj,sorted(:,i));
             end
             [m,~] = size(C);
@@ -56,6 +56,7 @@ classdef Adder
                 avg(:,i) = val;
             end
             avg(:,2) = monotonic_data(obj,avg(:,2));
+            
             avg(:,n) = monotonic_data(obj,avg(:,n));
         end
 
