@@ -39,13 +39,13 @@ module mult_tester_system(
 
 (* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *)
 
-localparam RADIX = 1;
-localparam DIGITS = 63;
-localparam ADDR_WIDTH = 8;
+localparam RADIX = 2;
+localparam DIGITS = 31;
+localparam ADDR_WIDTH = 9;
 localparam DW = $clog2(RADIX)+1;
 localparam BITS = DW*DIGITS;
 localparam BITS_OUT = 2*BITS+DW;
-localparam W32 = 256; //32*((BITS_OUT+32-1)/32);
+localparam W32 = 128; //32*((BITS_OUT+32-1)/32);
 localparam ADELAY = (DIGITS+3)/2; //celi((DIGITS+2)/2)
 
 //INTERNAL CLOCKS
@@ -130,7 +130,7 @@ testControlUnit #(.ID(8)) tcu(
 
 //POSITIVE MULT DELAYS
 generate
-	if(RADIX>=2) begin
+	if(RADIX>=1) begin
 		for(i=0;i<ADELAY;i=i+1) begin: ad_pline_p
 			addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp(
 				.pll_clock(clk_pos), .addr_in(addr_pline_p[i]), .addr_out(addr_pline_p[i+1]),
@@ -169,7 +169,7 @@ addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cp_4(
 
 //NEGATIVE MULT DELAYS
 generate
-	if(RADIX>=2) begin
+	if(RADIX>=1) begin
 		for(i=0;i<ADELAY;i=i+1) begin: ad_pline_n
 			addr_delay #(.ADDR_WIDTH(ADDR_WIDTH)) ad_cn(
 				.pll_clock(clk_neg), .addr_in(addr_pline_n[i]), .addr_out(addr_pline_n[i+1]),

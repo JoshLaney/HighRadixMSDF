@@ -12,6 +12,8 @@ import sys
 RADIX=int(sys.argv[1])
 WIDTH=int(sys.argv[2])
 TRYS=int(sys.argv[3])
+if(sys.argv[4]): SEED = int(sys.argv[4])
+else: SEED = -1
 
 A=RADIX-1
 D=math.floor(math.log(RADIX,2)+1)
@@ -29,12 +31,18 @@ b_n = 'add/r%d_w%d/b_n_data.txt' % (RADIX,WIDTH)
 c_n = 'add/r%d_w%d/c_n_data.txt' % (RADIX,WIDTH)
 val_gold_n = 'add/r%d_w%d/c_n_data_GOLD.txt' % (RADIX,WIDTH)
 vec_gold_n = 'add/r%d_w%d/c_n_data_GOLD_VEC.txt' % (RADIX,WIDTH)
-rbf= './program_fpga.sh add/r%d_w%d/r%d_w%d.rbf' % (RADIX,WIDTH,RADIX,WIDTH)
-
-err_path = 'add/r%d_w%d/r%d_w%d_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
-abs_err_path = 'add/r%d_w%d/r%d_w%d_abs_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
-mr_err_path = 'add/r%d_w%d/r%d_w%d_mr_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
-bf_loc_path = 'add/r%d_w%d/r%d_w%d_bf_loc.csv' % (RADIX,WIDTH,RADIX,WIDTH)
+if(SEED>=0): 
+    rbf= './program_fpga.sh add/r%d_w%d/r%d_w%d_s%d.rbf' % (RADIX,WIDTH,RADIX,WIDTH,SEED)
+    err_path = 'add/r%d_w%d/r%d_w%d_s%d_err.csv' % (RADIX,WIDTH,RADIX,WIDTH,SEED)
+    abs_err_path = 'add/r%d_w%d/r%d_w%d_s%d_abs_err.csv' % (RADIX,WIDTH,RADIX,WIDTH,SEED)
+    mr_err_path = 'add/r%d_w%d/r%d_w%d_s%dmr_err.csv' % (RADIX,WIDTH,RADIX,WIDTH,SEED)
+    bf_loc_path = 'add/r%d_w%d/r%d_w%d_s%d_bf_loc.csv' % (RADIX,WIDTH,RADIX,WIDTH,SEED)
+else: 
+    rbf= './program_fpga.sh add/r%d_w%d/r%d_w%d.rbf' % (RADIX,WIDTH,RADIX,WIDTH)
+    err_path = 'add/r%d_w%d/r%d_w%d_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
+    abs_err_path = 'add/r%d_w%d/r%d_w%d_abs_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
+    mr_err_path = 'add/r%d_w%d/r%d_w%d_mr_err.csv' % (RADIX,WIDTH,RADIX,WIDTH)
+    bf_loc_path = 'add/r%d_w%d/r%d_w%d_bf_loc.csv' % (RADIX,WIDTH,RADIX,WIDTH)
 
 mr_err_file = open(mr_err_path, 'w')
 err_file = open(err_path, 'w')
