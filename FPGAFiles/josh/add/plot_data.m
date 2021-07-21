@@ -57,7 +57,7 @@ fig_num = 1;
 fig_num = make_plots(Adders_128, '128 Bits', fig_num, {'r2','r4','r8','control'});
 %fig_num = make_plots(Adders_256, '256 Bits', fig_num, {'r2','r4','r8','control'});
 %fig_num = make_plots(Adders_R2, 'Radix 2', fig_num, {'15 dig','31 dig','63 dig','127 dig'});
-fig_num = make_plots(Adders_R4, 'Radix 4', fig_num, {'8 dig','16 dig','32 dig','64 dig'});
+%fig_num = make_plots(Adders_R4, 'Radix 4', fig_num, {'8 dig','16 dig','32 dig','64 dig'});
 %fig_num = make_plots(Adders_R8, 'Radix 8', fig_num, {'5 dig','11 dig','21 dig', '43 dig'});
 function fig_num = make_plots(Adders, width, fig_num, data_lgd)
     figure(fig_num);

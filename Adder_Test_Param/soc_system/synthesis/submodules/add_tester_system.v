@@ -39,8 +39,8 @@ module add_tester_system(
 
 (* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *)
 
-localparam RADIX = 8;
-localparam DIGITS = 21;
+localparam RADIX = 1;
+localparam DIGITS = 63;
 localparam ADDR_WIDTH = 9;
 localparam DW = $clog2(RADIX)+1;
 localparam BITS = DW*DIGITS;
