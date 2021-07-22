@@ -83,6 +83,7 @@ f_sum = 0
 start_time = time.time()
 for x in range(1, TRYS+1):
     print 'Control, W',WIDTH,'Trial', x
+    os.popen('python make_reg_mult_data.py %d' % (WIDTH))
     f_min=10000000
     f_max=600000000
 
@@ -216,7 +217,7 @@ for x in range(1, TRYS+1):
         output_neg = diff_neg.read()
         if (output_pos != '' or output_neg != '') :
             print '     fail'
-            time.sleep(0.05)
+            time.sleep(0.01)
         else:
             prog_working = True
 
@@ -314,19 +315,19 @@ for x in range(1, TRYS+1):
                 continue
 
         if(ovc_freq>=(600-4*prog_bar) and (not checkpoint_400)):
-            print 'reached', ovc_freq, 'MHz'
+            print 'reached', ovc_freq, 'MHz, [XX--------]'
             checkpoint_400 = True
 
         if(ovc_freq>=(600-3*prog_bar) and (not checkpoint_450)):
-            print 'reached', ovc_freq, 'MHz'
+            print 'reached', ovc_freq, 'MHz, [XXXX------]'
             checkpoint_450 = True
 
         if(ovc_freq>=(600-2*prog_bar) and (not checkpoint_500)):
-            print 'reached', ovc_freq, 'MHz'
+            print 'reached', ovc_freq, 'MHz, [XXXXXX----]'
             checkpoint_500 = True
 
         if(ovc_freq>=(600-1*prog_bar) and (not checkpoint_550)):
-            print 'reached', ovc_freq, 'MHz'
+            print 'reached', ovc_freq, 'MHz, [XXXXXXXX--]'
             checkpoint_550 = True
 
         while(tcu.read(tcu_regs['lock']) != 1):
@@ -343,22 +344,22 @@ for x in range(1, TRYS+1):
 
         max_err = 0
         min_err = 0
-        avg_err = 0
+        avg_err = 0.0
         avg_err_count = 0
 
         max_abs_err = 0
-        avg_abs_err = 0
+        avg_abs_err = 0.0
         avg_abs_count = 0
 
-        max_mr_err = 0
-        avg_mr_err = 0
+        max_mr_err = 0.0
+        avg_mr_err = 0.0
         avg_mr_count = 0
 
         max_bf = 0
-        min_bf = BITS+D+1
-        avg_min_bf = 0
+        min_bf = 2*BITS+D+1
+        avg_min_bf = 0.0
         avg_min_bf_count = 0
-        avg_max_bf = 0
+        avg_max_bf = 0.0
         avg_max_bf_count = 0
         bf_illegal = 0
 
@@ -375,12 +376,12 @@ for x in range(1, TRYS+1):
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
 
             xor_vec = c_num^gold_vec
-            right_1 = BITS+D+1
+            right_1 = 2*BITS+D+1
             if(xor_vec!=0): right_1 = math.log(xor_vec&-xor_vec, 2)+1
             if(right_1<min_bf): min_bf = right_1
-            if(right_1<=BITS+D):
-                avg_min_bf = avg_min_bf + right_1
-                avg_min_bf_count = avg_min_bf_count + 1
+            if(right_1==2*BITS+D+1):right_1 = 0
+            avg_min_bf += right_1
+            avg_min_bf_count += 1
 
             left_1 = 0
             if(xor_vec!=0):
@@ -390,51 +391,33 @@ for x in range(1, TRYS+1):
                     xor_left = int(xor_left/2)
                     left_1 += 1
             if(left_1>max_bf): max_bf = left_1
-            if(left_1>0):
-                avg_max_bf += left_1
-                avg_max_bf_count +=1 
+            avg_max_bf += left_1
+            avg_max_bf_count +=1 
 
             c_val = c_num
 
             err = c_val-gold_val
             abs_err = abs(err)
-            if(gold_val!=0):
-                mr_err = float(abs_err)/float(abs(gold_val))
-            else: mr_err = abs_err
-            # if(mr_err!=0):
-            #     print 'POS'
-            #     print 'freq', ovc_freq
-            #     print 'c_val', c_val
-            #     print 'gold_val', gold_val
-            #     print 'diff', abs(c_val-gold_val)
-            #     print 'mr_err', mr_err
-            #     print 'c_num', c_num
-            #     print 'gold_vec', gold_vec
-            #     print 'xor_vec', xor_vec
-            #     print 'xor_mask', (xor_vec&-xor_vec)
-            #     print 'right_1', right_1
-            #     print 'left_1', left_1
-            #     exit()
+            if(gold_val != 0): mr_err = float(abs_err)/float(abs(gold_val))
+            else: mr_err = float("NaN")
 
             if(err > max_err):
                 max_err = err
             if(err < min_err):
                 min_err = err
-            if(err!=0.0):
-                avg_err = avg_err + err
-                avg_err_count = avg_err_count + 1
+            avg_err += err
+            avg_err_count+=1
 
             if(abs_err > max_abs_err):
                 max_abs_err = abs_err
-            if(mr_err!=0.0):
-                avg_abs_err = avg_abs_err + abs_err
-                avg_abs_count = avg_abs_count + 1
+            avg_abs_err += abs_err
+            avg_abs_count += 1
 
             if(mr_err > max_mr_err):
                 max_mr_err = mr_err
-            if(mr_err!=0.0):
-                avg_mr_err = avg_mr_err + mr_err
-                avg_mr_count = avg_abs_count + 1
+            if(mr_err >= 0):
+                avg_mr_err += mr_err
+                avg_mr_count += 1
         p_val_file.close()
 
         c_n_ram.write(ram_regs['addr'], 0)
@@ -449,12 +432,12 @@ for x in range(1, TRYS+1):
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
 
             xor_vec = c_num^gold_vec
-            right_1 = BITS+D+1
+            right_1 = 2*BITS+D+1
             if(xor_vec!=0): right_1 = math.log(xor_vec&-xor_vec, 2)+1
             if(right_1<min_bf): min_bf = right_1
-            if(right_1<=BITS+D):
-                avg_min_bf = avg_min_bf + right_1
-                avg_min_bf_count = avg_min_bf_count + 1
+            if(right_1==2*BITS+D+1):right_1 = 0
+            avg_min_bf += right_1
+            avg_min_bf_count += 1
 
             left_1 = 0
             if(xor_vec!=0):
@@ -464,51 +447,33 @@ for x in range(1, TRYS+1):
                     xor_left = int(xor_left/2)
                     left_1 += 1
             if(left_1>max_bf): max_bf = left_1
-            if(left_1>0):
-                avg_max_bf += left_1
-                avg_max_bf_count +=1 
+            avg_max_bf += left_1
+            avg_max_bf_count +=1 
 
             c_val = c_num
 
             err = c_val-gold_val
             abs_err = abs(err)
-            if(gold_val!=0):
-                mr_err = float(abs_err)/float(abs(gold_val))
-            else: mr_err = abs_err
-            # if(mr_err!=0):
-            #     print 'NEG'
-            #     print 'freq', ovc_freq
-            #     print 'c_val', c_val
-            #     print 'gold_val', gold_val
-            #     print 'diff', abs(c_val-gold_val)
-            #     print 'mr_err', mr_err
-            #     print 'c_num', c_num
-            #     print 'gold_vec', gold_vec
-            #     print 'xor_vec', xor_vec
-            #     print 'xor_mask', (xor_vec&-xor_vec)
-            #     print 'right_1', right_1
-            #     print 'left_1', left_1
-            #     exit()
+            if(gold_val != 0): mr_err = float(abs_err)/float(abs(gold_val))
+            else: mr_err = float("NaN")
 
             if(err > max_err):
                 max_err = err
             if(err < min_err):
                 min_err = err
-            if(err!=0.0):
-                avg_err = avg_err + err
-                avg_err_count = avg_err_count + 1
+            avg_err += err
+            avg_err_count+=1
 
             if(abs_err > max_abs_err):
                 max_abs_err = abs_err
-            if(mr_err!=0.0):
-                avg_abs_err = avg_abs_err + abs_err
-                avg_abs_count = avg_abs_count + 1
+            avg_abs_err += abs_err
+            avg_abs_count += 1
 
             if(mr_err > max_mr_err):
                 max_mr_err = mr_err
-            if(mr_err!=0.0):
-                avg_mr_err = avg_mr_err + mr_err
-                avg_mr_count = avg_abs_count + 1
+            if(mr_err >= 0):
+                avg_mr_err += mr_err
+                avg_mr_count += 1
         n_val_file.close()
 
         if(avg_err_count != 0):
@@ -537,10 +502,10 @@ for x in range(1, TRYS+1):
         else:
             avg_max_bf = 0
 
-        err_file.write('%d, %f, %d, %d\n' %(ovc_freq,avg_err,max_err,min_err))
-        abs_err_file.write('%d, %f, %d\n' %(ovc_freq,avg_abs_err,max_abs_err))
-        mr_err_file.write('%d, %f, %f\n' %(ovc_freq,avg_mr_err,max_mr_err))
-        bf_loc_file.write('%d, %f, %d, %d, %d, %f\n' %(ovc_freq,avg_min_bf,max_bf,min_bf,bf_illegal,avg_max_bf))
+        err_file.write('%d, %E, %d, %d\n' %(ovc_freq,avg_err,max_err,min_err))
+        abs_err_file.write('%d, %E, %d\n' %(ovc_freq,avg_abs_err,max_abs_err))
+        mr_err_file.write('%d, %E, %E\n' %(ovc_freq,avg_mr_err,max_mr_err))
+        bf_loc_file.write('%d, %E, %d, %d, %d, %E\n' %(ovc_freq,avg_min_bf,max_bf,min_bf,bf_illegal,avg_max_bf))
         freq_diff = ovc_freq-ovc_freq_start
         if(freq_diff<=100): ovc_freq += 1
         elif(freq_diff<=200): ovc_freq += 5

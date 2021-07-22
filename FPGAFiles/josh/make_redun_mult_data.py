@@ -17,9 +17,9 @@ a_p_file = open(a_p, 'w')
 b_p_file = open(b_p, 'w')
 gold_p_file = open(gold_p, 'w')
 
-print('Filling a_p_data.txt with random ints')
-print('Filling b_p_data.txt with random ints')
-print('Storing a+b in c_p_data_GOLD.txt')
+#print('Filling a_p_data.txt with random ints')
+#print('Filling b_p_data.txt with random ints')
+#print('Storing a+b in c_p_data_GOLD.txt')
 
 for i in range(0,2**(16-WORDS)-1):
     #generate bits
@@ -43,9 +43,9 @@ a_p_file.close()
 b_p_file.close()
 gold_p_file.close()
 
-print('Filling a_n_data.txt with random ints')
-print('Filling b_n_data.txt with random ints')
-print('Storing a+b in c_n_data_GOLD.txt')
+#print('Filling a_n_data.txt with random ints')
+#print('Filling b_n_data.txt with random ints')
+#print('Storing a+b in c_n_data_GOLD.txt')
 
 a_n = 'mult/r%d_w%d/a_n_data.txt' % (RADIX,WIDTH)
 b_n = 'mult/r%d_w%d/b_n_data.txt' % (RADIX,WIDTH)
