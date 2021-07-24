@@ -21,7 +21,7 @@ gold_p_file = open(gold_p, 'w')
 #print('Filling b_p_data.txt with random ints')
 #print('Storing a+b in c_p_data_GOLD.txt')
 
-for i in range(0,2**(15-WORDS)-1):
+for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0
@@ -47,7 +47,7 @@ a_n_file = open(a_n, 'w')
 b_n_file = open(b_n, 'w')
 gold_n_file = open(gold_n, 'w')
 
-for i in range(0,2**(15-WORDS)-1):
+for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0

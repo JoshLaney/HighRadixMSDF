@@ -7,7 +7,7 @@ module rRp_mult(
 	clock
 );
 
-parameter WIDTH = 31; //number of digits
+parameter WIDTH = 64; //number of digits
 parameter RADIX = 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 
@@ -25,7 +25,7 @@ wire [D*(WIDTH+6)-1:0] w[0:WIDTH+2];
 wire [2*D*WIDTH-1: 0] p_frac;
 wire [2*D*WIDTH-1: 0] p_msds[0:WIDTH-1];
 
-localparam CTRLW = 3;
+localparam CTRLW = 6;
 reg [D*(2*WIDTH+1)-1:0] p_buf[0:CTRLW-1];
 
 integer j;

@@ -5,19 +5,19 @@ set(groot,'defaultLineLineWidth',2.0)
 Mults_32 = [
     Multiplier(2, 7,2*2047, '-', [0.9 0 0])
     Multiplier(4, 4,2*2047, '-', [0 0.9 0])
-    Multiplier(1, 7,2*2047, '-', [0.1 0.1 0.1])
+    Multiplier(1, 8,2*2047, '-', [0.1 0.1 0.1])
 ];
 
 Mults_128 = [
     Multiplier(2, 31,2*511, '-', [0.9 0 0])
     Multiplier(4, 15,2*511, '-', [0 0.9 0])
-    Multiplier(1, 31,2*511, '-', [0.1 0.1 0.1])
+    Multiplier(1, 32,2*511, '-', [0.1 0.1 0.1])
 ];
 
 Mults_256 = [
     Multiplier(2, 63,2*255, '-', [0.9 0 0])
     Multiplier(4, 32,2*255, '-', [0 0.9 0])
-    Multiplier(1, 63,2*255, '-', [0.1 0.1 0.1])
+    Multiplier(1, 64,2*255, '-', [0.1 0.1 0.1])
 ];
 
 Mults_R2 = [

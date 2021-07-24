@@ -1,0 +1,1 @@
+seed, avg, max, min
