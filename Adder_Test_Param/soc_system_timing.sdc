@@ -5,7 +5,7 @@ create_clock -period 40 [get_ports eth_tse_0_pcs_mac_rx_clock_connection_clk]
 
 #derive_pll_clocks
 
-create_clock -name clk_pll -period 3\
+create_clock -name clk_pll -period 1\
  [get_pins {soc_inst|pll_0|altera_pll_i|cyclonev_pll|counter[0].output_counter|divclk}]
 
 create_generated_clock \

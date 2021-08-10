@@ -25,9 +25,9 @@ for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0
-    a_val = random.randint(0,2**WIDTH-1)
-    b_val = random.randint(0,2**WIDTH-1)
-    c_val = a_val + b_val
+    a_val = random.randint(0,2**WIDTH-1) - (2**(WIDTH-1))
+    b_val = random.randint(0,2**WIDTH-1) - (2**(WIDTH-1))
+    c_val = a_val + b_val 
     a_p_file.write('%d\n' %a_val)
     b_p_file.write('%d\n' %b_val)
     gold_p_file.write('%d\n' %c_val)
@@ -51,9 +51,9 @@ for i in range(0,2**(16-WORDS)-1):
     #generate bits
     a = 0
     b = 0
-    a_val = random.randint(0,2**WIDTH-1)
-    b_val = random.randint(0,2**WIDTH-1)
-    c_val = a_val + b_val
+    a_val = random.randint(0,2**WIDTH-1) - (2**(WIDTH-1))
+    b_val = random.randint(0,2**WIDTH-1) - (2**(WIDTH-1))
+    c_val = a_val + b_val 
     a_n_file.write('%d\n' %a_val)
     b_n_file.write('%d\n' %b_val)
     gold_n_file.write('%d\n' %c_val)

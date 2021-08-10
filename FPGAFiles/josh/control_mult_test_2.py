@@ -109,7 +109,7 @@ if working != 7:
     exit()
 print('IP contacted successfully')
 
-f_try = pll.set(100000000)
+f_try = pll.set(10000000)
 while(tcu.read(tcu_regs['lock']) != 1):
     pass
 
@@ -140,6 +140,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = a_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -171,6 +172,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = b_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -201,6 +203,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = a_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -232,6 +235,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = b_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -258,6 +262,14 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+        # if(c_num >> (long(BITS_OUT)-1) == 1):
+        #     print BITS_OUT
+        #     print c_num
+        #     print c_num >> (long(BITS_OUT)-1)
+        #     print 2**int(BITS_OUT)
+        #     print c_num - 2**long(BITS_OUT)
+        #     exit()
+    if(c_num >> (int(BITS_OUT)-1)): c_num -= 2**int(BITS_OUT)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -271,6 +283,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(BITS_OUT)-1)): c_num -= 2**int(BITS_OUT)
     c_file.write('%d\n' %c_num)
 c_file.close()
 

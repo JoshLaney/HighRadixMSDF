@@ -12,11 +12,11 @@ parameter RADIX = 4;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 
 input clock;
-input [D*WIDTH-1:0] x_in, y_in;
-output [D*(2*WIDTH+1)-1:0] p_out;
+input signed [D*WIDTH-1:0] x_in, y_in;
+output signed [D*(2*WIDTH+1)-1:0] p_out;
 
-(* preserve *) reg [D*WIDTH-1:0] x[0:WIDTH+2], y[0:WIDTH+2];
-(* preserve *) reg [D*(2*WIDTH+1)-1:0] p_out;
+(* preserve *) reg signed [D*WIDTH-1:0] x[0:WIDTH+2], y[0:WIDTH+2];
+(* preserve *) reg signed [D*(2*WIDTH+1)-1:0] p_out;
 (* preserve *) reg [D*(WIDTH+6)-1:0] w_reg[0:WIDTH+1];
 (* preserve *) reg [2*D*WIDTH-1: 0] p_msds_reg[0:WIDTH-1];
 //wire [D*WIDTH-1:0] x, y;
@@ -26,7 +26,7 @@ wire [2*D*WIDTH-1: 0] p_frac;
 wire [2*D*WIDTH-1: 0] p_msds[0:WIDTH-1];
 
 localparam CTRLW = 4;
-reg [D*(2*WIDTH+1)-1:0] p_buf[0:CTRLW-1];
+reg signed [D*(2*WIDTH+1)-1:0] p_buf[0:CTRLW-1];
 
 integer j;
 
@@ -35,12 +35,12 @@ integer j;
 always@(posedge clock) begin
 	x[0]<=x_in;
 	y[0]<=y_in;
-	p_out <= x[0]*y[0];
-//	p_buf[0] <= x[0]*y[0];
-//	for(j=1; j<CTRLW; j=j+1) begin: p_buf_loop
-//		p_buf[j]<=p_buf[j-1];
-//	end
-//	p_out <= p_buf[CTRLW-1];
+//	p_out <= x[0]*y[0];
+	p_buf[0] <= x[0]*y[0];
+	for(j=1; j<CTRLW; j=j+1) begin: p_buf_loop
+		p_buf[j]<=p_buf[j-1];
+	end
+	p_out <= p_buf[CTRLW-1];
 	
 	
 	

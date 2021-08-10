@@ -196,6 +196,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -208,6 +209,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -249,6 +251,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -261,6 +264,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -371,6 +375,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
 
             xor_vec = c_num^gold_vec
             right_1 = BITS+D+1
@@ -427,6 +432,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (WIDTH)): c_num -= 2**int(WIDTH+1)
 
             xor_vec = c_num^gold_vec
             right_1 = BITS+D+1

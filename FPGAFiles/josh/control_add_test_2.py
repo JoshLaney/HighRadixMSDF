@@ -12,6 +12,7 @@ WIDTH=int(sys.argv[1])
 A=RADIX-1
 D=1
 BITS=float(D*WIDTH)
+BITS_OUT=BITS+D
 MASK=int((2**D)-1)
 
 a_p = 'add/control_w%d/a_p_data.txt' % (WIDTH)
@@ -139,6 +140,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = a_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -146,7 +148,7 @@ diff = os.popen('diff '+c_p+' '+a_p)
 output = diff.read()
 if(output != ''):
     print('fail: writing ram_a_pos')
-    #print output
+    print output
     exit()
 
 print('Filling b_p_ram')
@@ -170,6 +172,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = b_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -200,6 +203,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = a_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -207,6 +211,7 @@ diff = os.popen('diff '+c_p+' '+a_n)
 output = diff.read()
 if(output != ''):
     print('fail: writing ram_a_neg')
+    print output
     exit()
 #print(a_n_ram.read(ram_regs['addr']))
     
@@ -231,6 +236,7 @@ for i in range(n):
         reg = 'data_%d' % (i*32)
         sub_c_num = b_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(math.ceil(BITS/32)*32)-1)): c_num -= 2**int(math.ceil(BITS/32)*32)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -253,10 +259,11 @@ c_file = open(c_p, 'w')
 c_p_ram.write(ram_regs['addr'], 0)
 for i in range(n):
     c_num = 0
-    for i in range(int(math.ceil(BITS/32)),0,-1):
+    for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_p_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(BITS_OUT)-1)): c_num -= 2**int(BITS_OUT)
     c_file.write('%d\n' %c_num)
 c_file.close()
 
@@ -266,10 +273,11 @@ c_file = open(c_n, 'w')
 c_n_ram.write(ram_regs['addr'], 0)
 for i in range(n):
     c_num = 0
-    for i in range(int(math.ceil(BITS/32)),0,-1):
+    for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
         reg = 'data_%d' % (i*32)
         sub_c_num = c_n_ram.read(ram_regs[reg])
         c_num = c_num + (sub_c_num<<(32*(i-1)))
+    if(c_num >> (int(BITS_OUT)-1)): c_num -= 2**int(BITS_OUT)
     c_file.write('%d\n' %c_num)
 c_file.close()
 

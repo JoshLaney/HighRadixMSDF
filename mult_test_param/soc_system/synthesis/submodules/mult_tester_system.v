@@ -40,13 +40,13 @@ module mult_tester_system(
 (* altera_attribute = "-name AUTO_SHIFT_REGISTER_RECOGNITION OFF" *)
 
 localparam RADIX = 1;
-localparam DIGITS = 32;
-localparam ADDR_WIDTH = 9;
+localparam DIGITS = 64;
+localparam ADDR_WIDTH = 8;
 localparam DW = $clog2(RADIX)+1;
 localparam BITS = DW*DIGITS;
 localparam BITS_OUT = 2*BITS+DW;
-localparam W32 = 128; //32*((BITS_OUT+32-1)/32);
-localparam ADELAY = 0;//(DIGITS+3)/2; //celi((DIGITS+2)/2)
+localparam W32 = 256; //32*((BITS_OUT+32-1)/32);
+localparam ADELAY = 2;//(DIGITS+3)/2; //celi((DIGITS+2)/2)
 
 //INTERNAL CLOCKS
 wire clk_neg, clk_pos;

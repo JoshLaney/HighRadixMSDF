@@ -15,8 +15,8 @@ TRYS=int(sys.argv[2])
 
 A=RADIX-1
 D=math.floor(math.log(RADIX,2)+1)
-BITS=D*WIDTH
-BITS_OUT = 2*BITS
+BITS=float(D*WIDTH)
+BITS_OUT = 2*BITS+1
 MASK=int((2**D)-1)
 
 a_p = 'mult/control_w%d/a_p_data.txt' % (WIDTH)
@@ -192,10 +192,11 @@ for x in range(1, TRYS+1):
         c_p_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -204,10 +205,11 @@ for x in range(1, TRYS+1):
         c_n_ram.write(ram_regs['addr'], 0)
         for i in range(n):
             c_num = 0
-            for i in range(int(math.ceil(BITS/32)),0,-1):
+            for i in range(int(math.ceil(BITS_OUT/32)),0,-1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -249,6 +251,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -261,6 +264,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
             c_file.write('%d\n' %c_num)
         c_file.close()
 
@@ -374,6 +378,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_p_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
 
             xor_vec = c_num^gold_vec
             right_1 = 2*BITS+D+1
@@ -430,6 +435,7 @@ for x in range(1, TRYS+1):
                 reg = 'data_%d' % (i*32)
                 sub_c_num = c_n_ram.read(ram_regs[reg])
                 c_num = c_num + (sub_c_num<<(32*(i-1)))
+            if(c_num >> (int(2*WIDTH))): c_num -= 2**int(2*WIDTH+1)
 
             xor_vec = c_num^gold_vec
             right_1 = 2*BITS+D+1

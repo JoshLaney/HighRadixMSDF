@@ -32,32 +32,53 @@ classdef Multiplier
         end
         
         function plot(obj, data)
-            [~,n] = size(data);
+            [m,n] = size(data);
             for i = 2:n
                 nexttile(i-1);
-                plot(data(:,1),data(:,i),obj.marker,'Color',obj.color);
+                no_out = zeros(m,2);
+                no_out(:,1) = data(:,1);
+                no_out(:,2) = data(:,i);
+                no_out = rmoutliers(no_out,'movmedian',[15 10]);
+                plot(no_out(:,1),no_out(:,2),obj.marker,'Color',obj.color);
                 hold on
             end
         end
         
         function avg=condition_data(obj,x)
+%             [~,idx]=sort(x(:,1));
+%             sorted=x(idx,:);
+%             [~,n] = size(sorted);
+%             [C,~,idx] = unique(sorted(:,1),'stable');
+%             for i = 3:(min(n,5))
+%                 sorted(:,i)=monotonic_data(obj,sorted(:,i));
+%             end
+%             [m,~] = size(C);
+%             avg = zeros(m,n);
+%             avg(:,1)=C;
+%             for i = 2:n
+%                 val = accumarray(idx,sorted(:,i),[],@mean);
+%                 avg(:,i) = val;
+%             end
+%             avg(:,2) = monotonic_data(obj,avg(:,2));
+%             
+%             avg(:,n) = monotonic_data(obj,avg(:,n));
+
             [~,idx]=sort(x(:,1));
             sorted=x(idx,:);
             [~,n] = size(sorted);
             [C,~,idx] = unique(sorted(:,1),'stable');
-            for i = 3:(min(n,5))
-                sorted(:,i)=monotonic_data(obj,sorted(:,i));
-            end
             [m,~] = size(C);
             avg = zeros(m,n);
             avg(:,1)=C;
-            for i = 2:n
-                val = accumarray(idx,sorted(:,i),[],@mean);
-                avg(:,i) = val;
+            avg(:,2) = accumarray(idx,sorted(:,2),[],@mean);
+            avg(:,3) = accumarray(idx,sorted(:,3),[],@max);
+            if(n>3)
+                avg(:,4) = accumarray(idx,sorted(:,4),[],@min);
+                if(n>4)
+                    avg(:,5) = accumarray(idx,sorted(:,5),[],@max);
+                    avg(:,6) = accumarray(idx,sorted(:,6),[],@mean);
+                end
             end
-            avg(:,2) = monotonic_data(obj,avg(:,2));
-            
-            avg(:,n) = monotonic_data(obj,avg(:,n));
         end
 
         function data=monotonic_data(obj, x)

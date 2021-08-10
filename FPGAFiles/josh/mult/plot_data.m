@@ -35,9 +35,9 @@ Mults_R4 = [
 fig_num = 1;
 %fig_num = make_plots(Mults_32, '32 Bits', fig_num, {'r2','r4','control'});
 %fig_num = make_plots(Mults_128, '128 Bits', fig_num, {'r2','r4','control'});
-%fig_num = make_plots(Mults_256, '256 Bits', fig_num, {'r2','r4','control'});
+fig_num = make_plots(Mults_256, '256 Bits', fig_num, {'r2','r4','control'});
 %fig_num = make_plots(Mults_R2, 'Radix 2', fig_num, {'7 dig','31 dig','63 dig'});
-fig_num = make_plots(Mults_R4, 'Radix 4', fig_num, {'4 dig','15 dig','32 dig'});
+%fig_num = make_plots(Mults_R4, 'Radix 4', fig_num, {'4 dig','15 dig','32 dig'});
 function fig_num = make_plots(Mults, width, fig_num, data_lgd)
     figure(fig_num);
     fig_num = fig_num+1;
