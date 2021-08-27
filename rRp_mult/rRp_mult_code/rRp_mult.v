@@ -30,20 +30,12 @@ reg signed [D*(2*WIDTH+1)-1:0] p_buf[0:CTRLW-1];
 
 integer j;
 
-//assign x = x_reg;
-//assign y = y_reg;
+
 always@(posedge clock) begin
 	x[0]<=x_in;
 	y[0]<=y_in;
-//	//p_out <= x[0]*y[0];
-//	p_buf[0] <= x[0]*y[0];
-//	for(j=1; j<CTRLW; j=j+1) begin: p_buf_loop
-//		p_buf[j]<=p_buf[j-1];
-//	end
-//	p_out <= p_buf[CTRLW-1];
-	
-	
-	
+
+
 	p_out<=p;
 	for(j=0; j<WIDTH+2; j=j+1) begin: x_y_buf
 		x[j+1] <= x[j];
@@ -52,10 +44,8 @@ always@(posedge clock) begin
 	for(j=0; j<=WIDTH+1; j=j+1) begin: w_buf
 		w_reg[j]<=w[j];
 	end
-	//p_msds_reg[0] <= p_msds[0];
 	for(j=0; j<WIDTH-1; j=j+1) begin: p_msds_buf
 		p_msds_reg[j] <= p_msds[j];
-		//p_msds_reg[j+1][D*(2*WIDTH-(j+1))-1 -: D] = p_msds[j+1][D*(2*WIDTH-(j+1))-1 -: D];
 	end
 
 end
@@ -111,10 +101,6 @@ assign p_msds[WIDTH-1][0 +: D*(WIDTH)] = 128'b0;
 assign p_frac[0 +: D*(WIDTH+3)] = w[WIDTH+2][D*(WIDTH+6)-1 -: D*(WIDTH+3)];
 assign p_frac[2*D*WIDTH-1 : D*(WIDTH+3)] = 128'b0;
 
-// always@(p_msds[WIDTH-1]) begin
-// 	p_msds_reg[WIDTH-1][0 +: D*(WIDTH+1)]<=p_msds[WIDTH-1][0 +: D*(WIDTH+1)];
-// end
-	
 rRp_add #(.RADIX(RADIX), .WIDTH(2*WIDTH)) addr_p(
 	.x(p_msds[WIDTH-1]),
 	.y(p_frac),

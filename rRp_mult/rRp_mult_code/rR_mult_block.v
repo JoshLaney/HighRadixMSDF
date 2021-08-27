@@ -16,40 +16,6 @@
  output [D*(WIDTH+6)-1: 0] w_1;
  output reg [D-1: 0] p;
 
-//module rR_mult_block(
-//    x_in,
-//    y_in,
-//    w_in,
-//    w_1_out,
-//    p_out,
-//    clock
-//);
-//parameter J = 1;
-//parameter WIDTH = 7;
-//parameter RADIX = 2;
-//localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
-//
-//input [D*WIDTH -1: 0] x_in;
-//input [D*WIDTH -1: 0] y_in;
-//input [D*(WIDTH+6)-1: 0] w_in;
-//output reg [D*(WIDTH+6)-1: 0] w_1_out;
-//output reg [D-1: 0] p_out;
-//input clock;
-//
-//
-//reg [D*WIDTH -1: 0] x;
-//reg [D*WIDTH -1: 0] y;
-//reg [D*(WIDTH+6)-1: 0] w;
-//wire [D*(WIDTH+6)-1: 0] w_1;
-//reg [D-1: 0] p;
-//
-//always@(posedge clock) begin
-//    x <= x_in;
-//    y <= y_in;
-//    w <= w_in;
-//    w_1_out <= w_1;
-//    p_out <= p;
-//end
 
 generate
 if(J == -3) begin
@@ -62,7 +28,6 @@ if(J == -3) begin
 		.pp(y_j_1));
 
 	always@(y_j_1) begin
-		//w_1_n[D*(WIDTH+6)-1 -: D*(J+1+3+6)] <= {12'b0,y_j_1};
 		w_1_n[D*(WIDTH+6)-1 -: D*5] <= 128'b0;
 		w_1_n[D*(WIDTH+1)-1 -: D*(J+1+4)] <= y_j_1;
 		w_1_n[0 +: D*(WIDTH-J-4)] <= 128'b0;
@@ -176,8 +141,6 @@ else begin
 	assign v[D*(WIDTH+6)-1 : D] = w[0 +: D*(WIDTH+5)];
 	always @(v) begin
 		estimate(v,p,p_val);
-		//p_val <= v;
-		//p <= v[1:0];
 	end
 
 	rRp_add #(.RADIX(RADIX), .WIDTH(WIDTH+6)) addr_w(

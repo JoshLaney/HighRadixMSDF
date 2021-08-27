@@ -21,15 +21,6 @@ if(RADIX==2) begin
 	always@(a,b) begin
 	
 		for(i=0; i<J+3; i=i+1)begin
-//			case(b)
-//				2'b00: prod[2*i +: 2] <= 2'b00;
-//				2'b01: prod[2*i +: 2] <= a[2*i +: 2];
-//				2'b10: prod[2*i +: 2] <= 2'bXX;
-//				2'b11: begin
-//					if(a[2*i +: 2]==2'b00) prod[2*i +: 2] <= 2'b00;
-//					else prod[2*i +: 2] <= (2'b10 ^ a[2*i +: 2]);
-//				end
-//				default: ;
 			case(b)
 				2'b00: prod[2*i +: 2] <= 2'b00;
 				2'b01: prod[2*i +: 2] <= a[2*i +: 2];
