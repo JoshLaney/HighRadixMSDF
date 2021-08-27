@@ -24,7 +24,7 @@ That targeted FPGA was the [Intel Cyclone V SoC Development Kit](https://www.int
 
 * [rR_add](rRp_add) and [rRp_mult](rRp_mult) contain the tested online arithmetic IP, as well as simulation test benches for verification.
 * [Adder_Test_Param](Adder_Test_Param) and [mult_test_param](mult_test_param) are the Quartus projects used to generate the FPGA test benches for data collection
-* [FPGAFiles](FPGAFiles) contains both the python test scripts run on the FPGA, and the collected test data
+* [FPGAFiles/josh](FPGAFiles/josh) contains the python test scripts run on the FPGA, and the collected test data. This mirros the files stored on the Cyclone V SoC.
   * [run_tests.sh](FPGAFiles/run_tests.sh) will collect degreadation data on all generated adders and multipliers. It takes about 24 hours to complete
 * [PLL_Test](PLL_Test) is a simple Quartus Project to test dynamic reconfiguration of the CycloneV PLL
 * [mult_csims](mult_csims) contains C++ simulations of the online multiplication algorithm
