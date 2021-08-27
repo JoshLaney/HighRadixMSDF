@@ -35,7 +35,7 @@ always@(posedge clock) begin
 end
 
 //always@(x,y) begin
-//	s <= {x[127],x} + {y[127],y};
+//	s <= {x[63],x} + {y[63],y};
 //end
 
 generate

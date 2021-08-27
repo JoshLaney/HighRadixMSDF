@@ -33,12 +33,12 @@ classdef Multiplier
         
         function plot(obj, data)
             [m,n] = size(data);
-            for i = 2:n
+            for i = 2:2
                 nexttile(i-1);
-                no_out = zeros(m,2);
-                no_out(:,1) = data(:,1);
-                no_out(:,2) = data(:,i);
-                no_out = rmoutliers(no_out,'movmedian',[15 10]);
+                no_out = zeros(m-1,2);
+                no_out(:,1) = data(1:end-1,1);
+                no_out(:,2) = data(1:end-1,i);
+                %no_out = rmoutliers(no_out,'movmedian',[15 10]);
                 plot(no_out(:,1),no_out(:,2),obj.marker,'Color',obj.color);
                 hold on
             end

@@ -35,7 +35,7 @@ integer j;
 always@(posedge clock) begin
 	x[0]<=x_in;
 	y[0]<=y_in;
-//	p_out <= x[0]*y[0];
+	p_out <= x[0]*y[0];
 	p_buf[0] <= x[0]*y[0];
 	for(j=1; j<CTRLW; j=j+1) begin: p_buf_loop
 		p_buf[j]<=p_buf[j-1];

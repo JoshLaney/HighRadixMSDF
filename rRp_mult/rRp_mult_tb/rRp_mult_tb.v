@@ -2,8 +2,8 @@
 
 module rRp_mult_tb;
 
-parameter RADIX = 4;
-parameter WIDTH = 4; //number of digits 
+parameter RADIX = 2;
+parameter WIDTH = 7; //number of digits 
 parameter TESTS = 1000;
 
 localparam A = RADIX - 1;

@@ -7,8 +7,8 @@ module rRp_add_clocked(
 	clock
 );
 
-parameter RADIX = 8;
-parameter WIDTH = 5; //number of digits
+parameter RADIX = 2;
+parameter WIDTH = 3; //number of digits
 localparam A = RADIX - 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 localparam N = D*WIDTH; //bitwidth of each input
