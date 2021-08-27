@@ -6,12 +6,11 @@
    showClockDomains="1"
    showResetDomains="0">
   <columns>
-   <connections preferredWidth="223" />
+   <connections preferredWidth="175" />
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/Memory Interfaces and Controllers,Library/Tri-State Components,Library,Library/Basic Functions,Project,Library/Qsys Interconnect" />
+ <library expandedCategories="Project,Library" />
  <window width="1871" height="1173" x="49" y="27" />
  <hdlexample language="VERILOG" />
 </preferences>

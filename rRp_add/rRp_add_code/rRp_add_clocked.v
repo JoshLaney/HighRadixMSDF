@@ -8,7 +8,7 @@ module rRp_add_clocked(
 );
 
 parameter RADIX = 2;
-parameter WIDTH = 15; //number of digits
+parameter WIDTH = 3; //number of digits
 localparam A = RADIX - 1;
 localparam D = $clog2(RADIX) + 1; //bitwidth of each digit
 localparam N = D*WIDTH; //bitwidth of each input
@@ -55,9 +55,6 @@ if (RADIX == 2) begin
 		for(i=1; i<WIDTH; i = i+1) begin
 			z_i = z[i*2 +: 2];
 			z_h = z_i + h[i-1];
-//			$display ("z[%0d +: %0d] = %0d ('b%0b)", i*2, 2, z_i, z_i);
-//			$display ("h[%0d] = %0d ('b%0b)", i-1, h[i-1], h[i-1]);
-//			$display ("z+h = %0d ('b%0b)", z_i+h[i-1], z_i+h[i-1]);
 			w[i] = (z_h<0)? (z_h+2'd2): (z_h);
 			t[i*2 +: 2] = (z_h<0)? -2'd1: 2'd0;
 		end
@@ -77,9 +74,6 @@ end else begin
 		for(i = 0; i < WIDTH; i = i+1) begin
 			x_i = x[i*D +: D];
 			y_i = y[i*D +: D];
-			//$display ("x[%0d +: %0d] = %0d ('b%0b)", i*D, D, x_i, x_i);
-			//$display ("y[%0d +: %0d] = %0d ('b%0b)", i*D, D, y_i, y_i);
-			//$display ("x+y = %0d ('b%0b)", x_i+y_i, x_i+y_i);
 			if(x_i+y_i >= A) begin
 				t[i*2 +: 2] = 2'd1;
 				w[i*D +: D] = x_i + y_i - RADIX;
@@ -92,7 +86,6 @@ end else begin
 			end
 		end
 		
-		//$display ("s[%0d : %0d] <= t[%0d : %0d] ('b%0b)", (N-1)+D, N, x_i, x_i, t[tN-1:tN-2]);
 		s[(N-1)+D:N] <= { {(D-2){t[tN-1]}}, t[tN-1:tN-2]};
 		s[(D-1):0] <= w[(D-1):0];
 		

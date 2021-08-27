@@ -22,6 +22,7 @@ create_generated_clock \
 
 derive_clock_uncertainty
 
+set_false_path -from [get_registers {*c0_count*}] -to [get_registers {*readdata*}]
 
 # for enhancing USB BlasterII to be reliable, 25MHz
 create_clock -name {altera_reserved_tck} -period 40 {altera_reserved_tck}
